@@ -1,0 +1,10 @@
+// We can create a square by drawing a side, turning 90 degrees, drawning another side, and so on..
+
+forward 100;
+rightturn 90;
+forward 100;
+rightturn 90;
+forward 100;
+rightturn 90;
+forward 100;
+rightturn 90;

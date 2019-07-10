@@ -1,0 +1,22 @@
+// We can modify variables
+
+number length = 5;
+number length_increment = 5;
+number right_angle = 90;
+
+repeat 100 {
+  forward length;
+  rightturn right_angle;
+  length = length + length_increment;
+}
+
+setx 0;
+sety 0;
+setdirection 45;
+length = 5;
+
+repeat 100 {
+  forward length;
+  rightturn right_angle;
+  length = length + length_increment;
+}

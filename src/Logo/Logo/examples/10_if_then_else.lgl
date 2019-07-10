@@ -1,0 +1,15 @@
+// We can use if..then..else
+
+number counter = 0;
+repeat 36 {
+  if(counter <= 18) {
+    // Draw the segments of the circle..
+    forward 10;
+    rightturn 10;
+  } else {
+    // ... but when we get half way around
+    // break and abort the loop.
+    break;
+  }
+  counter = counter + 1;
+}

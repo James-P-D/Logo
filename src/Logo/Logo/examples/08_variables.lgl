@@ -1,0 +1,10 @@
+// We can create variables and use them for moves
+
+number length = 100;
+number right_angle = 90;
+number sides = 4;
+
+repeat sides {
+  forward length;
+  rightturn right_angle;
+}

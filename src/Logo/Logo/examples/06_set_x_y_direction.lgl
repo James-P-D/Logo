@@ -1,0 +1,33 @@
+// We can manually set the turtle X, Y and Direction properties
+
+setx -50;
+sety -50;
+setdirection 0;
+repeat 36 {
+  forward 5;
+  rightturn 10;
+}
+
+setx 50;
+sety -50;
+setdirection 0;
+repeat 36 {
+  forward 5;
+  rightturn 10;
+}
+
+setx -50;
+sety 50;
+setdirection 0;
+repeat 36 {
+  forward 5;
+  rightturn 10;
+}
+
+setx 50;
+sety 50;
+setdirection 0;
+repeat 36 {
+  forward 5;
+  rightturn 10;
+}

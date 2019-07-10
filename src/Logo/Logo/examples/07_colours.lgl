@@ -1,0 +1,32 @@
+// We can set the RGB properties for the turtle pen
+
+colorr 255;
+colorg 0;
+colorb 0;
+repeat 36 {
+  forward 10;
+  rightturn 10;
+}
+
+rightturn 120;
+
+colorr 0;
+colorg 255;
+colorb 0;
+repeat 36 {
+  forward 10;
+  rightturn 10;
+}
+
+rightturn 120;
+
+colorr 0;
+colorg 0;
+colorb 255;
+repeat 36 {
+  forward 10;
+  rightturn 10;
+}
+
+rightturn 120;
+

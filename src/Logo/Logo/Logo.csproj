@@ -64,6 +64,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="examples\10_if_then_else.lgl" />
+    <None Include="examples\01_square.lgl" />
+    <None Include="examples\02_stairs.lgl" />
+    <None Include="examples\03_circle.lgl" />
+    <None Include="examples\04_circles.lgl" />
+    <None Include="examples\05_dashed_square.lgl" />
+    <None Include="examples\06_set_x_y_direction.lgl" />
+    <None Include="examples\07_colours.lgl" />
+    <None Include="examples\08_variables.lgl" />
+    <None Include="examples\09_spiral.lgl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -91,5 +101,6 @@
       <Name>StringParser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

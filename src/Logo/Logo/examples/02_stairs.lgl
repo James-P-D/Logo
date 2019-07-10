@@ -1,0 +1,15 @@
+// We can draw some stairs by moving forwards, backwards, left and right without turning
+
+forward 20;
+right 20;
+forward 20;
+right 20;
+forward 20;
+right 20;
+
+backward 20;
+right 20;
+backward 20;
+right 20;
+backward 20;
+right 20;

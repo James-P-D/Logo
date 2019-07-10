@@ -1,0 +1,9 @@
+// We can draw multiple circles by wrapping the circle code in another repeat statement
+
+repeat 4 {
+  repeat 36 {
+    forward 15;
+    rightturn 10;
+  }
+  rightturn 90;
+}

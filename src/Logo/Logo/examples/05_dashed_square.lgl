@@ -1,0 +1,11 @@
+// We can draw dashes by moving the turtle pen up and down from the canvas
+
+repeat 4 {
+  repeat 15 {
+    penup;
+    forward 5;
+    pendown;
+    forward 5;
+  }
+  rightturn 90;
+}

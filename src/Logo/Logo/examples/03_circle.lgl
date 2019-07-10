@@ -1,0 +1,6 @@
+// We can draw a circle by moving forward slightly, then turning right by 10 degrees, and then repeat the procses 35 more times
+
+repeat 36 {
+  forward 15;
+  rightturn 10;
+}

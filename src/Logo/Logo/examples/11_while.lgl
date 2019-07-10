@@ -1,0 +1,10 @@
+// We can use while loops
+
+number counter = 0;
+while (counter < 36) {
+  
+  forward 10;
+  rightturn 10;
+  
+  counter = counter + 1;
+}
