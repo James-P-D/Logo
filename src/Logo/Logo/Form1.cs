@@ -18,13 +18,14 @@ using StringParser;
 using Executor;
 
 //TODO;
+// Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
 // Initialise canvas and turtle (including textboxes and initial turtle icon)
 // floats? and ints? bytes? casting?!?
 // do {} until();/while();?
 // Check for additional unneccesary parameters to commands. if you run 'PENUP x' what happens?
-// Getting values? GetX, GetDirection?
-// More execution to dedicated engine rather than Form
+// Fix for error line numbers (are we not working correctly with comments?)
+    // Getting values? GetX, GetDirection?
 // Numbered, example programs in Samples folder
 // Allow user generated constants?
 // Check variables (do we need that value in there?)

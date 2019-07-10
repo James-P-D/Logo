@@ -69,7 +69,7 @@
             // 
             this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.runButton.Location = new System.Drawing.Point(579, 253);
-            this.runButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.runButton.Margin = new System.Windows.Forms.Padding(2);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 26);
             this.runButton.TabIndex = 0;
@@ -83,7 +83,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(9, 22);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(566, 654);
             this.pictureBox1.TabIndex = 1;
@@ -109,7 +109,7 @@
             this.panel1.Controls.Add(this.turtleXTextBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(579, 284);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(165, 176);
             this.panel1.TabIndex = 2;
@@ -117,7 +117,7 @@
             // turtleDirectionTextBox
             // 
             this.turtleDirectionTextBox.Location = new System.Drawing.Point(59, 62);
-            this.turtleDirectionTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleDirectionTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleDirectionTextBox.Name = "turtleDirectionTextBox";
             this.turtleDirectionTextBox.ReadOnly = true;
             this.turtleDirectionTextBox.Size = new System.Drawing.Size(86, 20);
@@ -136,7 +136,7 @@
             // turtleAColourTextBox
             // 
             this.turtleAColourTextBox.Location = new System.Drawing.Point(95, 118);
-            this.turtleAColourTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleAColourTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleAColourTextBox.Name = "turtleAColourTextBox";
             this.turtleAColourTextBox.ReadOnly = true;
             this.turtleAColourTextBox.Size = new System.Drawing.Size(50, 20);
@@ -145,7 +145,7 @@
             // turtleBColourTextBox
             // 
             this.turtleBColourTextBox.Location = new System.Drawing.Point(24, 118);
-            this.turtleBColourTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleBColourTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleBColourTextBox.Name = "turtleBColourTextBox";
             this.turtleBColourTextBox.ReadOnly = true;
             this.turtleBColourTextBox.Size = new System.Drawing.Size(50, 20);
@@ -174,7 +174,7 @@
             // turtleGColourTextBox
             // 
             this.turtleGColourTextBox.Location = new System.Drawing.Point(95, 91);
-            this.turtleGColourTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleGColourTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleGColourTextBox.Name = "turtleGColourTextBox";
             this.turtleGColourTextBox.ReadOnly = true;
             this.turtleGColourTextBox.Size = new System.Drawing.Size(50, 20);
@@ -193,7 +193,7 @@
             // turtleRColourTextBox
             // 
             this.turtleRColourTextBox.Location = new System.Drawing.Point(24, 91);
-            this.turtleRColourTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleRColourTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleRColourTextBox.Name = "turtleRColourTextBox";
             this.turtleRColourTextBox.ReadOnly = true;
             this.turtleRColourTextBox.Size = new System.Drawing.Size(50, 20);
@@ -232,7 +232,7 @@
             // turtleYTextBox
             // 
             this.turtleYTextBox.Location = new System.Drawing.Point(95, 36);
-            this.turtleYTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleYTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleYTextBox.Name = "turtleYTextBox";
             this.turtleYTextBox.ReadOnly = true;
             this.turtleYTextBox.Size = new System.Drawing.Size(50, 20);
@@ -241,7 +241,7 @@
             // turtleXTextBox
             // 
             this.turtleXTextBox.Location = new System.Drawing.Point(24, 36);
-            this.turtleXTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.turtleXTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.turtleXTextBox.Name = "turtleXTextBox";
             this.turtleXTextBox.ReadOnly = true;
             this.turtleXTextBox.Size = new System.Drawing.Size(50, 20);
@@ -261,9 +261,9 @@
             // 
             this.programTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.programTextBox.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.programTextBox.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.programTextBox.Location = new System.Drawing.Point(579, 22);
-            this.programTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.programTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.programTextBox.Multiline = true;
             this.programTextBox.Name = "programTextBox";
             this.programTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -275,7 +275,7 @@
             // 
             this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.stopButton.Location = new System.Drawing.Point(668, 253);
-            this.stopButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stopButton.Margin = new System.Windows.Forms.Padding(2);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(75, 26);
             this.stopButton.TabIndex = 4;
@@ -369,7 +369,7 @@
             this.outputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.outputTextBox.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputTextBox.Location = new System.Drawing.Point(579, 464);
-            this.outputTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outputTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.outputTextBox.Multiline = true;
             this.outputTextBox.Name = "outputTextBox";
             this.outputTextBox.ReadOnly = true;
@@ -382,7 +382,7 @@
             this.wrapBordersCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.wrapBordersCheckBox.AutoSize = true;
             this.wrapBordersCheckBox.Location = new System.Drawing.Point(761, 345);
-            this.wrapBordersCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wrapBordersCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.wrapBordersCheckBox.Name = "wrapBordersCheckBox";
             this.wrapBordersCheckBox.Size = new System.Drawing.Size(91, 17);
             this.wrapBordersCheckBox.TabIndex = 8;
@@ -397,7 +397,7 @@
             this.updateUICheckBox.Checked = true;
             this.updateUICheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.updateUICheckBox.Location = new System.Drawing.Point(759, 367);
-            this.updateUICheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.updateUICheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.updateUICheckBox.Name = "updateUICheckBox";
             this.updateUICheckBox.Size = new System.Drawing.Size(113, 17);
             this.updateUICheckBox.TabIndex = 9;
@@ -420,7 +420,7 @@
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(938, 558);
             this.Name = "Form1";
             this.Text = "Logo";

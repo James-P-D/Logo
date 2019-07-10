@@ -47,8 +47,8 @@ namespace Executor
             {
                 foreach (Command command in commands)
                 {
-                    //AddOutputText(string.Format("{0}{1}", GetIndent(indent), command.ToString()));
-                    Thread.Sleep(1);
+                    AddOutputText(string.Format("{0}{1}", GetIndent(indent), command.ToString()));
+                    //Thread.Sleep(1);
 
                     if (!this.Running)
                     {
@@ -393,7 +393,7 @@ namespace Executor
 
                         var foo = sender;
                         (sender as BackgroundWorker).ReportProgress(0, new object[] { turtle, x1, y1 });
-                        
+
                         //TODO: Do we need this?
                         //Update(turtle, x1, y1);
                     }
