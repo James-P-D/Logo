@@ -21,11 +21,12 @@ using Executor;
 // Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
 // Initialise canvas and turtle (including textboxes and initial turtle icon)
+// Fix update textboxes (not working!)
 // floats? and ints? bytes? casting?!?
 // do {} until();/while();?
 // Check for additional unneccesary parameters to commands. if you run 'PENUP x' what happens?
 // Fix for error line numbers (are we not working correctly with comments?)
-    // Getting values? GetX, GetDirection?
+// Getting values? GetX, GetY, GetDirection, IsPenUp, IsPenDown?
 // Numbered, example programs in Samples folder
 // Allow user generated constants?
 // Check variables (do we need that value in there?)
@@ -117,12 +118,7 @@ namespace Logo
         private const string INITIAL_DIRECTORY = @".\Samples";
         private string currentFilename;
         private Executor.Executor Executor;
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Stop();
-        }
-
+                
         private void stopButton_Click(object sender, EventArgs e)
         {
             Stop();
@@ -133,10 +129,15 @@ namespace Logo
             running = false;
             Executor.Running = false;
         }
-
-        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+                
+        private void LoadButton_Click(object sender, EventArgs e)
         {
-            Run();
+
+        }
+
+        private void StepButton_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void runButton_Click(object sender, EventArgs e)
@@ -532,5 +533,6 @@ namespace Logo
             ThreadHelper.ScrollToEnd(this, outputTextBox);
         }
 
+        
     }
 }

@@ -54,12 +54,11 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.wrapBordersCheckBox = new System.Windows.Forms.CheckBox();
             this.updateUICheckBox = new System.Windows.Forms.CheckBox();
+            this.stepButton = new System.Windows.Forms.Button();
+            this.loadButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -68,10 +67,10 @@
             // runButton
             // 
             this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.runButton.Location = new System.Drawing.Point(579, 253);
+            this.runButton.Location = new System.Drawing.Point(747, 253);
             this.runButton.Margin = new System.Windows.Forms.Padding(2);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(75, 26);
+            this.runButton.Size = new System.Drawing.Size(80, 26);
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
@@ -274,10 +273,10 @@
             // stopButton
             // 
             this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.stopButton.Location = new System.Drawing.Point(668, 253);
+            this.stopButton.Location = new System.Drawing.Point(831, 253);
             this.stopButton.Margin = new System.Windows.Forms.Padding(2);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(75, 26);
+            this.stopButton.Size = new System.Drawing.Size(80, 26);
             this.stopButton.TabIndex = 4;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
@@ -287,12 +286,11 @@
             // 
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.executeToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(-2, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(102, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(163, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -339,31 +337,6 @@
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
-            // executeToolStripMenuItem
-            // 
-            this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem,
-            this.stopToolStripMenuItem});
-            this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.executeToolStripMenuItem.Text = "Execute";
-            // 
-            // runToolStripMenuItem
-            // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.runToolStripMenuItem.Text = "Run";
-            this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
-            // 
-            // stopToolStripMenuItem
-            // 
-            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.stopToolStripMenuItem.Text = "Stop";
-            this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
-            // 
             // outputTextBox
             // 
             this.outputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -405,11 +378,37 @@
             this.updateUICheckBox.UseVisualStyleBackColor = true;
             this.updateUICheckBox.Click += new System.EventHandler(this.updateUICheckBox_CheckedChanged);
             // 
+            // stepButton
+            // 
+            this.stepButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.stepButton.Location = new System.Drawing.Point(663, 253);
+            this.stepButton.Margin = new System.Windows.Forms.Padding(2);
+            this.stepButton.Name = "stepButton";
+            this.stepButton.Size = new System.Drawing.Size(80, 26);
+            this.stepButton.TabIndex = 10;
+            this.stepButton.Text = "Step";
+            this.stepButton.UseVisualStyleBackColor = true;
+            this.stepButton.Click += new System.EventHandler(this.StepButton_Click);
+            // 
+            // loadButton
+            // 
+            this.loadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.loadButton.Location = new System.Drawing.Point(579, 253);
+            this.loadButton.Margin = new System.Windows.Forms.Padding(2);
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(80, 26);
+            this.loadButton.TabIndex = 11;
+            this.loadButton.Text = "Load";
+            this.loadButton.UseVisualStyleBackColor = true;
+            this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 695);
+            this.Controls.Add(this.loadButton);
+            this.Controls.Add(this.stepButton);
             this.Controls.Add(this.updateUICheckBox);
             this.Controls.Add(this.wrapBordersCheckBox);
             this.Controls.Add(this.outputTextBox);
@@ -465,12 +464,11 @@
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
     private System.Windows.Forms.TextBox outputTextBox;
     private System.Windows.Forms.CheckBox wrapBordersCheckBox;
     private System.Windows.Forms.CheckBox updateUICheckBox;
-  }
+        private System.Windows.Forms.Button stepButton;
+        private System.Windows.Forms.Button loadButton;
+    }
 }
 
