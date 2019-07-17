@@ -27,12 +27,7 @@ leftturn X;
 
 Again, `X` can be an integer literal, a variable or an evaluation consisting of integers and variables.
 
-If you wish to simply centre the turtle and set the direction to upward (zero) we can use the following command:
-```
-centerturtle;
-```
-
-It is also possible to manually set the `X` and `Y` positions of the canvas, or to set the turtle direction:
+It is also possible to manually set the `X` and `Y` positions, or the direction of the turtle:
 ```
 setx X;
 sety Y;
@@ -40,6 +35,11 @@ setdirection D;
 ```
 
 As usual, the parameter can be a integer literal, variable or evaluation. When setting the direction, the value `D` will wrap around `0` and `360`.
+
+If you wish to simply centre the turtle and set the direction to upward (zero) we can use the following command:
+```
+centerturtle;
+```
 
 We can toggle the displaying of the turtle with the following commands:
 ```
