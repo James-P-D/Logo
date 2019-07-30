@@ -27,8 +27,6 @@ using Executor;
 // Check for additional unneccesary parameters to commands. if you run 'PENUP x' what happens?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Getting values? GetX, GetY, GetDirection, IsPenUp, IsPenDown?
-// Numbered, example programs in Samples folder
-// Allow user generated constants?
 // Check variables (do we need that value in there?)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
