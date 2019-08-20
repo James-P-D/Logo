@@ -196,6 +196,10 @@ namespace StringParser
                 {
                     formattedLines.Add(String.Empty);
                 }
+                else
+                {
+                    throw new Exception(string.Format("Unable to parser '{0}'", currentString));
+                }
                 i++;
             }
 
