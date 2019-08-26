@@ -7,13 +7,7 @@
             NumberEval1 = numberEval;
         }
 
-        public override float Value
-        {
-            get
-            {
-                return -NumberEval1.Value;
-            }
-        }
+        public override float Value => -NumberEval1.Value;
 
         public NumberEval NumberEval1 { get; }
 

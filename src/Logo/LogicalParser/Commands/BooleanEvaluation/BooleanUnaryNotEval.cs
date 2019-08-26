@@ -7,13 +7,7 @@
             BooleanEval = booleanEval;
         }
 
-        public override bool Value
-        {
-            get
-            {
-                return !BooleanEval.Value;
-            }
-        }
+        public override bool Value => !BooleanEval.Value;
 
         public BooleanEval BooleanEval { get; }
 

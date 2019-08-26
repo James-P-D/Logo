@@ -16,10 +16,7 @@ namespace LogicalParser.Commands.Control
 
         public int Counter
         {
-            get
-            {
-                return (int)NumberEval.Value;
-            }
+            get => (int)NumberEval.Value;
             private set { }
         }
 

@@ -10,14 +10,7 @@ namespace LogicalParser.Commands.NumberEvaluation
             NumberEval2 = numberEval2;
         }
 
-        public override float Value
-        {
-            get
-            {
-                throw new NotImplementedException();
-                //return this.numberEval1.Value ^ this.numberEval2.Value;
-            }
-        }
+        public override float Value => throw new NotImplementedException();
 
         public NumberEval NumberEval1 { get; }
         public NumberEval NumberEval2 { get; }

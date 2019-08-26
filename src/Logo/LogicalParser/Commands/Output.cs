@@ -9,21 +9,9 @@
 
         private Eval Eval { get; }
 
-        public string Name
-        {
-            get
-            {
-                return Eval.ToString();
-            }
-        }
+        public string Name => Eval.ToString();
 
-        public Eval Value
-        {
-            get
-            {
-                return Eval;
-            }
-        }
+        public Eval Value => Eval;
 
         public override string ToString()
         {

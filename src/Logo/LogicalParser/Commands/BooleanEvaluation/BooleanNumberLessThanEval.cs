@@ -10,13 +10,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
             NumberEval2 = numberEval2;
         }
 
-        public override bool Value
-        {
-            get
-            {
-                return NumberEval1.Value < NumberEval2.Value;
-            }
-        }
+        public override bool Value => NumberEval1.Value < NumberEval2.Value;
 
         public NumberEval NumberEval1 { get; }
         public NumberEval NumberEval2 { get; }

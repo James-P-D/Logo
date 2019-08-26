@@ -11,13 +11,7 @@ namespace LogicalParser.Commands
 
         private NumberEval NumberEval { get; }
 
-        public float Angle
-        {
-            get
-            {
-                return NumberEval.Value;
-            }
-        }
+        public float Angle => NumberEval.Value;
 
         public override string ToString()
         {

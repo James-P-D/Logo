@@ -25,10 +25,7 @@ namespace LogicalParser.Commands.Control
 
         public bool Value
         {
-            get
-            {
-                return BooleanEval.Value;
-            }
+            get => BooleanEval.Value;
             private set { }
         }
 

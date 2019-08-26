@@ -1,4 +1,5 @@
-﻿using LogicalParser.Commands.NumberEvaluation;
+﻿using System;
+using LogicalParser.Commands.NumberEvaluation;
 
 namespace LogicalParser.Commands.BooleanEvaluation
 {
@@ -14,7 +15,8 @@ namespace LogicalParser.Commands.BooleanEvaluation
         {
             get
             {
-                return NumberEval1.Value == NumberEval2.Value;
+                double TOLERANCE = 0.001;
+                return Math.Abs(NumberEval1.Value - NumberEval2.Value) < TOLERANCE;
             }
         }
 

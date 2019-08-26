@@ -11,10 +11,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         private NumberObject NumberObject { get; }
 
-        public override float Value
-        {
-            get { return NumberObject.Value; }
-        }
+        public override float Value => NumberObject.Value;
 
         public override string ToString()
         {

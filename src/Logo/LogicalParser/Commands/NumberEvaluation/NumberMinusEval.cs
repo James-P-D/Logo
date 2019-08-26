@@ -8,13 +8,7 @@
             NumberEval2 = numberEval2;
         }
 
-        public override float Value
-        {
-            get
-            {
-                return NumberEval1.Value - NumberEval2.Value;
-            }
-        }
+        public override float Value => NumberEval1.Value - NumberEval2.Value;
 
         public NumberEval NumberEval1 { get; }
         public NumberEval NumberEval2 { get; }

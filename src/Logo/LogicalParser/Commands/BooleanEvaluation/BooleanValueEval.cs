@@ -11,10 +11,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
 
         private BooleanObject BooleanObject { get; }
 
-        public override bool Value
-        {
-            get { return BooleanObject.Value; }
-        }
+        public override bool Value => BooleanObject.Value;
 
         public override string ToString()
         {

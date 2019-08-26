@@ -8,13 +8,7 @@
             BooleanEval2 = booleanEval2;
         }
 
-        public override bool Value
-        {
-            get
-            {
-                return BooleanEval1.Value != BooleanEval2.Value;
-            }
-        }
+        public override bool Value => BooleanEval1.Value != BooleanEval2.Value;
 
         public BooleanEval BooleanEval1 { get; }
         public BooleanEval BooleanEval2 { get; }

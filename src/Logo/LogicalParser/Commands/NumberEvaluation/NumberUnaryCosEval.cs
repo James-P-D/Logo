@@ -9,13 +9,7 @@ namespace LogicalParser.Commands.NumberEvaluation
             NumberEval1 = numberEval;
         }
 
-        public override float Value
-        {
-            get
-            {
-                return (float)Math.Cos(NumberEval1.Value * (Math.PI / 180));
-            }
-        }
+        public override float Value => (float)Math.Cos(NumberEval1.Value * (Math.PI / 180));
 
         public NumberEval NumberEval1 { get; }
 

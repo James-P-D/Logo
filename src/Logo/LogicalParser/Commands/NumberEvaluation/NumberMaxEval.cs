@@ -10,13 +10,7 @@ namespace LogicalParser.Commands.NumberEvaluation
             NumberEval2 = numberEval2;
         }
 
-        public override float Value
-        {
-            get
-            {
-                return Math.Max(NumberEval1.Value, NumberEval2.Value);
-            }
-        }
+        public override float Value => Math.Max(NumberEval1.Value, NumberEval2.Value);
 
         public NumberEval NumberEval1 { get; }
         public NumberEval NumberEval2 { get; }
