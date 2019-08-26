@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Objects
+﻿namespace LogicalParser.Objects.Boolean
 {
     public class BooleanObject : LogoObject
     {

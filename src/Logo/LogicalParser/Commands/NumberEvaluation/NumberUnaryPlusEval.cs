@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Commands.Evaluation
+﻿namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberUnaryPlusEval : NumberEval
     {
@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return string.Format("{0}", this.NumberEval1);
+            return $"{this.NumberEval1}";
         }
     }
 }

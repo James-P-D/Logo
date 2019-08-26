@@ -4,16 +4,16 @@
     {
         public Output(Eval eval)
         {
-            this.eval = eval;
+            this.Eval = eval;
         }
 
-        private Eval eval { get; }
+        private Eval Eval { get; }
 
         public string Name
         {
             get
             {
-                return this.eval.ToString();
+                return this.Eval.ToString();
             }
         }
 
@@ -21,13 +21,13 @@
         {
             get
             {
-                return this.eval;
+                return this.Eval;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", Parser.OUTPUT, this.Name);
+            return $"{Parser.Output} {this.Name}";
         }
     }
 }

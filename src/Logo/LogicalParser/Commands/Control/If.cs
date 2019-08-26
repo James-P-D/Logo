@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using LogicalParser.Commands.Evaluation;
+using LogicalParser.Commands.BooleanEvaluation;
 
 namespace LogicalParser.Commands.Control
 {
@@ -9,32 +9,32 @@ namespace LogicalParser.Commands.Control
         // but only if it actually exists!
         public If(BooleanEval booleanEval, Command[] thenCommands)
         {
-            this.booleanEval = booleanEval;
-            this.thenCommands = new List<Command>(thenCommands);
-            this.elseCommands = new List<Command>();
+            this.BooleanEval = booleanEval;
+            this.ThenCommands = new List<Command>(thenCommands);
+            this.ElseCommands = new List<Command>();
         }
 
         public void SetElseCommands(Command[] elseCommands)
         {
-            this.elseCommands.AddRange(elseCommands);
+            this.ElseCommands.AddRange(elseCommands);
         }
 
-        private BooleanEval booleanEval { get; }
-        public List<Command> thenCommands { get; }
-        public List<Command> elseCommands { get; }
+        private BooleanEval BooleanEval { get; }
+        public List<Command> ThenCommands { get; }
+        public List<Command> ElseCommands { get; }
 
         public bool Value
         {
             get
             {
-                return booleanEval.Value;
+                return BooleanEval.Value;
             }
             private set { }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", Parser.IF, booleanEval.ToString());
+            return $"{Parser.If} {BooleanEval.ToString()}";
         }
     }
 }

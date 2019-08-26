@@ -1,4 +1,4 @@
-﻿using LogicalParser.Commands.Evaluation;
+﻿using LogicalParser.Commands.NumberEvaluation;
 
 namespace LogicalParser.Commands
 {
@@ -6,22 +6,22 @@ namespace LogicalParser.Commands
     {
         public SetDirection(NumberEval numberEval)
         {
-            this.numberEval = numberEval;
+            this.NumberEval = numberEval;
         }
 
-        private NumberEval numberEval { get; }
+        private NumberEval NumberEval { get; }
 
         public float Direction
         {
             get
             {
-                return this.numberEval.Value;
+                return this.NumberEval.Value;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", Parser.SET_DIRECTION, this.numberEval.ToString());
+            return $"{Parser.SetDirection} {this.NumberEval.ToString()}";
         }
 
     }

@@ -8,56 +8,56 @@ namespace StringParser
     {
         #region Operators
 
-        public const string SPACE = " ";
-        public const string COMMA = ",";
-        public const string ASSIGNMENT = "=";
-        public const string START_PARENTHESIS = "(";
-        public const string END_PARENTHESIS = ")";
+        public const string Space = " ";
+        public const string Comma = ",";
+        public const string Assignment = "=";
+        public const string StartParenthesis = "(";
+        public const string EndParenthesis = ")";
 
         #endregion
 
         #region Number Operators
 
-        public const string DIVIDE = "/";
-        public const string MULTIPLY = "*";
-        public const string MODULUS = "%";
-        public const string EXPONENTIAL = "^";
-        public const string MINUS = "-";
-        public const string PLUS = "+";
-        public const string UNARY_MINUS = "#";
-        public const string UNARY_PLUS = "@";
+        public const string Divide = "/";
+        public const string Multiply = "*";
+        public const string Modulus = "%";
+        public const string Exponential = "^";
+        public const string Minus = "-";
+        public const string Plus = "+";
+        public const string UnaryMinus = "#";
+        public const string UnaryPlus = "@";
 
-        public const string UNARY_SIN = "sin";
-        public const string UNARY_COS = "cos";
-        public const string UNARY_TAN = "tan";
+        public const string UnarySin = "sin";
+        public const string UnaryCos = "cos";
+        public const string UnaryTan = "tan";
 
-        public const string MIN = "min";
-        public const string MAX = "max";
+        public const string Min = "min";
+        public const string Max = "max";
 
         #endregion
 
         #region Boolean Operators
 
-        public const string UNARY_NOT = "!";
-        public const string AND = "&&";
-        public const string OR = "||";
-        public const string XOR = "^^";
+        public const string UnaryNot = "!";
+        public const string And = "&&";
+        public const string Or = "||";
+        public const string Xor = "^^";
 
-        public const string EQUALITY = "==";
-        public const string INEQUALITY = "!=";
-        public const string GREATER_THAN = ">";
-        public const string LESS_THAN = "<";
-        public const string GREATER_THAN_OR_EQUAL = ">=";
-        public const string LESS_THAN_OR_EQUAL = "<=";
+        public const string Equality = "==";
+        public const string Inequality = "!=";
+        public const string GreaterThan = ">";
+        public const string LessThan = "<";
+        public const string GreaterThanOrEqual = ">=";
+        public const string LessThanOrEqual = "<=";
 
         #endregion
 
         #region Control, Command Termination and Comments
 
-        public const string END_COMMAND = ";";
-        public const string START_BLOCK = "{";
-        public const string END_BLOCK = "}";
-        public const string COMMENT = "//";
+        public const string EndCommand = ";";
+        public const string StartBlock = "{";
+        public const string EndBlock = "}";
+        public const string Comment = "//";
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace StringParser
 
         private void Output(string[] lines, int i)
         {
-            AddOutputText(string.Format("String Tokeniser Parser {0}", i));
+            AddOutputText($"String Tokeniser Parser {i}");
             foreach (string line in lines)
             {
                 AddOutputText(line);
@@ -94,14 +94,14 @@ namespace StringParser
             List<StringToken> tokens = new List<StringToken>();
 
             Output(allLines, 0);
-            string[] crlfRemoved = RemoveCRLF(allLines);
+            string[] crlfRemoved = RemoveCrlf(allLines);
             Output(crlfRemoved, 1);
             string[] commentLess = RemoveComments(crlfRemoved);
             Output(commentLess, 2);
             string[] formattedLines = FormatLines(commentLess);
             Output(formattedLines, 3);
 
-            for (int i = 0; i < formattedLines.Count(); i++)
+            for (int i = 0; i < formattedLines.Length; i++)
             {
                 foreach (string str in FirstSplit(formattedLines[i]))
                 {
@@ -127,7 +127,7 @@ namespace StringParser
             return tokens.ToArray();
         }
 
-        private string[] RemoveCRLF(string[] lines)
+        private string[] RemoveCrlf(string[] lines)
         {
             List<string> crlfLessLines = new List<string>();
 
@@ -144,17 +144,12 @@ namespace StringParser
             List<string> commentLessLines = new List<string>();
 
             int i = 0;
-            while (i < lines.Count())
+            while (i < lines.Length)
             {
                 string currentString = lines[i];
-                if (currentString.Contains(COMMENT))
-                {
-                    commentLessLines.Add(currentString.Substring(0, currentString.IndexOf(COMMENT)));
-                }
-                else
-                {
-                    commentLessLines.Add(currentString);
-                }
+                commentLessLines.Add(currentString.Contains(Comment)
+                    ? currentString.Substring(0, currentString.IndexOf(Comment, StringComparison.Ordinal))
+                    : currentString);
 
                 i++;
             }
@@ -170,11 +165,11 @@ namespace StringParser
             int startLine = 0;
 
             int i = 0;
-            while (i < lines.Count())
+            while (i < lines.Length)
             {
                 currentString += lines[i];
 
-                if (lines[i].Contains(END_COMMAND) || lines[i].Contains(START_BLOCK) || lines[i].Contains(END_BLOCK))
+                if (lines[i].Contains(EndCommand) || lines[i].Contains(StartBlock) || lines[i].Contains(EndBlock))
                 {
                     formattedLines.Add(currentString);
                     currentString = string.Empty;
@@ -192,7 +187,7 @@ namespace StringParser
                 }
                 else
                 {
-                    throw new Exception(string.Format("Unable to parser '{0}'", currentString));
+                    throw new Exception($"Unable to parser '{currentString}'");
                 }
                 i++;
             }
@@ -255,25 +250,25 @@ namespace StringParser
             int i = 0;
             while (i < str.Length)
             {
-                if (StringMatch(str, END_COMMAND, i))
+                if (StringMatch(str, EndCommand, i))
                 {
                     subStrs.Add(subStr);
                     subStr = string.Empty;
-                    i += END_COMMAND.Length;
+                    i += EndCommand.Length;
                 }
-                else if (StringMatch(str, START_BLOCK, i))
+                else if (StringMatch(str, StartBlock, i))
                 {
                     subStr += str[i];
                     subStrs.Add(subStr);
                     subStr = string.Empty;
-                    i += START_BLOCK.Length;
+                    i += StartBlock.Length;
                 }
-                else if (StringMatch(str, END_BLOCK, i))
+                else if (StringMatch(str, EndBlock, i))
                 {
                     subStr += str[i];
                     subStrs.Add(subStr);
                     subStr = string.Empty;
-                    i += END_BLOCK.Length;
+                    i += EndBlock.Length;
                 }
                 else
                 {
@@ -292,27 +287,27 @@ namespace StringParser
         }
 
         string[] separators = new string[] {
-      SPACE,
-      COMMA,
-      ASSIGNMENT,
-      START_PARENTHESIS,
-      END_PARENTHESIS,
-      PLUS,
-      MINUS,
-      DIVIDE,
-      MULTIPLY,
-      MODULUS,
-      EXPONENTIAL,
-      UNARY_NOT,
-      AND,
-      OR,
-      XOR,
-      EQUALITY,
-      INEQUALITY,
-      GREATER_THAN,
-      LESS_THAN,
-      GREATER_THAN_OR_EQUAL,
-      LESS_THAN_OR_EQUAL
+      Space,
+      Comma,
+      Assignment,
+      StartParenthesis,
+      EndParenthesis,
+      Plus,
+      Minus,
+      Divide,
+      Multiply,
+      Modulus,
+      Exponential,
+      UnaryNot,
+      And,
+      Or,
+      Xor,
+      Equality,
+      Inequality,
+      GreaterThan,
+      LessThan,
+      GreaterThanOrEqual,
+      LessThanOrEqual
     };
 
         private string[] SecondSplit(string str)

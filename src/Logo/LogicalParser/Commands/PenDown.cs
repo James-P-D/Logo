@@ -4,7 +4,7 @@
     {
         public override string ToString()
         {
-            return string.Format("{0}", Parser.PEN_DOWN);
+            return $"{Parser.PenDown}";
         }
 
     }

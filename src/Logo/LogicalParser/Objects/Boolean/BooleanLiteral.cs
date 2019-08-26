@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Objects
+﻿namespace LogicalParser.Objects.Boolean
 {
     public class BooleanLiteral : BooleanObject
     {
@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            return string.Format("{0}", base.Value);
+            return $"{base.Value}";
         }
     }
 }

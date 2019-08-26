@@ -1,4 +1,4 @@
-﻿using LogicalParser.Commands.Evaluation;
+﻿using LogicalParser.Commands.NumberEvaluation;
 
 namespace LogicalParser.Commands
 {
@@ -6,22 +6,22 @@ namespace LogicalParser.Commands
     {
         public SetColorR(NumberEval numberEval)
         {
-            this.numberEval = numberEval;
+            this.NumberEval = numberEval;
         }
 
-        private NumberEval numberEval { get; }
+        private NumberEval NumberEval { get; }
 
         public int R
         {
             get
             {
-                return (int)this.numberEval.Value;
+                return (int)this.NumberEval.Value;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", Parser.COLOR_R, this.numberEval.ToString());
+            return $"{Parser.ColorR} {this.NumberEval.ToString()}";
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberUnarySinEval : NumberEval
     {
@@ -21,7 +21,7 @@ namespace LogicalParser.Commands.Evaluation
 
         public override string ToString()
         {
-            return string.Format("Sin {0}", this.NumberEval1);
+            return $"Sin {this.NumberEval1}";
         }
     }
 }

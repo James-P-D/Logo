@@ -1,24 +1,24 @@
-﻿using LogicalParser.Objects;
+﻿using LogicalParser.Objects.Number;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberValueEval : NumberEval
     {
         public NumberValueEval(NumberObject numberObject)
         {
-            this.numberObject = numberObject;
+            this.NumberObject = numberObject;
         }
 
-        private NumberObject numberObject { get; }
+        private NumberObject NumberObject { get; }
 
         public override float Value
         {
-            get { return numberObject.Value; }
+            get { return NumberObject.Value; }
         }
 
         public override string ToString()
         {
-            return string.Format("{0}", this.numberObject.ToString());
+            return $"{this.NumberObject.ToString()}";
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using LogicalParser.Objects;
+﻿using LogicalParser.Objects.Boolean;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.BooleanEvaluation
 {
     public class BooleanAssign : Command
     {
@@ -15,7 +15,7 @@ namespace LogicalParser.Commands.Evaluation
 
         public override string ToString()
         {
-            return string.Format("{0} {1} = {2}", Parser.BOOLEAN, this.BooleanVar.Name, this.BooleanEval.ToString());
+            return $"{Parser.Boolean} {this.BooleanVar.Name} = {this.BooleanEval.ToString()}";
         }
     }
 }

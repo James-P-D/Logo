@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Objects
+﻿namespace LogicalParser.Objects.Number
 {
     public class NumberVariable : NumberObject
     {
@@ -12,7 +12,7 @@
 
         public override string ToString()
         {
-            return string.Format("{0}", this.Name);
+            return $"{this.Name}";
         }
     }
 }

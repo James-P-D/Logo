@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberMinEval : NumberEval
     {
@@ -23,7 +23,7 @@ namespace LogicalParser.Commands.Evaluation
 
         public override string ToString()
         {
-            return string.Format("min ({0} , {1})", NumberEval1.ToString(), NumberEval2.ToString());
+            return $"min ({NumberEval1.ToString()} , {NumberEval2.ToString()})";
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using LogicalParser.Commands.Evaluation;
-
-namespace LogicalParser.Commands
+﻿namespace LogicalParser.Commands.BooleanEvaluation
 {
     public class BooleanUnaryNotEval : BooleanEval
     {
@@ -21,7 +19,7 @@ namespace LogicalParser.Commands
 
         public override string ToString()
         {
-            return string.Format("!{0}", this.BooleanEval);
+            return $"!{this.BooleanEval}";
         }
     }
 }

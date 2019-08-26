@@ -1,6 +1,4 @@
-﻿using LogicalParser.Commands.Evaluation;
-
-namespace LogicalParser.Commands
+﻿namespace LogicalParser.Commands.BooleanEvaluation
 {
     public class BooleanBooleanEqualityEval : BooleanEval
     {
@@ -23,7 +21,7 @@ namespace LogicalParser.Commands
 
         public override string ToString()
         {
-            return string.Format("({0} == {1})", BooleanEval1.ToString(), BooleanEval2.ToString());
+            return $"({BooleanEval1.ToString()} == {BooleanEval2.ToString()})";
         }
     }
 }

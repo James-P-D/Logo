@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Commands.Evaluation
+﻿namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberMultiplyEval : NumberEval
     {
@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return string.Format("({0} * {1})", NumberEval1.ToString(), NumberEval2.ToString());
+            return $"({NumberEval1.ToString()} * {NumberEval2.ToString()})";
         }
     }
 }

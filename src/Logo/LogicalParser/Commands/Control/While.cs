@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using LogicalParser.Commands.Evaluation;
+using LogicalParser.Commands.BooleanEvaluation;
 
 namespace LogicalParser.Commands.Control
 {
@@ -7,25 +7,25 @@ namespace LogicalParser.Commands.Control
     {
         public While(BooleanEval numberEval, Command[] commands)
         {
-            this.booleanEval = numberEval;
-            this.commands = new List<Command>(commands);
+            this.BooleanEval = numberEval;
+            this.Commands = new List<Command>(commands);
         }
 
-        private BooleanEval booleanEval { get; }
-        public List<Command> commands { get; }
+        private BooleanEval BooleanEval { get; }
+        public List<Command> Commands { get; }
 
         public bool Value
         {
             get
             {
-                return booleanEval.Value;
+                return BooleanEval.Value;
             }
             private set { }
         }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}", Parser.WHILE, booleanEval.ToString());
+            return $"{Parser.While} {BooleanEval.ToString()}";
         }
     }
 

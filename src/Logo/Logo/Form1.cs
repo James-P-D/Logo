@@ -38,9 +38,9 @@ namespace Logo
 
             this.wrapBordersCheckBox.Checked = this.wrapBorders;
             this.updateUICheckBox.Checked = this.updateTextBoxes;
-            this.Executor = new Executor.Executor();
-            this.Executor.AddOutputTextEvent += new Executor.Executor.AddOutputTextDelegate(Executor_AddOutputTextEvent);
-            this.Executor.UpdateEvent += new global::Executor.Executor.UpdateDelegate(Executor_UpdateEvent);
+            this.executor = new Executor.Executor();
+            this.executor.AddOutputTextEvent += new Executor.Executor.AddOutputTextDelegate(Executor_AddOutputTextEvent);
+            this.executor.UpdateEvent += new global::Executor.Executor.UpdateDelegate(Executor_UpdateEvent);
             this.programTextBox.Text = "hideturtle; repeat 36 { repeat 360 { forward 5; rightturn 1; } rightturn 10; }";
         }
 
@@ -109,7 +109,7 @@ namespace Logo
         private bool isDirty = false;
         private const string INITIAL_DIRECTORY = @".\Samples";
         private string currentFilename;
-        private Executor.Executor Executor;
+        private Executor.Executor executor;
                 
         private void stopButton_Click(object sender, EventArgs e)
         {
@@ -119,7 +119,7 @@ namespace Logo
         private void Stop()
         {
             running = false;
-            Executor.Running = false;
+            executor.Running = false;
         }
                 
         private void LoadButton_Click(object sender, EventArgs e)
@@ -282,8 +282,8 @@ namespace Logo
             
             bool mainBreak = false;
             bool mainContinue = false;
-            Executor.Running = true;
-            if (Executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
+            executor.Running = true;
+            if (executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
             {
                 AddOutputText("*** Execution successful ***");
             }
@@ -457,7 +457,7 @@ namespace Logo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("Unable to save to file {0}\nException: {1}", this.currentFilename, ex.Message));
+                MessageBox.Show($"Unable to save to file {this.currentFilename}\nException: {ex.Message}");
                 return false;
             }
         }
@@ -489,7 +489,7 @@ namespace Logo
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Unable to save to file {0}\nException: {1}", this.currentFilename, ex.Message));
+                    MessageBox.Show($"Unable to save to file {this.currentFilename}\nException: {ex.Message}");
                 }
             }
 

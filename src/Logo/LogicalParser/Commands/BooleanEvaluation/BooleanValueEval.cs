@@ -1,24 +1,24 @@
-﻿using LogicalParser.Objects;
+﻿using LogicalParser.Objects.Boolean;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.BooleanEvaluation
 {
     public class BooleanValueEval : BooleanEval
     {
         public BooleanValueEval(BooleanObject booleanObject)
         {
-            this.booleanObject = booleanObject;
+            this.BooleanObject = booleanObject;
         }
 
-        private BooleanObject booleanObject { get; }
+        private BooleanObject BooleanObject { get; }
 
         public override bool Value
         {
-            get { return booleanObject.Value; }
+            get { return BooleanObject.Value; }
         }
 
         public override string ToString()
         {
-            return string.Format("{0}", this.booleanObject.ToString());
+            return $"{this.BooleanObject.ToString()}";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LogicalParser.Commands.Evaluation
+﻿namespace LogicalParser.Commands.BooleanEvaluation
 {
     public abstract class BooleanEval : Eval
     {

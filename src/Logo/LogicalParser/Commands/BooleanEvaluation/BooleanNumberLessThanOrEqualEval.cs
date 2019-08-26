@@ -1,6 +1,6 @@
-﻿using LogicalParser.Commands.Evaluation;
+﻿using LogicalParser.Commands.NumberEvaluation;
 
-namespace LogicalParser.Commands
+namespace LogicalParser.Commands.BooleanEvaluation
 {
     public class BooleanNumberLessThanOrEqualEval : BooleanEval
     {
@@ -23,7 +23,7 @@ namespace LogicalParser.Commands
 
         public override string ToString()
         {
-            return string.Format("({0} <= {1})", this.NumberEval1.ToString(), this.NumberEval2.ToString());
+            return $"({this.NumberEval1.ToString()} <= {this.NumberEval2.ToString()})";
         }
     }
 }

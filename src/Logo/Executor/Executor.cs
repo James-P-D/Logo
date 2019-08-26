@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using LogicalParser.Commands;
 using LogicalParser.Objects;
-using LogicalParser.Commands.Evaluation;
 using LogicalParser.Commands.Control;
 using System.ComponentModel;
+using LogicalParser.Commands.BooleanEvaluation;
+using LogicalParser.Commands.NumberEvaluation;
 
 namespace Executor
 {
@@ -43,7 +44,7 @@ namespace Executor
             {
                 foreach (Command command in commands)
                 {
-                    AddOutputText(string.Format("{0}{1}", GetIndent(indent), command.ToString()));
+                    AddOutputText($"{GetIndent(indent)}{command.ToString()}");
                     //Thread.Sleep(1);
 
                     if (!this.Running)
@@ -163,111 +164,130 @@ namespace Executor
                             Eval eval = (command as Output).Value;
                             if (eval is NumberValueEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberValueEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberValueEval).Value}");
                             }
                             else if (eval is NumberPlusEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberPlusEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberPlusEval).Value}");
                             }
                             else if (eval is NumberMinusEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberMinusEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberMinusEval).Value}");
                             }
                             else if (eval is NumberMultiplyEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberMultiplyEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberMultiplyEval).Value}");
                             }
                             else if (eval is NumberDivideEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberDivideEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberDivideEval).Value}");
                             }
                             else if (eval is NumberExponentialEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberExponentialEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberExponentialEval).Value}");
                             }
                             else if (eval is NumberModulusEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberModulusEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberModulusEval).Value}");
                             }
                             else if (eval is NumberUnaryMinusEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberUnaryMinusEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryMinusEval).Value}");
                             }
                             else if (eval is NumberUnaryPlusEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberUnaryPlusEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryPlusEval).Value}");
                             }
                             else if (eval is BooleanValueEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanValueEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanValueEval).Value}");
                             }
                             else if (eval is BooleanUnaryNotEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanUnaryNotEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanUnaryNotEval).Value}");
                             }
                             else if (eval is BooleanAndEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanAndEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanAndEval).Value}");
                             }
                             else if (eval is BooleanOrEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanOrEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanOrEval).Value}");
                             }
                             else if (eval is BooleanXorEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanXorEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanXorEval).Value}");
                             }
                             else if (eval is BooleanBooleanEqualityEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanBooleanEqualityEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanEqualityEval).Value}");
                             }
                             else if (eval is BooleanNumberEqualityEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberEqualityEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberEqualityEval).Value}");
                             }
                             else if (eval is BooleanBooleanInequalityEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanBooleanInequalityEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanInequalityEval).Value}");
                             }
                             else if (eval is BooleanNumberInequalityEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberInequalityEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberInequalityEval).Value}");
                             }
                             else if (eval is BooleanNumberGreaterThanEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberGreaterThanEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanEval).Value}");
                             }
                             else if (eval is BooleanNumberLessThanEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberLessThanEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanEval).Value}");
                             }
                             else if (eval is BooleanNumberGreaterThanOrEqualEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberGreaterThanOrEqualEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanOrEqualEval).Value}");
                             }
                             else if (eval is BooleanNumberLessThanOrEqualEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as BooleanNumberLessThanOrEqualEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanOrEqualEval).Value}");
                             }
                             else if (eval is NumberUnarySinEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberUnarySinEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnarySinEval).Value}");
                             }
                             else if (eval is NumberUnaryCosEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberUnaryCosEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryCosEval).Value}");
                             }
                             else if (eval is NumberUnaryTanEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberUnaryTanEval).Value));
+                                AddOutputText(
+                                    $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryTanEval).Value}");
                             }
                             else if (eval is NumberMinEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberMinEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberMinEval).Value}");
                             }
                             else if (eval is NumberMaxEval)
                             {
-                                AddOutputText(string.Format("OUTPUT: {0} = {1}", (command as Output).Name, (eval as NumberMaxEval).Value));
+                                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberMaxEval).Value}");
                             }
                             else
                             {
@@ -282,7 +302,7 @@ namespace Executor
                             {
                                 bool repeatBreak = false;
                                 bool repeatContinue = false;
-                                if (!Execute(sender, (command as Repeat).commands, objects, turtle, indent + 2, ref repeatBreak, ref repeatContinue))
+                                if (!Execute(sender, (command as Repeat).Commands, objects, turtle, indent + 2, ref repeatBreak, ref repeatContinue))
                                 {
                                     return false;
                                 }
@@ -305,7 +325,7 @@ namespace Executor
                             {
                                 bool whileBreak = false;
                                 bool whileContinue = false;
-                                if (!Execute(sender, (command as While).commands, objects, turtle, indent + 2, ref whileBreak, ref whileContinue))
+                                if (!Execute(sender, (command as While).Commands, objects, turtle, indent + 2, ref whileBreak, ref whileContinue))
                                 {
                                     return false;
                                 }
@@ -328,7 +348,7 @@ namespace Executor
                             {
                                 bool ifBreak = false;
                                 bool ifContinue = false;
-                                if (!Execute(sender, (command as If).thenCommands, objects, turtle, indent + 2, ref ifBreak, ref ifContinue))
+                                if (!Execute(sender, (command as If).ThenCommands, objects, turtle, indent + 2, ref ifBreak, ref ifContinue))
                                 {
                                     return false;
                                 }
@@ -348,7 +368,7 @@ namespace Executor
                             {
                                 bool elseBreak = false;
                                 bool elseContinue = false;
-                                if (!Execute(sender, (command as If).elseCommands, objects, turtle, indent + 2, ref elseBreak, ref elseContinue))
+                                if (!Execute(sender, (command as If).ElseCommands, objects, turtle, indent + 2, ref elseBreak, ref elseContinue))
                                 {
                                     return false;
                                 }
@@ -384,7 +404,7 @@ namespace Executor
                         }
                         else
                         {
-                            throw new Exception(string.Format("Don't recognise command '{0}'", command));
+                            throw new Exception($"Don't recognise command '{command}'");
                         }
 
                         var foo = sender;

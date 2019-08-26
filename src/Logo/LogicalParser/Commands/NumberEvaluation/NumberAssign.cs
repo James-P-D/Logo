@@ -1,6 +1,6 @@
-﻿using LogicalParser.Objects;
+﻿using LogicalParser.Objects.Number;
 
-namespace LogicalParser.Commands.Evaluation
+namespace LogicalParser.Commands.NumberEvaluation
 {
     public class NumberAssign : Command
     {
@@ -15,7 +15,7 @@ namespace LogicalParser.Commands.Evaluation
 
         public override string ToString()
         {
-            return string.Format("{0} {1} = {2}", Parser.NUMBER, this.NumberVar.Name, this.NumberEval.ToString());
+            return $"{Parser.Number} {this.NumberVar.Name} = {this.NumberEval.ToString()}";
         }
     }
 }

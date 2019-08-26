@@ -4,7 +4,7 @@
     {
         public override string ToString()
         {
-            return $"{Parser.SHOW_TURTLE}";
+            return $"{Parser.ShowTurtle}";
         }
 
     }
