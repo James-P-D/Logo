@@ -74,7 +74,7 @@ namespace StringParser
         private void Output(string[] lines, int i)
         {
             AddOutputText($"String Tokeniser Parser {i}");
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
                 AddOutputText(line);
             }
@@ -88,24 +88,24 @@ namespace StringParser
 
         public StringToken[] Parse(string[] allLines)
         {
-            List<StringToken> tokens = new List<StringToken>();
+            var tokens = new List<StringToken>();
 
             Output(allLines, 0);
-            string[] crlfRemoved = RemoveCrlf(allLines);
+            var crlfRemoved = RemoveCrlf(allLines);
             Output(crlfRemoved, 1);
-            string[] commentLess = RemoveComments(crlfRemoved);
+            var commentLess = RemoveComments(crlfRemoved);
             Output(commentLess, 2);
-            string[] formattedLines = FormatLines(commentLess);
+            var formattedLines = FormatLines(commentLess);
             Output(formattedLines, 3);
 
-            for (int i = 0; i < formattedLines.Length; i++)
+            for (var i = 0; i < formattedLines.Length; i++)
             {
-                foreach (string str in FirstSplit(formattedLines[i]))
+                foreach (var str in FirstSplit(formattedLines[i]))
                 {
                     if (!string.IsNullOrEmpty(str))
                     {
-                        List<string> strTokens = new List<string>();
-                        foreach (string subStr in SecondSplit(str))
+                        var strTokens = new List<string>();
+                        foreach (var subStr in SecondSplit(str))
                         {
                             if (!string.IsNullOrEmpty(subStr))
                             {
@@ -126,9 +126,9 @@ namespace StringParser
 
         private string[] RemoveCrlf(string[] lines)
         {
-            List<string> crlfLessLines = new List<string>();
+            var crlfLessLines = new List<string>();
 
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
                 crlfLessLines.Add(line.Replace("\r", "").Replace("\n", ""));
             }
@@ -138,12 +138,12 @@ namespace StringParser
 
         private string[] RemoveComments(string[] lines)
         {
-            List<string> commentLessLines = new List<string>();
+            var commentLessLines = new List<string>();
 
-            int i = 0;
+            var i = 0;
             while (i < lines.Length)
             {
-                string currentString = lines[i];
+                var currentString = lines[i];
                 commentLessLines.Add(currentString.Contains(Comment)
                     ? currentString.Substring(0, currentString.IndexOf(Comment, StringComparison.Ordinal))
                     : currentString);
@@ -156,12 +156,12 @@ namespace StringParser
 
         private string[] FormatLines(string[] lines)
         {
-            List<string> formattedLines = new List<string>();
+            var formattedLines = new List<string>();
 
-            string currentString = string.Empty;
-            int startLine = 0;
+            var currentString = string.Empty;
+            var startLine = 0;
 
-            int i = 0;
+            var i = 0;
             while (i < lines.Length)
             {
                 currentString += lines[i];
@@ -194,7 +194,7 @@ namespace StringParser
 
         private bool StringMatch(string str, string[] subStrings, int i, ref string match)
         {
-            foreach (string subStr in subStrings)
+            foreach (var subStr in subStrings)
             {
                 if (StringMatch(str, subStr, i))
                 {
@@ -213,7 +213,7 @@ namespace StringParser
                 return false;
             }
 
-            int j = 0;
+            var j = 0;
             while ((j + i < str.Length) && (j < subStr.Length))
             {
                 if (!str[j + i].Equals(subStr[j]))
@@ -241,10 +241,10 @@ namespace StringParser
         /// <returns></returns>
         private string[] FirstSplit(string str)
         {
-            List<string> subStrings = new List<string>();
+            var subStrings = new List<string>();
 
-            string subStr = string.Empty;
-            int i = 0;
+            var subStr = string.Empty;
+            var i = 0;
             while (i < str.Length)
             {
                 if (StringMatch(str, EndCommand, i))
@@ -310,15 +310,15 @@ namespace StringParser
 
         private string[] SecondSplit(string str)
         {
-            string[] orderedSeparators = separators.OrderByDescending(s => s.Length).ToArray();
-            List<string> subStrings = new List<string>();
+            var orderedSeparators = separators.OrderByDescending(s => s.Length).ToArray();
+            var subStrings = new List<string>();
 
-            string currentSubStr = string.Empty;
-            int i = 0;
+            var currentSubStr = string.Empty;
+            var i = 0;
             while (i < str.Length)
             {
-                char currentChar = str[i];
-                string match = string.Empty;
+                var currentChar = str[i];
+                var match = string.Empty;
                 if (StringMatch(str, orderedSeparators, i, ref match))
                 {
                     AddSegment(subStrings, currentSubStr);

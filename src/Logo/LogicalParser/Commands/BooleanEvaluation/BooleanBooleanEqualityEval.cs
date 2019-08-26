@@ -15,7 +15,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
         {
             get
             {
-                double TOLERANCE = 0.001;
+                var TOLERANCE = 0.001;
                 return Math.Abs(NumberEval1.Value - NumberEval2.Value) < TOLERANCE;
             }
         }

@@ -51,13 +51,13 @@ namespace Logo
 
         private void InitialiseCanvasAndTurtle()
         {             
-            int imageWidth = pictureBox1.Width;
-            int imageHeight = pictureBox1.Height;
+            var imageWidth = pictureBox1.Width;
+            var imageHeight = pictureBox1.Height;
 
             turtle = new Turtle(0, 0, 0);
 
             imageWithoutTurtle = new Bitmap(imageWidth, imageHeight, PixelFormat.Format24bppRgb);
-            using (Graphics grp = Graphics.FromImage(imageWithoutTurtle))
+            using (var grp = Graphics.FromImage(imageWithoutTurtle))
             {
                 grp.FillRectangle(Brushes.White, 0, 0, imageWidth, imageHeight);
             }
@@ -145,22 +145,22 @@ namespace Logo
         private void Run()
         {
             ClearOutputText();
-            StringTokeniser stringTokeniser = new StringTokeniser();
+            var stringTokeniser = new StringTokeniser();
             InitialiseCanvasAndTurtle();
 
             try
             {
                 stringTokeniser.AddOutputTextEvent += new StringTokeniser.AddOutputTextDelegate(StringTokeniserAddOutputText);
-                string[] allLines = programTextBox.Text.Split('\n');
-                StringToken[] stringTokens = stringTokeniser.Parse(allLines);
+                var allLines = programTextBox.Text.Split('\n');
+                var stringTokens = stringTokeniser.Parse(allLines);
 
                 List<Command> commands;
                 List<LogoObject> objects;
-                Parser logicalParser = new Parser();
+                var logicalParser = new Parser();
                 logicalParser.Parse(stringTokens, out commands, out objects);
                                 
                 running = true;
-                BackgroundWorker runThread = new BackgroundWorker();
+                var runThread = new BackgroundWorker();
                 runThread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(runThread_RunWorkerCompleted);
                 runThread.DoWork += new DoWorkEventHandler(runThread_DoWork);
                 runThread.ProgressChanged += new ProgressChangedEventHandler(runThread_ProgressChanged);
@@ -198,17 +198,17 @@ namespace Logo
 
         private void UpdateImage(Turtle turtle, int x1, int y1)
         {
-            using (Graphics grp = Graphics.FromImage(imageWithoutTurtle))
+            using (var grp = Graphics.FromImage(imageWithoutTurtle))
             {
-                int xCenter = imageWithoutTurtle.Width / 2;
-                int yCenter = imageWithoutTurtle.Height / 2;
+                var xCenter = imageWithoutTurtle.Width / 2;
+                var yCenter = imageWithoutTurtle.Height / 2;
 
-                int startX = x1 + xCenter;
-                int startY = y1 + yCenter;
-                int endX = (int)turtle.X + xCenter;
-                int endY = (int)turtle.Y + yCenter;
+                var startX = x1 + xCenter;
+                var startY = y1 + yCenter;
+                var endX = (int)turtle.X + xCenter;
+                var endY = (int)turtle.Y + yCenter;
 
-                Pen pen = new Pen(Color.FromArgb(turtle.ColorA, turtle.ColorR, turtle.ColorG, turtle.ColorB));
+                var pen = new Pen(Color.FromArgb(turtle.ColorA, turtle.ColorR, turtle.ColorG, turtle.ColorB));
                 grp.DrawLine(pen, new Point(startX, startY), new Point(endX, endY));
 
                 if (wrapBorders)
@@ -250,23 +250,23 @@ namespace Logo
 
         private void DrawTurtle()
         {
-            float x = turtle.X;
-            float y = turtle.Y;
-            float bottomLeftX = x;
-            float bottomLeftY = y;
-            float bottomRightX = x;
-            float bottomRightY = y;
+            var x = turtle.X;
+            var y = turtle.Y;
+            var bottomLeftX = x;
+            var bottomLeftY = y;
+            var bottomRightX = x;
+            var bottomRightY = y;
 
             turtle.CalculateNewPosition(turtle.CalculateNewDirection(45), -20, ref bottomLeftX, ref bottomLeftY);
             turtle.CalculateNewPosition(turtle.CalculateNewDirection(-45), -20, ref bottomRightX, ref bottomRightY);
 
             imageWithTurtle = (Image)imageWithoutTurtle.Clone();
-            using (Graphics grp = Graphics.FromImage(imageWithTurtle))
+            using (var grp = Graphics.FromImage(imageWithTurtle))
             {
                 float xCenter = imageWithTurtle.Width / 2;
                 float yCenter = imageWithTurtle.Height / 2;
 
-                Pen pen = Pens.Black;
+                var pen = Pens.Black;
 
                 grp.DrawLine(pen, new Point((int)(turtle.X + xCenter), (int)(turtle.Y + yCenter)), new Point((int)(bottomLeftX + xCenter), (int)(bottomLeftY + yCenter)));
                 grp.DrawLine(pen, new Point((int)(turtle.X + xCenter), (int)(turtle.Y + yCenter)), new Point((int)(bottomRightX + xCenter), (int)(bottomRightY + yCenter)));
@@ -276,12 +276,12 @@ namespace Logo
 
         void runThread_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Command> commands = ((e.Argument as object[])[0]) as List<Command>;
-            List<LogoObject> objects = ((e.Argument as object[])[1]) as List<LogoObject>;
-            Turtle turtle = ((e.Argument as object[])[2]) as Turtle;
+            var commands = ((e.Argument as object[])[0]) as List<Command>;
+            var objects = ((e.Argument as object[])[1]) as List<LogoObject>;
+            var turtle = ((e.Argument as object[])[2]) as Turtle;
             
-            bool mainBreak = false;
-            bool mainContinue = false;
+            var mainBreak = false;
+            var mainContinue = false;
             executor.Running = true;
             if (executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
             {
@@ -307,19 +307,19 @@ namespace Logo
           //TODO: Do we still need this?!?
           // Yes! This doesn't seem to cause the same threading issue as firing on events!
             return;
-            int x1 = (int)((e.UserState as object[])[0]);
-            int y1 = (int)((e.UserState as object[])[1]);
-            int x2 = (int)((e.UserState as object[])[2]);
-            int y2 = (int)((e.UserState as object[])[3]);
-            int direction1 = (int)((e.UserState as object[])[4]);
-            int direction2 = (int)((e.UserState as object[])[5]);
-            bool isPenDown = (bool)((e.UserState as object[])[6]);
-            bool isVisible = (bool)((e.UserState as object[])[7]);
-            Image image = (Image)((e.UserState as object[])[8]);
+            var x1 = (int)((e.UserState as object[])[0]);
+            var y1 = (int)((e.UserState as object[])[1]);
+            var x2 = (int)((e.UserState as object[])[2]);
+            var y2 = (int)((e.UserState as object[])[3]);
+            var direction1 = (int)((e.UserState as object[])[4]);
+            var direction2 = (int)((e.UserState as object[])[5]);
+            var isPenDown = (bool)((e.UserState as object[])[6]);
+            var isVisible = (bool)((e.UserState as object[])[7]);
+            var image = (Image)((e.UserState as object[])[8]);
             lock (image)
             {
-                int xCenter = image.Width / 2;
-                int yCenter = image.Height / 2;
+                var xCenter = image.Width / 2;
+                var yCenter = image.Height / 2;
                 //Console.WriteLine("{0}, {1} -> {2}, {3}", x1, y1, x2, y2);
                 //Console.WriteLine("------------");
 
@@ -360,18 +360,18 @@ namespace Logo
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = INITIAL_DIRECTORY;
             openFileDialog.Filter = "logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
             openFileDialog.DefaultExt = "lgl";
-            DialogResult dialogResult = openFileDialog.ShowDialog();
+            var dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
                 programTextBox.Text = string.Empty;
 
-                string[] allLines = File.ReadAllLines(openFileDialog.FileName);
+                var allLines = File.ReadAllLines(openFileDialog.FileName);
 
-                foreach (string line in FormatLines(allLines))
+                foreach (var line in FormatLines(allLines))
                 {
                     programTextBox.Text += line + "\r\n";
                 }
@@ -393,7 +393,7 @@ namespace Logo
         {
             if (isDirty)
             {
-                DialogResult dialogResult = MessageBox.Show("Do you want to save your changes?", "New", MessageBoxButtons.YesNoCancel);
+                var dialogResult = MessageBox.Show("Do you want to save your changes?", "New", MessageBoxButtons.YesNoCancel);
 
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -469,11 +469,11 @@ namespace Logo
 
         private bool SaveAs()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            var saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = INITIAL_DIRECTORY;
             saveFileDialog.Filter = "logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
             saveFileDialog.DefaultExt = "lgl";
-            DialogResult dialogResult = saveFileDialog.ShowDialog();
+            var dialogResult = saveFileDialog.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
                 try

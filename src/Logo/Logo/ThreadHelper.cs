@@ -22,7 +22,7 @@ namespace Logo
             // If these threads are different, it returns true. 
             if (control.InvokeRequired)
             {
-                SetTextCallback setTextCallback = new SetTextCallback(SetText);
+                var setTextCallback = new SetTextCallback(SetText);
                 form.Invoke(setTextCallback, new object[] { form, control, text });
             }
             else
@@ -50,7 +50,7 @@ namespace Logo
             // If these threads are different, it returns true. 
             if (control.InvokeRequired)
             {
-                AddTextCallback addTextCallback = new AddTextCallback(AddText);
+                var addTextCallback = new AddTextCallback(AddText);
                 form.Invoke(addTextCallback, new object[] { form, control, text });
             }
             else
@@ -84,7 +84,7 @@ namespace Logo
             // If these threads are different, it returns true. 
             if (control.InvokeRequired)
             {
-                ScrollToEndCallback scrollToEndCallback = new ScrollToEndCallback(ScrollToEnd);
+                var scrollToEndCallback = new ScrollToEndCallback(ScrollToEnd);
                 form.Invoke(scrollToEndCallback, new object[] { form, control });
             }
             else
@@ -107,7 +107,7 @@ namespace Logo
             // If these threads are different, it returns true. 
             if (control.InvokeRequired)
             {
-                SetImageCallback setImageCallback = new SetImageCallback(SetImage);
+                var setImageCallback = new SetImageCallback(SetImage);
                 form.Invoke(setImageCallback, new object[] { form, control, image });
             }
             else

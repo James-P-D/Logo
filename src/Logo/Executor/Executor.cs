@@ -36,7 +36,7 @@ namespace Executor
             breakOut = false;
             try
             {
-                foreach (Command command in commands)
+                foreach (var command in commands)
                 {
                     AddOutputText($"{GetIndent(indent)}{command}");
                     //Thread.Sleep(1);
@@ -56,9 +56,9 @@ namespace Executor
                     }
                     else
                     {
-                        int x1 = (int)turtle.X;
-                        int y1 = (int)turtle.Y;
-                        float direction1 = turtle.Direction;
+                        var x1 = (int)turtle.X;
+                        var y1 = (int)turtle.Y;
+                        var direction1 = turtle.Direction;
 
                         if (command is RightTurn)
                         {
@@ -155,7 +155,7 @@ namespace Executor
                         }
                         else if (command is Output)
                         {
-                            Eval eval = (command as Output).Value;
+                            var eval = (command as Output).Value;
                             if (eval is NumberValueEval)
                             {
                                 AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberValueEval).Value}");
@@ -291,11 +291,11 @@ namespace Executor
                         }
                         else if (command is Repeat)
                         {
-                            int repeatCount = (command as Repeat).Counter;
-                            for (int i = 0; i < repeatCount; i++)
+                            var repeatCount = (command as Repeat).Counter;
+                            for (var i = 0; i < repeatCount; i++)
                             {
-                                bool repeatBreak = false;
-                                bool repeatContinue = false;
+                                var repeatBreak = false;
+                                var repeatContinue = false;
                                 if (!Execute(sender, (command as Repeat).Commands, objects, turtle, indent + 2, ref repeatBreak, ref repeatContinue))
                                 {
                                     return false;
@@ -317,8 +317,8 @@ namespace Executor
                         {
                             while ((command as While).Value)
                             {
-                                bool whileBreak = false;
-                                bool whileContinue = false;
+                                var whileBreak = false;
+                                var whileContinue = false;
                                 if (!Execute(sender, (command as While).Commands, objects, turtle, indent + 2, ref whileBreak, ref whileContinue))
                                 {
                                     return false;
@@ -340,8 +340,8 @@ namespace Executor
                         {
                             if ((command as If).Value)
                             {
-                                bool ifBreak = false;
-                                bool ifContinue = false;
+                                var ifBreak = false;
+                                var ifContinue = false;
                                 if (!Execute(sender, (command as If).ThenCommands, objects, turtle, indent + 2, ref ifBreak, ref ifContinue))
                                 {
                                     return false;
@@ -360,8 +360,8 @@ namespace Executor
                             }
                             else
                             {
-                                bool elseBreak = false;
-                                bool elseContinue = false;
+                                var elseBreak = false;
+                                var elseContinue = false;
                                 if (!Execute(sender, (command as If).ElseCommands, objects, turtle, indent + 2, ref elseBreak, ref elseContinue))
                                 {
                                     return false;
@@ -421,8 +421,8 @@ namespace Executor
 
         private string GetIndent(int indent)
         {
-            string result = string.Empty;
-            for (int i = 0; i < indent; i++) result += " ";
+            var result = string.Empty;
+            for (var i = 0; i < indent; i++) result += " ";
             return result;
         }
 

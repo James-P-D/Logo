@@ -157,21 +157,19 @@ namespace LogicalParser
 
             while (stringTokenIndex < stringTokens.Length)
             {
-                StringToken stringToken = stringTokens[stringTokenIndex];
-                string firstToken = stringToken.Tokens.First();
-                int parameters = stringToken.Tokens.Length - 1;
+                var stringToken = stringTokens[stringTokenIndex];
+                var firstToken = stringToken.Tokens.First();
+                var parameters = stringToken.Tokens.Length - 1;
 
                 if (firstToken.Equals(Repeat))
                 {
-                    string lastParam = stringToken.Tokens.Last();
+                    var lastParam = stringToken.Tokens.Last();
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        int updatedStringTokenIndex = 0;
-
-                        List<Command> repeatCommands = new List<Command>();
-                        Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, repeatCommands, objects, false);
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
+                        var repeatCommands = new List<Command>();
+                        Parse(stringTokenIndex + 1, out var updatedStringTokenIndex, stringTokens, repeatCommands, objects, false);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new Repeat(eval as NumberEval, repeatCommands.ToArray()));
@@ -192,15 +190,15 @@ namespace LogicalParser
                 }
                 else if (firstToken.Equals(While))
                 {
-                    string lastParam = stringToken.Tokens.Last();
+                    var lastParam = stringToken.Tokens.Last();
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        int updatedStringTokenIndex = 0;
+                        var updatedStringTokenIndex = 0;
 
-                        List<Command> whileCommands = new List<Command>();
+                        var whileCommands = new List<Command>();
                         Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, whileCommands, objects, false);
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
                         if (eval is BooleanEval)
                         {
                             commands.Add(new While(eval as BooleanEval, whileCommands.ToArray()));
@@ -221,15 +219,15 @@ namespace LogicalParser
                 }
                 else if (firstToken.Equals(If))
                 {
-                    string lastParam = stringToken.Tokens.Last();
+                    var lastParam = stringToken.Tokens.Last();
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        int updatedStringTokenIndex = 0;
+                        var updatedStringTokenIndex = 0;
 
-                        List<Command> thenCommands = new List<Command>();
+                        var thenCommands = new List<Command>();
                         Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, thenCommands, objects, false);
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
                         if (eval is BooleanEval)
                         {
                             commands.Add(new If(eval as BooleanEval, thenCommands.ToArray()));
@@ -250,16 +248,16 @@ namespace LogicalParser
                 }
                 else if (firstToken.Equals(Else))
                 {
-                    string lastParam = stringToken.Tokens.Last();
+                    var lastParam = stringToken.Tokens.Last();
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        int updatedStringTokenIndex = 0;
+                        var updatedStringTokenIndex = 0;
 
-                        List<Command> elseCommands = new List<Command>();
+                        var elseCommands = new List<Command>();
                         Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, elseCommands, objects, false);
 
-                        Command lastCommand = commands.Last();
+                        var lastCommand = commands.Last();
                         if ((lastCommand != null) && (lastCommand is If))
                         {
                             (lastCommand as If).SetElseCommands(elseCommands.ToArray());
@@ -300,14 +298,14 @@ namespace LogicalParser
                         }
                         else if (parameters == 1)
                         {
-                            string param1 = stringToken.Tokens[1];
+                            var param1 = stringToken.Tokens[1];
 
                             AddNewNumberVariable(param1, objects, stringToken);
                         }
                         else if (parameters >= 3)
                         {
-                            string param1 = stringToken.Tokens[1];
-                            string param2 = stringToken.Tokens[2];
+                            var param1 = stringToken.Tokens[1];
+                            var param2 = stringToken.Tokens[2];
 
                             if (param2.Equals(StringTokeniser.Assignment))
                             {
@@ -333,14 +331,14 @@ namespace LogicalParser
                         }
                         else if (parameters == 1)
                         {
-                            string param1 = stringToken.Tokens[1];
+                            var param1 = stringToken.Tokens[1];
 
                             AddNewBooleanVariable(param1, objects, stringToken);
                         }
                         else if (parameters >= 3)
                         {
-                            string param1 = stringToken.Tokens[1];
-                            string param2 = stringToken.Tokens[2];
+                            var param1 = stringToken.Tokens[1];
+                            var param2 = stringToken.Tokens[2];
 
                             if (param2.Equals(StringTokeniser.Assignment))
                             {
@@ -362,11 +360,11 @@ namespace LogicalParser
                     {
                         if (parameters >= 2)
                         {
-                            string param1 = stringToken.Tokens[1];
+                            var param1 = stringToken.Tokens[1];
 
                             if (param1.Equals(StringTokeniser.Assignment))
                             {
-                                LogoObject variable = GetExistingObject(firstToken, objects);
+                                var variable = GetExistingObject(firstToken, objects);
 
                                 if (variable is NumberVariable)
                                 {
@@ -397,7 +395,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(Forward))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new Forward(eval as NumberEval));
@@ -409,7 +407,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(Backward))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new Backward(eval as NumberEval));
@@ -421,7 +419,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(Left))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new Left(eval as NumberEval));
@@ -433,7 +431,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(Right))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new Right(eval as NumberEval));
@@ -445,7 +443,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(RightTurn))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new RightTurn(eval as NumberEval));
@@ -457,7 +455,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(LeftTurn))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new LeftTurn(eval as NumberEval));
@@ -469,7 +467,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(SetDirection))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetDirection(eval as NumberEval));
@@ -481,7 +479,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(SetX))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetX(eval as NumberEval));
@@ -493,7 +491,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(SetY))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetY(eval as NumberEval));
@@ -513,7 +511,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(ColorA))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetColorA(eval as NumberEval));
@@ -525,7 +523,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(ColorR))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetColorR(eval as NumberEval));
@@ -537,7 +535,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(ColorG))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetColorG(eval as NumberEval));
@@ -549,7 +547,7 @@ namespace LogicalParser
                     }
                     else if (firstToken.Equals(ColorB))
                     {
-                        Eval eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
+                        var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval)
                         {
                             commands.Add(new SetColorB(eval as NumberEval));
@@ -598,16 +596,16 @@ namespace LogicalParser
 
         private string[] CopyArray(string[] items, int startIndex)
         {
-            int length = items.Length - startIndex;
-            string[] subItems = new string[length];
+            var length = items.Length - startIndex;
+            var subItems = new string[length];
             Array.Copy(items, startIndex, subItems, 0, length);
             return subItems;
         }
 
         private string[] CopyArray(string[] items, int startIndex, int endIndex)
         {
-            int length = endIndex - startIndex + 1;
-            string[] subItems = new string[length];
+            var length = endIndex - startIndex + 1;
+            var subItems = new string[length];
             Array.Copy(items, startIndex, subItems, 0, length);
             return subItems;
         }
@@ -622,9 +620,9 @@ namespace LogicalParser
         {
             if (string.IsNullOrEmpty(variableName)) return false;
 
-            for (int i = 0; i < variableName.Length; i++)
+            for (var i = 0; i < variableName.Length; i++)
             {
-                char currentChar = variableName[i];
+                var currentChar = variableName[i];
                 if (i == 0)
                 {
                     if ((!char.IsLetter(currentChar)) && (currentChar != '_'))
@@ -655,7 +653,7 @@ namespace LogicalParser
 
         private LogoObject ParseObject(string str, List<LogoObject> objects, StringToken stringToken)
         {
-            LogoObject variable = GetExistingObject(str, objects);
+            var variable = GetExistingObject(str, objects);
 
             if (variable != null)
             {
@@ -710,7 +708,7 @@ namespace LogicalParser
 
         private Command ParseNumberAssignment(string variableName, string[] subTokens, List<LogoObject> objects, StringToken stringToken)
         {
-            LogoObject variable = GetExistingObject(variableName, objects);
+            var variable = GetExistingObject(variableName, objects);
             if (variable is NumberVariable)
             {
                 object evaluation = ParseEvaluation(subTokens, objects, stringToken);
@@ -760,7 +758,7 @@ namespace LogicalParser
 
         private Command ParseBooleanAssignment(string variableName, string[] subTokens, List<LogoObject> objects, StringToken stringToken)
         {
-            LogoObject variable = GetExistingObject(variableName, objects);
+            var variable = GetExistingObject(variableName, objects);
             if (variable is BooleanVariable)
             {
                 object evaluation = ParseEvaluation(subTokens, objects, stringToken);
@@ -789,11 +787,11 @@ namespace LogicalParser
         {
             // Before we start the evaluation we need to distinguish between binary and unary plus and minus operators
             // ( '5 - 4' verses '-3') We will convert unary minus to '#' and unary plus to '@'
-            for (int i = 0; i < parameters.Length; i++)
+            for (var i = 0; i < parameters.Length; i++)
             {
-                string previousToken = (i == 0) ? null : parameters[i - 1];
-                string currentToken = parameters[i];
-                string nextToken = (i >= parameters.Length - 1) ? null : parameters[i + 1];
+                var previousToken = (i == 0) ? null : parameters[i - 1];
+                var currentToken = parameters[i];
+                var nextToken = (i >= parameters.Length - 1) ? null : parameters[i + 1];
 
                 if ((previousToken == null) ||
                   ((previousToken != null) && (GetOperatorSymbol(previousToken) != OperatorType.Invalid)))
@@ -810,20 +808,20 @@ namespace LogicalParser
             }
 
             // See https://en.wikipedia.org/wiki/Shunting-yard_algorithm for more details on this algorithm    
-            Stack<Eval> evalStack = new Stack<Eval>();
-            Stack<OperatorType> operatorStack = new Stack<OperatorType>();
+            var evalStack = new Stack<Eval>();
+            var operatorStack = new Stack<OperatorType>();
 
-            foreach (string parameter in parameters)
+            foreach (var parameter in parameters)
             {
                 if (parameter.Equals(StringTokeniser.Comma))
                 {
                     continue;
                 }
 
-                OperatorType currentOperator = GetOperatorSymbol(parameter);
+                var currentOperator = GetOperatorSymbol(parameter);
                 if (currentOperator == OperatorType.Invalid)
                 {
-                    LogoObject logoObject = ParseObject(parameter, objects, stringToken);
+                    var logoObject = ParseObject(parameter, objects, stringToken);
                     if (logoObject is NumberObject)
                     {
                         evalStack.Push(new NumberValueEval(logoObject as NumberObject));
@@ -853,8 +851,8 @@ namespace LogicalParser
                                 break;
                             }
 
-                            int currentOperatorPrecedence = GetOperatorPrecedence(currentOperator);
-                            int previousOperatorPrecedence = GetOperatorPrecedence(operatorStack.Peek());
+                            var currentOperatorPrecedence = GetOperatorPrecedence(currentOperator);
+                            var previousOperatorPrecedence = GetOperatorPrecedence(operatorStack.Peek());
 
                             if (previousOperatorPrecedence > currentOperatorPrecedence)
                             {
@@ -864,7 +862,7 @@ namespace LogicalParser
                     }
                     else
                     {
-                        int currentOperatorPrecedence = GetOperatorPrecedence(currentOperator);
+                        var currentOperatorPrecedence = GetOperatorPrecedence(currentOperator);
 
                         if (currentOperatorPrecedence == -1)
                         {
@@ -874,7 +872,7 @@ namespace LogicalParser
 
                         if (operatorStack.Count > 0)
                         {
-                            int previousOperatorPrecedence = GetOperatorPrecedence(operatorStack.Peek());
+                            var previousOperatorPrecedence = GetOperatorPrecedence(operatorStack.Peek());
                             if (previousOperatorPrecedence > currentOperatorPrecedence)
                             {
                                 PopOperatorAndEvaluate(operatorStack, evalStack, stringToken);
@@ -904,7 +902,7 @@ namespace LogicalParser
 
         private void PopOperatorAndEvaluate(Stack<OperatorType> operatorStack, Stack<Eval> evalStack, StringToken stringToken)
         {
-            OperatorType currentOperator = operatorStack.Pop();
+            var currentOperator = operatorStack.Pop();
 
             switch (currentOperator)
             {
@@ -914,7 +912,7 @@ namespace LogicalParser
                 case OperatorType.UnaryCos:
                 case OperatorType.UnaryTan:
                     {
-                        Eval eval = SafePop(evalStack, stringToken);
+                        var eval = SafePop(evalStack, stringToken);
                         if (eval is NumberEval)
                         {
                             if (currentOperator == OperatorType.UnaryMinus)
@@ -957,8 +955,8 @@ namespace LogicalParser
                 case OperatorType.Min:
                 case OperatorType.Max:
                     {
-                        Eval eval2 = SafePop(evalStack, stringToken);
-                        Eval eval1 = SafePop(evalStack, stringToken);
+                        var eval2 = SafePop(evalStack, stringToken);
+                        var eval1 = SafePop(evalStack, stringToken);
                         if ((eval1 is NumberEval) && (eval2 is NumberEval))
                         {
                             if (currentOperator == OperatorType.Plus)
@@ -1006,7 +1004,7 @@ namespace LogicalParser
                     }
                 case OperatorType.UnaryNot:
                     {
-                        Eval eval = SafePop(evalStack, stringToken);
+                        var eval = SafePop(evalStack, stringToken);
                         if (eval is BooleanEval)
                         {
                             evalStack.Push(new BooleanUnaryNotEval(eval as BooleanEval));
@@ -1021,8 +1019,8 @@ namespace LogicalParser
                 case OperatorType.Or:
                 case OperatorType.Xor:
                     {
-                        Eval eval2 = SafePop(evalStack, stringToken);
-                        Eval eval1 = SafePop(evalStack, stringToken);
+                        var eval2 = SafePop(evalStack, stringToken);
+                        var eval1 = SafePop(evalStack, stringToken);
                         if ((eval1 is BooleanEval) && (eval2 is BooleanEval))
                         {
                             if (currentOperator == OperatorType.And)
@@ -1056,8 +1054,8 @@ namespace LogicalParser
                 case OperatorType.LessThanOrEqual:
                     {
                         // NO! This can be number and number or bool and bool!
-                        Eval eval2 = SafePop(evalStack, stringToken);
-                        Eval eval1 = SafePop(evalStack, stringToken);
+                        var eval2 = SafePop(evalStack, stringToken);
+                        var eval1 = SafePop(evalStack, stringToken);
                         if ((eval1 is NumberEval) && (eval2 is NumberEval))
                         {
                             if (currentOperator == OperatorType.Equality)

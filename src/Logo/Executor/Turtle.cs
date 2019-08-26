@@ -54,8 +54,8 @@ namespace Executor
 
         public void Forward(float distance)
         {
-            float newX = X;
-            float newY = Y;
+            var newX = X;
+            var newY = Y;
             CalculateNewPosition(Direction, distance, ref newX, ref newY);
             X = newX;
             Y = newY;
@@ -63,9 +63,9 @@ namespace Executor
 
         public void Backward(float distance)
         {
-            float newX = X;
-            float newY = Y;
-            float tempDirection = CalculateNewDirection(180);
+            var newX = X;
+            var newY = Y;
+            var tempDirection = CalculateNewDirection(180);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
             X = newX;
             Y = newY;
@@ -73,9 +73,9 @@ namespace Executor
 
         public void Left(float distance)
         {
-            float newX = X;
-            float newY = Y;
-            float tempDirection = CalculateNewDirection(-90);
+            var newX = X;
+            var newY = Y;
+            var tempDirection = CalculateNewDirection(-90);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
             X = newX;
             Y = newY;
@@ -83,9 +83,9 @@ namespace Executor
 
         public void Right(float distance)
         {
-            float newX = X;
-            float newY = Y;
-            float tempDirection = CalculateNewDirection(90);
+            var newX = X;
+            var newY = Y;
+            var tempDirection = CalculateNewDirection(90);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
             X = newX;
             Y = newY;
@@ -95,7 +95,7 @@ namespace Executor
 
         public float CalculateNewDirection(float angle)
         {
-            float newDirection = Direction;
+            var newDirection = Direction;
 
             newDirection += angle;
             while (newDirection > 359) newDirection -= 360;
