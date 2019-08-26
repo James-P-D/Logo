@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using LogicalParser;
@@ -39,9 +40,9 @@ namespace Logo
             wrapBordersCheckBox.Checked = wrapBorders;
             updateUICheckBox.Checked = updateTextBoxes;
             executor = new Executor.Executor();
-            executor.AddOutputTextEvent += new Executor.Executor.AddOutputTextDelegate(Executor_AddOutputTextEvent);
-            executor.UpdateEvent += new global::Executor.Executor.UpdateDelegate(Executor_UpdateEvent);
-            programTextBox.Text = "hideturtle; repeat 36 { repeat 360 { forward 5; rightturn 1; } rightturn 10; }";
+            executor.AddOutputTextEvent += Executor_AddOutputTextEvent;
+            executor.UpdateEvent += Executor_UpdateEvent;
+            programTextBox.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,7 +72,8 @@ namespace Logo
         {
             if (turtle.IsPenDown)
             {
-                if (turtle.X != x1 || turtle.Y != y1)
+                double TOLERANCE = 0.0001;
+                if (Math.Abs(turtle.X - x1) > TOLERANCE || Math.Abs(turtle.Y - y1) > TOLERANCE)
                 {
                     UpdateImage(turtle, x1, y1);
                 }
@@ -150,7 +152,7 @@ namespace Logo
 
             try
             {
-                stringTokeniser.AddOutputTextEvent += new StringTokeniser.AddOutputTextDelegate(StringTokeniserAddOutputText);
+                stringTokeniser.AddOutputTextEvent += StringTokeniserAddOutputText;
                 var allLines = programTextBox.Text.Split('\n');
                 var stringTokens = stringTokeniser.Parse(allLines);
 
@@ -159,9 +161,9 @@ namespace Logo
                                 
                 running = true;
                 var runThread = new BackgroundWorker();
-                runThread.RunWorkerCompleted += new RunWorkerCompletedEventHandler(runThread_RunWorkerCompleted);
-                runThread.DoWork += new DoWorkEventHandler(runThread_DoWork);
-                runThread.ProgressChanged += new ProgressChangedEventHandler(runThread_ProgressChanged);
+                runThread.RunWorkerCompleted += runThread_RunWorkerCompleted;
+                runThread.DoWork += runThread_DoWork;
+                runThread.ProgressChanged += runThread_ProgressChanged;
                 runThread.WorkerReportsProgress = true;
 
                 AddOutputText("*** Compile successful ***");
@@ -176,7 +178,7 @@ namespace Logo
             }
             finally
             {
-                stringTokeniser.AddOutputTextEvent -= new StringTokeniser.AddOutputTextDelegate(StringTokeniserAddOutputText);
+                stringTokeniser.AddOutputTextEvent -= StringTokeniserAddOutputText;
             }
         }
         
@@ -184,9 +186,9 @@ namespace Logo
 
         private void UpdateTextboxes(Turtle turtle)
         {
-            ThreadHelper.SetText(this, turtleXTextBox, turtle.X.ToString());
-            ThreadHelper.SetText(this, turtleYTextBox, turtle.Y.ToString());
-            ThreadHelper.SetText(this, turtleDirectionTextBox, turtle.Direction.ToString());
+            ThreadHelper.SetText(this, turtleXTextBox, turtle.X.ToString(CultureInfo.InvariantCulture));
+            ThreadHelper.SetText(this, turtleYTextBox, turtle.Y.ToString(CultureInfo.InvariantCulture));
+            ThreadHelper.SetText(this, turtleDirectionTextBox, turtle.Direction.ToString(CultureInfo.InvariantCulture));
 
             ThreadHelper.SetText(this, turtleRColourTextBox, turtle.ColorR.ToString());
             ThreadHelper.SetText(this, turtleGColourTextBox, turtle.ColorG.ToString());
@@ -259,11 +261,11 @@ namespace Logo
             turtle.CalculateNewPosition(turtle.CalculateNewDirection(-45), -20, ref bottomRightX, ref bottomRightY);
 
             imageWithTurtle = (Image)imageWithoutTurtle.Clone();
+            float xCenter = imageWithTurtle.Width / 2;
+            float yCenter = imageWithTurtle.Height / 2;
+
             using (var grp = Graphics.FromImage(imageWithTurtle))
             {
-                float xCenter = imageWithTurtle.Width / 2;
-                float yCenter = imageWithTurtle.Height / 2;
-
                 var pen = Pens.Black;
 
                 grp.DrawLine(pen, new Point((int)(turtle.X + xCenter), (int)(turtle.Y + yCenter)), new Point((int)(bottomLeftX + xCenter), (int)(bottomLeftY + yCenter)));
@@ -274,20 +276,23 @@ namespace Logo
 
         void runThread_DoWork(object sender, DoWorkEventArgs e)
         {
-            var commands = (e.Argument as object[])[0] as List<Command>;
-            var objects = (e.Argument as object[])[1] as List<LogoObject>;
-            var turtle = (e.Argument as object[])[2] as Turtle;
+            var commands = e.Argument is object[] ? ((object[]) e.Argument)[0] as List<Command> : null;
+            if (((object[]) e.Argument).Length > 1)
+            {
+                var objects = e.Argument is object[] ? ((object[]) e.Argument)[1] as List<LogoObject> : null;
+                var turtle = e.Argument is object[] ? ((object[]) e.Argument)[2] as Turtle : null;
             
-            var mainBreak = false;
-            var mainContinue = false;
-            executor.Running = true;
-            if (executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
-            {
-                AddOutputText("*** Execution successful ***");
-            }
-            else
-            {
-                AddOutputText("*** Execution failed ***");
+                var mainBreak = false;
+                var mainContinue = false;
+                executor.Running = true;
+                if (executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
+                {
+                    AddOutputText("*** Execution successful ***");
+                }
+                else
+                {
+                    AddOutputText("*** Execution failed ***");
+                }
             }
         }
 
@@ -297,14 +302,14 @@ namespace Logo
             lock (locker)
             {
                 UpdatePicture(
-                    (e.UserState as object[])[0] as Turtle,
-                    (int)(e.UserState as object[])[1],
-                    (int)(e.UserState as object[])[2]);
-                UpdateTextboxes((e.UserState as object[])[0] as Turtle);
+                    (e.UserState as object[])?[0] as Turtle,
+                    (int)(e.UserState as object[])?[1],
+                    (int)(e.UserState as object[])?[2]);
+                UpdateTextboxes((e.UserState as object[])?[0] as Turtle);
             }
           //TODO: Do we still need this?!?
           // Yes! This doesn't seem to cause the same threading issue as firing on events!
-            return;
+          /*
             var x1 = (int)(e.UserState as object[])[0];
             var y1 = (int)(e.UserState as object[])[1];
             var x2 = (int)(e.UserState as object[])[2];
@@ -336,6 +341,7 @@ namespace Logo
 
             ThreadHelper.SetText(this, turtleXTextBox, x2.ToString());
             ThreadHelper.SetText(this, turtleYTextBox, y2.ToString());
+            */
         }
 
         void runThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
