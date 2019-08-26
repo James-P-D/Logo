@@ -17,7 +17,6 @@ namespace LogicalParser.Commands.Control
         public bool Value
         {
             get => BooleanEval.Value;
-            private set { }
         }
 
         public override string ToString()

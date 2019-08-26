@@ -17,7 +17,6 @@ namespace LogicalParser.Commands.Control
         public int Counter
         {
             get => (int)NumberEval.Value;
-            private set { }
         }
 
         public override string ToString()
