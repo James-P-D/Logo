@@ -6,18 +6,18 @@ namespace Executor
     {
         public Turtle(float x, float y, float direction)
         {
-            this.InitialX = x;
-            this.InitialY = y;
-            this.InitialDirection = direction;
-            this.CenterTurtle();
+            InitialX = x;
+            InitialY = y;
+            InitialDirection = direction;
+            CenterTurtle();
 
-            this.IsPenDown = true;
-            this.IsVisible = true;
+            IsPenDown = true;
+            IsVisible = true;
 
-            this.ColorA = 255;
-            this.ColorR = 0;
-            this.ColorG = 0;
-            this.ColorB = 0;
+            ColorA = 255;
+            ColorR = 0;
+            ColorG = 0;
+            ColorB = 0;
         }
 
         #region Properties
@@ -44,58 +44,58 @@ namespace Executor
 
         public void RightTurn(float angle)
         {
-            this.Direction = CalculateNewDirection(angle);
+            Direction = CalculateNewDirection(angle);
         }
 
         public void LeftTurn(float angle)
         {
-            this.Direction = CalculateNewDirection(-angle);
+            Direction = CalculateNewDirection(-angle);
         }
 
         public void Forward(float distance)
         {
-            float newX = this.X;
-            float newY = this.Y;
-            CalculateNewPosition(this.Direction, distance, ref newX, ref newY);
-            this.X = newX;
-            this.Y = newY;
+            float newX = X;
+            float newY = Y;
+            CalculateNewPosition(Direction, distance, ref newX, ref newY);
+            X = newX;
+            Y = newY;
         }
 
         public void Backward(float distance)
         {
-            float newX = this.X;
-            float newY = this.Y;
+            float newX = X;
+            float newY = Y;
             float tempDirection = CalculateNewDirection(180);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
-            this.X = newX;
-            this.Y = newY;
+            X = newX;
+            Y = newY;
         }
 
         public void Left(float distance)
         {
-            float newX = this.X;
-            float newY = this.Y;
+            float newX = X;
+            float newY = Y;
             float tempDirection = CalculateNewDirection(-90);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
-            this.X = newX;
-            this.Y = newY;
+            X = newX;
+            Y = newY;
         }
 
         public void Right(float distance)
         {
-            float newX = this.X;
-            float newY = this.Y;
+            float newX = X;
+            float newY = Y;
             float tempDirection = CalculateNewDirection(90);
             CalculateNewPosition(tempDirection, distance, ref newX, ref newY);
-            this.X = newX;
-            this.Y = newY;
+            X = newX;
+            Y = newY;
         }
 
         #region Direction and Position Calculation
 
         public float CalculateNewDirection(float angle)
         {
-            float newDirection = this.Direction;
+            float newDirection = Direction;
 
             newDirection += angle;
             while (newDirection > 359) newDirection -= 360;
@@ -106,8 +106,8 @@ namespace Executor
 
         public void CalculateNewPosition(float angle, float distance, ref float newX, ref float newY)
         {
-            newX = this.X;
-            newY = this.Y;
+            newX = X;
+            newY = Y;
 
             if (angle == 0)
             {
@@ -156,12 +156,12 @@ namespace Executor
 
         public void PenUp()
         {
-            this.IsPenDown = false;
+            IsPenDown = false;
         }
 
         public void PenDown()
         {
-            this.IsPenDown = true;
+            IsPenDown = true;
         }
 
         #endregion
@@ -170,12 +170,12 @@ namespace Executor
 
         public void Hide()
         {
-            this.IsVisible = false;
+            IsVisible = false;
         }
 
         public void Show()
         {
-            this.IsVisible = true;
+            IsVisible = true;
         }
 
         #endregion
@@ -184,22 +184,22 @@ namespace Executor
 
         public void SetColorA(int colorA)
         {
-            this.ColorA = (byte)Math.Max(0, Math.Min(colorA, 255));
+            ColorA = (byte)Math.Max(0, Math.Min(colorA, 255));
         }
 
         public void SetColorR(int colorR)
         {
-            this.ColorR = (byte)Math.Max(0, Math.Min(colorR, 255));
+            ColorR = (byte)Math.Max(0, Math.Min(colorR, 255));
         }
 
         public void SetColorG(int colorG)
         {
-            this.ColorG = (byte)Math.Max(0, Math.Min(colorG, 255));
+            ColorG = (byte)Math.Max(0, Math.Min(colorG, 255));
         }
 
         public void SetColorB(int colorB)
         {
-            this.ColorB = (byte)Math.Max(0, Math.Min(colorB, 255));
+            ColorB = (byte)Math.Max(0, Math.Min(colorB, 255));
         }
 
         #endregion
@@ -208,24 +208,24 @@ namespace Executor
 
         public void CenterTurtle()
         {
-            this.X = this.InitialX;
-            this.Y = this.InitialY;
-            this.Direction = this.InitialDirection;
+            X = InitialX;
+            Y = InitialY;
+            Direction = InitialDirection;
         }
 
         public void SetDirection(float direction)
         {
-            this.Direction = direction;
+            Direction = direction;
         }
 
         public void SetX(float x)
         {
-            this.X = x;
+            X = x;
         }
 
         public void SetY(float y)
         {
-            this.Y = y;
+            Y = y;
         }
 
         #endregion

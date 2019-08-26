@@ -6,14 +6,14 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberUnaryTanEval(NumberEval numberEval)
         {
-            this.NumberEval1 = numberEval;
+            NumberEval1 = numberEval;
         }
 
         public override float Value
         {
             get
             {
-                return (float)Math.Tan(this.NumberEval1.Value * (Math.PI / 180));
+                return (float)Math.Tan(NumberEval1.Value * (Math.PI / 180));
             }
         }
 
@@ -21,7 +21,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"Tan {this.NumberEval1}";
+            return $"Tan {NumberEval1}";
         }
     }
 }

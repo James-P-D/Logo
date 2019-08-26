@@ -6,15 +6,15 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberMaxEval(NumberEval numberEval1, NumberEval numberEval2)
         {
-            this.NumberEval1 = numberEval1;
-            this.NumberEval2 = numberEval2;
+            NumberEval1 = numberEval1;
+            NumberEval2 = numberEval2;
         }
 
         public override float Value
         {
             get
             {
-                return Math.Max(this.NumberEval1.Value, this.NumberEval2.Value);
+                return Math.Max(NumberEval1.Value, NumberEval2.Value);
             }
         }
 
@@ -23,7 +23,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"max ({NumberEval1.ToString()} , {NumberEval2.ToString()})";
+            return $"max ({NumberEval1} , {NumberEval2})";
         }
     }
 }

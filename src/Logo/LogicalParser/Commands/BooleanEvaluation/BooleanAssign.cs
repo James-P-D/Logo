@@ -6,8 +6,8 @@ namespace LogicalParser.Commands.BooleanEvaluation
     {
         public BooleanAssign(BooleanVariable variable, BooleanEval booleanEval)
         {
-            this.BooleanVar = variable;
-            this.BooleanEval = booleanEval;
+            BooleanVar = variable;
+            BooleanEval = booleanEval;
         }
 
         public BooleanVariable BooleanVar { get; set; }
@@ -15,7 +15,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
 
         public override string ToString()
         {
-            return $"{Parser.Boolean} {this.BooleanVar.Name} = {this.BooleanEval.ToString()}";
+            return $"{Parser.Boolean} {BooleanVar.Name} = {BooleanEval}";
         }
     }
 }

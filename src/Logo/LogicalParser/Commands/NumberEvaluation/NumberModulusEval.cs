@@ -6,8 +6,8 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberModulusEval(NumberEval numberEval1, NumberEval numberEval2)
         {
-            this.NumberEval1 = numberEval1;
-            this.NumberEval2 = numberEval2;
+            NumberEval1 = numberEval1;
+            NumberEval2 = numberEval2;
         }
 
         public override float Value
@@ -25,7 +25,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"({NumberEval1.ToString()} % {NumberEval2.ToString()})";
+            return $"({NumberEval1} % {NumberEval2})";
         }
     }
 }

@@ -4,8 +4,8 @@
     {
         public BooleanXorEval(BooleanEval booleanEval1, BooleanEval booleanEval2)
         {
-            this.BooleanEval1 = booleanEval1;
-            this.BooleanEval2 = booleanEval2;
+            BooleanEval1 = booleanEval1;
+            BooleanEval2 = booleanEval2;
         }
 
         public override bool Value
@@ -13,8 +13,8 @@
             get
             {
                 return
-                  (this.BooleanEval1.Value && !this.BooleanEval2.Value) ||
-                  (!this.BooleanEval1.Value && this.BooleanEval2.Value);
+                  (BooleanEval1.Value && !BooleanEval2.Value) ||
+                  (!BooleanEval1.Value && BooleanEval2.Value);
             }
         }
 
@@ -23,7 +23,7 @@
 
         public override string ToString()
         {
-            return $"({BooleanEval1.ToString()} ^^ {BooleanEval2.ToString()})";
+            return $"({BooleanEval1} ^^ {BooleanEval2})";
         }
     }
 }

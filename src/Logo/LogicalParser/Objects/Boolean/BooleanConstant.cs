@@ -5,14 +5,14 @@
         public BooleanConstant(string name, bool val) :
           base(val)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public string Name { get; }
 
         public override string ToString()
         {
-            return $"{this.Name}";
+            return $"{Name}";
         }
     }
 }

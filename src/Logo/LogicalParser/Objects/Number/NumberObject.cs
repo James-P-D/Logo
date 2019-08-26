@@ -4,12 +4,12 @@
     {
         public NumberObject(float val)
         {
-            this.Value = val;
+            Value = val;
         }
 
         public NumberObject(NumberLiteral numberConstValue)
         {
-            this.Value = numberConstValue.Value;
+            Value = numberConstValue.Value;
         }
 
         public float Value { get; set; }

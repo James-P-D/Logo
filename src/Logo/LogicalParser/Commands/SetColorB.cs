@@ -6,7 +6,7 @@ namespace LogicalParser.Commands
     {
         public SetColorB(NumberEval numberEval)
         {
-            this.NumberEval = numberEval;
+            NumberEval = numberEval;
         }
 
         private NumberEval NumberEval { get; }
@@ -15,13 +15,13 @@ namespace LogicalParser.Commands
         {
             get
             {
-                return (int)this.NumberEval.Value;
+                return (int)NumberEval.Value;
             }
         }
 
         public override string ToString()
         {
-            return $"{Parser.ColorB} {this.NumberEval.ToString()}";
+            return $"{Parser.ColorB} {NumberEval}";
         }
 
     }

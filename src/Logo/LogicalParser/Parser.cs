@@ -62,7 +62,7 @@ namespace LogicalParser
 
         public const string Output = "output";
 
-        private string[] reservedWords = {
+        private readonly string[] reservedWords = {
                                         Number,
 
                                         Boolean,
@@ -798,13 +798,13 @@ namespace LogicalParser
                 if ((previousToken == null) ||
                   ((previousToken != null) && (GetOperatorSymbol(previousToken) != OperatorType.Invalid)))
                 {
-                    if (currentToken.Equals(StringTokeniser.Minus.ToString()))
+                    if (currentToken.Equals(StringTokeniser.Minus))
                     {
-                        parameters[i] = StringTokeniser.UnaryMinus.ToString();
+                        parameters[i] = StringTokeniser.UnaryMinus;
                     }
-                    else if (currentToken.Equals(StringTokeniser.Plus.ToString()))
+                    else if (currentToken.Equals(StringTokeniser.Plus))
                     {
-                        parameters[i] = StringTokeniser.UnaryPlus.ToString();
+                        parameters[i] = StringTokeniser.UnaryPlus;
                     }
                 }
             }
@@ -1134,14 +1134,14 @@ namespace LogicalParser
 
         private OperatorType GetOperatorSymbol(string str)
         {
-            if (str.Equals(StringTokeniser.Plus.ToString())) return OperatorType.Plus;
-            else if (str.Equals(StringTokeniser.Minus.ToString())) return OperatorType.Minus;
-            else if (str.Equals(StringTokeniser.Divide.ToString())) return OperatorType.Divide;
-            else if (str.Equals(StringTokeniser.Multiply.ToString())) return OperatorType.Multiply;
-            else if (str.Equals(StringTokeniser.Modulus.ToString())) return OperatorType.Modulus;
-            else if (str.Equals(StringTokeniser.Exponential.ToString())) return OperatorType.Exponential;
-            else if (str.Equals(StringTokeniser.UnaryMinus.ToString())) return OperatorType.UnaryMinus;
-            else if (str.Equals(StringTokeniser.UnaryPlus.ToString())) return OperatorType.UnaryPlus;
+            if (str.Equals(StringTokeniser.Plus)) return OperatorType.Plus;
+            else if (str.Equals(StringTokeniser.Minus)) return OperatorType.Minus;
+            else if (str.Equals(StringTokeniser.Divide)) return OperatorType.Divide;
+            else if (str.Equals(StringTokeniser.Multiply)) return OperatorType.Multiply;
+            else if (str.Equals(StringTokeniser.Modulus)) return OperatorType.Modulus;
+            else if (str.Equals(StringTokeniser.Exponential)) return OperatorType.Exponential;
+            else if (str.Equals(StringTokeniser.UnaryMinus)) return OperatorType.UnaryMinus;
+            else if (str.Equals(StringTokeniser.UnaryPlus)) return OperatorType.UnaryPlus;
             else if (str.Equals(StringTokeniser.UnaryNot)) return OperatorType.UnaryNot;
             else if (str.Equals(StringTokeniser.And)) return OperatorType.And;
             else if (str.Equals(StringTokeniser.Or)) return OperatorType.Or;
@@ -1152,8 +1152,8 @@ namespace LogicalParser
             else if (str.Equals(StringTokeniser.LessThan)) return OperatorType.LessThan;
             else if (str.Equals(StringTokeniser.GreaterThanOrEqual)) return OperatorType.GreaterThanOrEqual;
             else if (str.Equals(StringTokeniser.LessThanOrEqual)) return OperatorType.LessThanOrEqual;
-            else if (str.Equals(StringTokeniser.StartParenthesis.ToString())) return OperatorType.StartParentheses;
-            else if (str.Equals(StringTokeniser.EndParenthesis.ToString())) return OperatorType.EndParentheses;
+            else if (str.Equals(StringTokeniser.StartParenthesis)) return OperatorType.StartParentheses;
+            else if (str.Equals(StringTokeniser.EndParenthesis)) return OperatorType.EndParentheses;
             else if (str.Equals(StringTokeniser.UnarySin)) return OperatorType.UnarySin;
             else if (str.Equals(StringTokeniser.UnaryCos)) return OperatorType.UnaryCos;
             else if (str.Equals(StringTokeniser.UnaryTan)) return OperatorType.UnaryTan;

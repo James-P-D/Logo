@@ -6,14 +6,14 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberUnaryCosEval(NumberEval numberEval)
         {
-            this.NumberEval1 = numberEval;
+            NumberEval1 = numberEval;
         }
 
         public override float Value
         {
             get
             {
-                return (float)Math.Cos(this.NumberEval1.Value * (Math.PI / 180));
+                return (float)Math.Cos(NumberEval1.Value * (Math.PI / 180));
             }
         }
 
@@ -21,7 +21,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"Cos {this.NumberEval1}";
+            return $"Cos {NumberEval1}";
         }
     }
 }

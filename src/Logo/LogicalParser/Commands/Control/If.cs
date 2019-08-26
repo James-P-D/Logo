@@ -9,14 +9,14 @@ namespace LogicalParser.Commands.Control
         // but only if it actually exists!
         public If(BooleanEval booleanEval, Command[] thenCommands)
         {
-            this.BooleanEval = booleanEval;
-            this.ThenCommands = new List<Command>(thenCommands);
-            this.ElseCommands = new List<Command>();
+            BooleanEval = booleanEval;
+            ThenCommands = new List<Command>(thenCommands);
+            ElseCommands = new List<Command>();
         }
 
         public void SetElseCommands(Command[] elseCommands)
         {
-            this.ElseCommands.AddRange(elseCommands);
+            ElseCommands.AddRange(elseCommands);
         }
 
         private BooleanEval BooleanEval { get; }
@@ -34,7 +34,7 @@ namespace LogicalParser.Commands.Control
 
         public override string ToString()
         {
-            return $"{Parser.If} {BooleanEval.ToString()}";
+            return $"{Parser.If} {BooleanEval}";
         }
     }
 }

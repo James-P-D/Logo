@@ -68,10 +68,7 @@ namespace StringParser
 
         private void AddOutputText(string text)
         {
-            if (this.AddOutputTextEvent != null)
-            {
-                this.AddOutputTextEvent.Invoke(text);
-            }
+            AddOutputTextEvent?.Invoke(text);
         }
 
         private void Output(string[] lines, int i)
@@ -175,7 +172,7 @@ namespace StringParser
                     currentString = string.Empty;
                     while (startLine < i)
                     {
-                        formattedLines.Add(String.Empty);
+                        formattedLines.Add(string.Empty);
                         startLine++;
                     }
 
@@ -183,7 +180,7 @@ namespace StringParser
                 }
                 else if (string.IsNullOrEmpty(currentString.Trim()))
                 {
-                    formattedLines.Add(String.Empty);
+                    formattedLines.Add(string.Empty);
                 }
                 else
                 {
@@ -195,9 +192,9 @@ namespace StringParser
             return formattedLines.ToArray();
         }
 
-        private bool StringMatch(string str, string[] subStrs, int i, ref string match)
+        private bool StringMatch(string str, string[] subStrings, int i, ref string match)
         {
-            foreach (string subStr in subStrs)
+            foreach (string subStr in subStrings)
             {
                 if (StringMatch(str, subStr, i))
                 {
@@ -244,7 +241,7 @@ namespace StringParser
         /// <returns></returns>
         private string[] FirstSplit(string str)
         {
-            List<string> subStrs = new List<string>();
+            List<string> subStrings = new List<string>();
 
             string subStr = string.Empty;
             int i = 0;
@@ -252,21 +249,21 @@ namespace StringParser
             {
                 if (StringMatch(str, EndCommand, i))
                 {
-                    subStrs.Add(subStr);
+                    subStrings.Add(subStr);
                     subStr = string.Empty;
                     i += EndCommand.Length;
                 }
                 else if (StringMatch(str, StartBlock, i))
                 {
                     subStr += str[i];
-                    subStrs.Add(subStr);
+                    subStrings.Add(subStr);
                     subStr = string.Empty;
                     i += StartBlock.Length;
                 }
                 else if (StringMatch(str, EndBlock, i))
                 {
                     subStr += str[i];
-                    subStrs.Add(subStr);
+                    subStrings.Add(subStr);
                     subStr = string.Empty;
                     i += EndBlock.Length;
                 }
@@ -280,40 +277,41 @@ namespace StringParser
             subStr = subStr.Trim();
             if (string.IsNullOrEmpty(subStr))
             {
-                subStrs.Add(subStr);
+                subStrings.Add(subStr);
             }
 
-            return subStrs.ToArray();
+            return subStrings.ToArray();
         }
 
-        string[] separators = new string[] {
-      Space,
-      Comma,
-      Assignment,
-      StartParenthesis,
-      EndParenthesis,
-      Plus,
-      Minus,
-      Divide,
-      Multiply,
-      Modulus,
-      Exponential,
-      UnaryNot,
-      And,
-      Or,
-      Xor,
-      Equality,
-      Inequality,
-      GreaterThan,
-      LessThan,
-      GreaterThanOrEqual,
-      LessThanOrEqual
-    };
+        private readonly string[] separators = new string[]
+        {
+            Space,
+            Comma,
+            Assignment,
+            StartParenthesis,
+            EndParenthesis,
+            Plus,
+            Minus,
+            Divide,
+            Multiply,
+            Modulus,
+            Exponential,
+            UnaryNot,
+            And,
+            Or,
+            Xor,
+            Equality,
+            Inequality,
+            GreaterThan,
+            LessThan,
+            GreaterThanOrEqual,
+            LessThanOrEqual
+        };
 
         private string[] SecondSplit(string str)
         {
             string[] orderedSeparators = separators.OrderByDescending(s => s.Length).ToArray();
-            List<string> subStrs = new List<string>();
+            List<string> subStrings = new List<string>();
 
             string currentSubStr = string.Empty;
             int i = 0;
@@ -323,8 +321,8 @@ namespace StringParser
                 string match = string.Empty;
                 if (StringMatch(str, orderedSeparators, i, ref match))
                 {
-                    AddSegment(subStrs, currentSubStr);
-                    AddSegment(subStrs, match);
+                    AddSegment(subStrings, currentSubStr);
+                    AddSegment(subStrings, match);
                     currentSubStr = string.Empty;
                     i += match.Length;
                 }
@@ -335,19 +333,19 @@ namespace StringParser
                 }
             }
 
-            AddSegment(subStrs, currentSubStr);
+            AddSegment(subStrings, currentSubStr);
 
 
 
-            return subStrs.ToArray();
+            return subStrings.ToArray();
         }
 
-        private void AddSegment(List<string> subStrs, string subStr)
+        private void AddSegment(List<string> subStrings, string subStr)
         {
             subStr = subStr.Trim();
             if (!string.IsNullOrEmpty(subStr))
             {
-                subStrs.Add(subStr);
+                subStrings.Add(subStr);
             }
         }
 

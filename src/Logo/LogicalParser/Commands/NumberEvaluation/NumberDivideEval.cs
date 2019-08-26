@@ -6,19 +6,19 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberDivideEval(NumberEval numberEval1, NumberEval numberEval2)
         {
-            this.NumberEval1 = numberEval1;
-            this.NumberEval2 = numberEval2;
+            NumberEval1 = numberEval1;
+            NumberEval2 = numberEval2;
         }
 
         public override float Value
         {
             get
             {
-                if (this.NumberEval2.Value == 0)
+                if (NumberEval2.Value == 0)
                 {
                     throw new DivideByZeroException();
                 }
-                return this.NumberEval1.Value / this.NumberEval2.Value;
+                return NumberEval1.Value / NumberEval2.Value;
             }
         }
 
@@ -27,7 +27,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"({NumberEval1.ToString()} / {NumberEval2.ToString()})";
+            return $"({NumberEval1} / {NumberEval2})";
         }
     }
 }

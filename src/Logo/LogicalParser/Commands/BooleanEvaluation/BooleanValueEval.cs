@@ -6,7 +6,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
     {
         public BooleanValueEval(BooleanObject booleanObject)
         {
-            this.BooleanObject = booleanObject;
+            BooleanObject = booleanObject;
         }
 
         private BooleanObject BooleanObject { get; }
@@ -18,7 +18,7 @@ namespace LogicalParser.Commands.BooleanEvaluation
 
         public override string ToString()
         {
-            return $"{this.BooleanObject.ToString()}";
+            return $"{BooleanObject}";
         }
     }
 }

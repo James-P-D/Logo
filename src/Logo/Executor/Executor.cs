@@ -18,10 +18,7 @@ namespace Executor
 
         private void AddOutputText(string text)
         {
-            if (this.AddOutputTextEvent != null)
-            {
-                this.AddOutputTextEvent.Invoke(text);
-            }
+            AddOutputTextEvent?.Invoke(text);
         }
 
         public delegate void UpdateDelegate(Turtle turtle, int x1, int y1);
@@ -29,10 +26,7 @@ namespace Executor
 
         private void Update(Turtle turtle, int x1, int y1)
         {
-            if (this.UpdateEvent != null)
-            {
-                this.UpdateEvent(turtle, x1, y1);
-            }
+            UpdateEvent?.Invoke(turtle, x1, y1);
         }
 
         #endregion
@@ -44,10 +38,10 @@ namespace Executor
             {
                 foreach (Command command in commands)
                 {
-                    AddOutputText($"{GetIndent(indent)}{command.ToString()}");
+                    AddOutputText($"{GetIndent(indent)}{command}");
                     //Thread.Sleep(1);
 
-                    if (!this.Running)
+                    if (!Running)
                     {
                         return true;
                     }

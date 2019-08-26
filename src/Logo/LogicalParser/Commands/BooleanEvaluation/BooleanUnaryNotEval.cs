@@ -4,14 +4,14 @@
     {
         public BooleanUnaryNotEval(BooleanEval booleanEval)
         {
-            this.BooleanEval = booleanEval;
+            BooleanEval = booleanEval;
         }
 
         public override bool Value
         {
             get
             {
-                return !this.BooleanEval.Value;
+                return !BooleanEval.Value;
             }
         }
 
@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return $"!{this.BooleanEval}";
+            return $"!{BooleanEval}";
         }
     }
 }

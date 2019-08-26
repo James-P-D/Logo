@@ -6,7 +6,7 @@ namespace LogicalParser.Commands
     {
         public Right(NumberEval numberEval)
         {
-            this.NumberEval = numberEval;
+            NumberEval = numberEval;
         }
 
         private NumberEval NumberEval { get; }
@@ -15,13 +15,13 @@ namespace LogicalParser.Commands
         {
             get
             {
-                return this.NumberEval.Value;
+                return NumberEval.Value;
             }
         }
 
         public override string ToString()
         {
-            return $"{Parser.Right} {this.NumberEval.ToString()}";
+            return $"{Parser.Right} {NumberEval}";
         }
     }
 }

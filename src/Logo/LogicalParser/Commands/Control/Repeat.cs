@@ -7,8 +7,8 @@ namespace LogicalParser.Commands.Control
     {
         public Repeat(NumberEval numberEval, Command[] commands)
         {
-            this.NumberEval = numberEval;
-            this.Commands = new List<Command>(commands);
+            NumberEval = numberEval;
+            Commands = new List<Command>(commands);
         }
 
         private NumberEval NumberEval { get; }
@@ -18,14 +18,14 @@ namespace LogicalParser.Commands.Control
         {
             get
             {
-                return (int)this.NumberEval.Value;
+                return (int)NumberEval.Value;
             }
             private set { }
         }
 
         public override string ToString()
         {
-            return $"{Parser.Repeat} {NumberEval.ToString()}";
+            return $"{Parser.Repeat} {NumberEval}";
         }
     }
 }

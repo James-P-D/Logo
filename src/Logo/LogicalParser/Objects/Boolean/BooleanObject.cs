@@ -4,12 +4,12 @@
     {
         public BooleanObject(bool val)
         {
-            this.Value = val;
+            Value = val;
         }
 
         public BooleanObject(BooleanLiteral booleanLiteralValue)
         {
-            this.Value = booleanLiteralValue.Value;
+            Value = booleanLiteralValue.Value;
         }
 
         public bool Value { get; set; }

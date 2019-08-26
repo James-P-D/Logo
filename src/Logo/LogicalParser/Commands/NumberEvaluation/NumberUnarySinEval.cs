@@ -6,14 +6,14 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberUnarySinEval(NumberEval numberEval)
         {
-            this.NumberEval1 = numberEval;
+            NumberEval1 = numberEval;
         }
 
         public override float Value
         {
             get
             {
-                return (float)Math.Sin(this.NumberEval1.Value * ((float)Math.PI / 180));
+                return (float)Math.Sin(NumberEval1.Value * ((float)Math.PI / 180));
             }
         }
 
@@ -21,7 +21,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"Sin {this.NumberEval1}";
+            return $"Sin {NumberEval1}";
         }
     }
 }

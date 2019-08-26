@@ -6,7 +6,7 @@ namespace LogicalParser.Commands.NumberEvaluation
     {
         public NumberValueEval(NumberObject numberObject)
         {
-            this.NumberObject = numberObject;
+            NumberObject = numberObject;
         }
 
         private NumberObject NumberObject { get; }
@@ -18,7 +18,7 @@ namespace LogicalParser.Commands.NumberEvaluation
 
         public override string ToString()
         {
-            return $"{this.NumberObject.ToString()}";
+            return $"{NumberObject}";
         }
     }
 }

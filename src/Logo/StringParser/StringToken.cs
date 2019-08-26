@@ -4,9 +4,9 @@
     {
         public StringToken(string[] tokens, int lineNumber, string originalString)
         {
-            this.Tokens = tokens;
-            this.LineNumber = lineNumber;
-            this.OriginalString = originalString;
+            Tokens = tokens;
+            LineNumber = lineNumber;
+            OriginalString = originalString;
         }
 
         public string[] Tokens { get; }

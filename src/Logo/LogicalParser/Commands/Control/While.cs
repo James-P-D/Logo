@@ -7,8 +7,8 @@ namespace LogicalParser.Commands.Control
     {
         public While(BooleanEval numberEval, Command[] commands)
         {
-            this.BooleanEval = numberEval;
-            this.Commands = new List<Command>(commands);
+            BooleanEval = numberEval;
+            Commands = new List<Command>(commands);
         }
 
         private BooleanEval BooleanEval { get; }
@@ -25,7 +25,7 @@ namespace LogicalParser.Commands.Control
 
         public override string ToString()
         {
-            return $"{Parser.While} {BooleanEval.ToString()}";
+            return $"{Parser.While} {BooleanEval}";
         }
     }
 

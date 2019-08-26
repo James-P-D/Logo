@@ -4,7 +4,7 @@
     {
         public Output(Eval eval)
         {
-            this.Eval = eval;
+            Eval = eval;
         }
 
         private Eval Eval { get; }
@@ -13,7 +13,7 @@
         {
             get
             {
-                return this.Eval.ToString();
+                return Eval.ToString();
             }
         }
 
@@ -21,13 +21,13 @@
         {
             get
             {
-                return this.Eval;
+                return Eval;
             }
         }
 
         public override string ToString()
         {
-            return $"{Parser.Output} {this.Name}";
+            return $"{Parser.Output} {Name}";
         }
     }
 }
