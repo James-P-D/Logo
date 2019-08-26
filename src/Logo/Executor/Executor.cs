@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using LogicalParser.Commands;
 using LogicalParser.Objects;
-using System.Drawing;
 using LogicalParser.Commands.Evaluation;
 using LogicalParser.Commands.Control;
 using System.ComponentModel;
-using System.Threading;
 
 namespace Executor
 {

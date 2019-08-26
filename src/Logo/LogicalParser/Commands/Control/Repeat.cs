@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LogicalParser.Objects;
+﻿using System.Collections.Generic;
 using LogicalParser.Commands.Evaluation;
 
 namespace LogicalParser.Commands.Control
