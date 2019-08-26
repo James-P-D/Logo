@@ -23,7 +23,7 @@ namespace Logo
             if (control.InvokeRequired)
             {
                 var setTextCallback = new SetTextCallback(SetText);
-                form.Invoke(setTextCallback, new object[] { form, control, text });
+                form.Invoke(setTextCallback, form, control, text);
             }
             else
             {
@@ -51,7 +51,7 @@ namespace Logo
             if (control.InvokeRequired)
             {
                 var addTextCallback = new AddTextCallback(AddText);
-                form.Invoke(addTextCallback, new object[] { form, control, text });
+                form.Invoke(addTextCallback, form, control, text);
             }
             else
             {
@@ -85,12 +85,12 @@ namespace Logo
             if (control.InvokeRequired)
             {
                 var scrollToEndCallback = new ScrollToEndCallback(ScrollToEnd);
-                form.Invoke(scrollToEndCallback, new object[] { form, control });
+                form.Invoke(scrollToEndCallback, form, control);
             }
             else
             {
-                (control as TextBox).SelectionStart = (control as TextBox).Text.Length;
-                (control as TextBox).ScrollToCaret();
+                ((TextBox) control).SelectionStart = ((TextBox) control).Text.Length;
+                ((TextBox) control).ScrollToCaret();
             }
         }
 
@@ -108,7 +108,7 @@ namespace Logo
             if (control.InvokeRequired)
             {
                 var setImageCallback = new SetImageCallback(SetImage);
-                form.Invoke(setImageCallback, new object[] { form, control, image });
+                form.Invoke(setImageCallback, form, control, image);
             }
             else
             {

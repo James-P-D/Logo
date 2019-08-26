@@ -214,7 +214,7 @@ namespace StringParser
             }
 
             var j = 0;
-            while ((j + i < str.Length) && (j < subStr.Length))
+            while (j + i < str.Length && j < subStr.Length)
             {
                 if (!str[j + i].Equals(subStr[j]))
                 {

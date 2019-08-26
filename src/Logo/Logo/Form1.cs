@@ -154,10 +154,8 @@ namespace Logo
                 var allLines = programTextBox.Text.Split('\n');
                 var stringTokens = stringTokeniser.Parse(allLines);
 
-                List<Command> commands;
-                List<LogoObject> objects;
                 var logicalParser = new Parser();
-                logicalParser.Parse(stringTokens, out commands, out objects);
+                logicalParser.Parse(stringTokens, out var commands, out var objects);
                                 
                 running = true;
                 var runThread = new BackgroundWorker();
@@ -214,8 +212,8 @@ namespace Logo
                 if (wrapBorders)
                 {
                     if (
-                      (endX < 0) || (endX > imageWithoutTurtle.Width) ||
-                      (endY < 0) || (endY > imageWithoutTurtle.Height))
+                      endX < 0 || endX > imageWithoutTurtle.Width ||
+                      endY < 0 || endY > imageWithoutTurtle.Height)
                     {
                         if (endX < 0)
                         {
@@ -276,9 +274,9 @@ namespace Logo
 
         void runThread_DoWork(object sender, DoWorkEventArgs e)
         {
-            var commands = ((e.Argument as object[])[0]) as List<Command>;
-            var objects = ((e.Argument as object[])[1]) as List<LogoObject>;
-            var turtle = ((e.Argument as object[])[2]) as Turtle;
+            var commands = (e.Argument as object[])[0] as List<Command>;
+            var objects = (e.Argument as object[])[1] as List<LogoObject>;
+            var turtle = (e.Argument as object[])[2] as Turtle;
             
             var mainBreak = false;
             var mainContinue = false;
@@ -307,15 +305,15 @@ namespace Logo
           //TODO: Do we still need this?!?
           // Yes! This doesn't seem to cause the same threading issue as firing on events!
             return;
-            var x1 = (int)((e.UserState as object[])[0]);
-            var y1 = (int)((e.UserState as object[])[1]);
-            var x2 = (int)((e.UserState as object[])[2]);
-            var y2 = (int)((e.UserState as object[])[3]);
-            var direction1 = (int)((e.UserState as object[])[4]);
-            var direction2 = (int)((e.UserState as object[])[5]);
-            var isPenDown = (bool)((e.UserState as object[])[6]);
-            var isVisible = (bool)((e.UserState as object[])[7]);
-            var image = (Image)((e.UserState as object[])[8]);
+            var x1 = (int)(e.UserState as object[])[0];
+            var y1 = (int)(e.UserState as object[])[1];
+            var x2 = (int)(e.UserState as object[])[2];
+            var y2 = (int)(e.UserState as object[])[3];
+            var direction1 = (int)(e.UserState as object[])[4];
+            var direction2 = (int)(e.UserState as object[])[5];
+            var isPenDown = (bool)(e.UserState as object[])[6];
+            var isVisible = (bool)(e.UserState as object[])[7];
+            var image = (Image)(e.UserState as object[])[8];
             lock (image)
             {
                 var xCenter = image.Width / 2;

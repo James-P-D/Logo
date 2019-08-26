@@ -146,8 +146,7 @@ namespace LogicalParser
         {
             commands = new List<Command>();
             objects = new List<LogoObject>();
-            int newStringTokenIndex;
-            Parse(0, out newStringTokenIndex, stringTokens, commands, objects, true);
+            Parse(0, out _, stringTokens, commands, objects, true);
         }
 
         private void Parse(int stringTokenIndex, out int newStringTokenIndex, StringToken[] stringTokens, List<Command> commands, List<LogoObject> objects, bool outerLoop)
@@ -170,9 +169,9 @@ namespace LogicalParser
                         var repeatCommands = new List<Command>();
                         Parse(stringTokenIndex + 1, out var updatedStringTokenIndex, stringTokens, repeatCommands, objects, false);
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new Repeat(eval as NumberEval, repeatCommands.ToArray()));
+                            commands.Add(new Repeat(numberEval, repeatCommands.ToArray()));
                         }
                         else
                         {
@@ -194,14 +193,12 @@ namespace LogicalParser
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        var updatedStringTokenIndex = 0;
-
                         var whileCommands = new List<Command>();
-                        Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, whileCommands, objects, false);
+                        Parse(stringTokenIndex + 1, out var updatedStringTokenIndex, stringTokens, whileCommands, objects, false);
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
-                        if (eval is BooleanEval)
+                        if (eval is BooleanEval booleanEval)
                         {
-                            commands.Add(new While(eval as BooleanEval, whileCommands.ToArray()));
+                            commands.Add(new While(booleanEval, whileCommands.ToArray()));
                         }
                         else
                         {
@@ -223,14 +220,12 @@ namespace LogicalParser
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        var updatedStringTokenIndex = 0;
-
                         var thenCommands = new List<Command>();
-                        Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, thenCommands, objects, false);
+                        Parse(stringTokenIndex + 1, out var updatedStringTokenIndex, stringTokens, thenCommands, objects, false);
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1, parameters - 1), objects, stringToken);
-                        if (eval is BooleanEval)
+                        if (eval is BooleanEval booleanEval)
                         {
-                            commands.Add(new If(eval as BooleanEval, thenCommands.ToArray()));
+                            commands.Add(new If(booleanEval, thenCommands.ToArray()));
                         }
                         else
                         {
@@ -252,15 +247,13 @@ namespace LogicalParser
 
                     if (lastParam.Equals(StartBlock))
                     {
-                        var updatedStringTokenIndex = 0;
-
                         var elseCommands = new List<Command>();
-                        Parse(stringTokenIndex + 1, out updatedStringTokenIndex, stringTokens, elseCommands, objects, false);
+                        Parse(stringTokenIndex + 1, out var updatedStringTokenIndex, stringTokens, elseCommands, objects, false);
 
                         var lastCommand = commands.Last();
-                        if ((lastCommand != null) && (lastCommand is If))
+                        if (lastCommand is If @if)
                         {
-                            (lastCommand as If).SetElseCommands(elseCommands.ToArray());
+                            @if.SetElseCommands(elseCommands.ToArray());
                         }
                         else
                         {
@@ -396,9 +389,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(Forward))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new Forward(eval as NumberEval));
+                            commands.Add(new Forward(numberEval));
                         }
                         else
                         {
@@ -408,9 +401,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(Backward))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new Backward(eval as NumberEval));
+                            commands.Add(new Backward(numberEval));
                         }
                         else
                         {
@@ -420,9 +413,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(Left))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new Left(eval as NumberEval));
+                            commands.Add(new Left(numberEval));
                         }
                         else
                         {
@@ -432,9 +425,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(Right))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new Right(eval as NumberEval));
+                            commands.Add(new Right(numberEval));
                         }
                         else
                         {
@@ -444,9 +437,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(RightTurn))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new RightTurn(eval as NumberEval));
+                            commands.Add(new RightTurn(numberEval));
                         }
                         else
                         {
@@ -456,9 +449,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(LeftTurn))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new LeftTurn(eval as NumberEval));
+                            commands.Add(new LeftTurn(numberEval));
                         }
                         else
                         {
@@ -468,9 +461,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(SetDirection))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetDirection(eval as NumberEval));
+                            commands.Add(new SetDirection(numberEval));
                         }
                         else
                         {
@@ -480,9 +473,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(SetX))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetX(eval as NumberEval));
+                            commands.Add(new SetX(numberEval));
                         }
                         else
                         {
@@ -492,9 +485,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(SetY))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetY(eval as NumberEval));
+                            commands.Add(new SetY(numberEval));
                         }
                         else
                         {
@@ -512,9 +505,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(ColorA))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetColorA(eval as NumberEval));
+                            commands.Add(new SetColorA(numberEval));
                         }
                         else
                         {
@@ -524,9 +517,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(ColorR))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetColorR(eval as NumberEval));
+                            commands.Add(new SetColorR(numberEval));
                         }
                         else
                         {
@@ -536,9 +529,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(ColorG))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetColorG(eval as NumberEval));
+                            commands.Add(new SetColorG(numberEval));
                         }
                         else
                         {
@@ -548,9 +541,9 @@ namespace LogicalParser
                     else if (firstToken.Equals(ColorB))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
-                            commands.Add(new SetColorB(eval as NumberEval));
+                            commands.Add(new SetColorB(numberEval));
                         }
                         else
                         {
@@ -625,14 +618,14 @@ namespace LogicalParser
                 var currentChar = variableName[i];
                 if (i == 0)
                 {
-                    if ((!char.IsLetter(currentChar)) && (currentChar != '_'))
+                    if (!char.IsLetter(currentChar) && currentChar != '_')
                     {
                         return false;
                     }
                 }
                 else
                 {
-                    if ((!char.IsLetterOrDigit(currentChar)) && (currentChar != '_'))
+                    if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
                     {
                         return false;
                     }
@@ -645,10 +638,10 @@ namespace LogicalParser
         private LogoObject GetExistingObject(string variableName, List<LogoObject> objects)
         {
             return objects.FirstOrDefault(v =>
-              (v is NumberVariable && (v as NumberVariable).Name.Equals(variableName)) ||
-              (v is BooleanVariable && (v as BooleanVariable).Name.Equals(variableName)) ||
-              (v is NumberConstant && (v as NumberConstant).Name.Equals(variableName)) ||
-              (v is BooleanConstant && (v as BooleanConstant).Name.Equals(variableName)));
+              v is NumberVariable numberVariable && numberVariable.Name.Equals(variableName) ||
+              v is BooleanVariable booleanVariable && booleanVariable.Name.Equals(variableName) ||
+              v is NumberConstant numberConstant && numberConstant.Name.Equals(variableName) ||
+              v is BooleanConstant booleanConstant && booleanConstant.Name.Equals(variableName));
         }
 
         private LogoObject ParseObject(string str, List<LogoObject> objects, StringToken stringToken)
@@ -670,8 +663,7 @@ namespace LogicalParser
                     return new BooleanLiteral(false);
                 }
 
-                float floatValue;
-                if (float.TryParse(str, out floatValue))
+                if (float.TryParse(str, out var floatValue))
                 {
                     return new NumberLiteral(floatValue);
                 }
@@ -709,12 +701,12 @@ namespace LogicalParser
         private Command ParseNumberAssignment(string variableName, string[] subTokens, List<LogoObject> objects, StringToken stringToken)
         {
             var variable = GetExistingObject(variableName, objects);
-            if (variable is NumberVariable)
+            if (variable is NumberVariable numberVariable)
             {
                 object evaluation = ParseEvaluation(subTokens, objects, stringToken);
-                if (evaluation is NumberEval)
+                if (evaluation is NumberEval numberEval)
                 {
-                    return new NumberAssign(variable as NumberVariable, (evaluation as NumberEval));
+                    return new NumberAssign(numberVariable, numberEval);
                 }
                 else
                 {
@@ -759,12 +751,12 @@ namespace LogicalParser
         private Command ParseBooleanAssignment(string variableName, string[] subTokens, List<LogoObject> objects, StringToken stringToken)
         {
             var variable = GetExistingObject(variableName, objects);
-            if (variable is BooleanVariable)
+            if (variable is BooleanVariable booleanVariable)
             {
                 object evaluation = ParseEvaluation(subTokens, objects, stringToken);
-                if (evaluation is BooleanEval)
+                if (evaluation is BooleanEval booleanEval)
                 {
-                    return new BooleanAssign(variable as BooleanVariable, (evaluation as BooleanEval));
+                    return new BooleanAssign(booleanVariable, booleanEval);
                 }
                 else
                 {
@@ -789,12 +781,10 @@ namespace LogicalParser
             // ( '5 - 4' verses '-3') We will convert unary minus to '#' and unary plus to '@'
             for (var i = 0; i < parameters.Length; i++)
             {
-                var previousToken = (i == 0) ? null : parameters[i - 1];
+                var previousToken = i == 0 ? null : parameters[i - 1];
                 var currentToken = parameters[i];
-                var nextToken = (i >= parameters.Length - 1) ? null : parameters[i + 1];
 
-                if ((previousToken == null) ||
-                  ((previousToken != null) && (GetOperatorSymbol(previousToken) != OperatorType.Invalid)))
+                if (previousToken == null || GetOperatorSymbol(previousToken) != OperatorType.Invalid)
                 {
                     if (currentToken.Equals(StringTokeniser.Minus))
                     {
@@ -822,13 +812,13 @@ namespace LogicalParser
                 if (currentOperator == OperatorType.Invalid)
                 {
                     var logoObject = ParseObject(parameter, objects, stringToken);
-                    if (logoObject is NumberObject)
+                    if (logoObject is NumberObject numberObject)
                     {
-                        evalStack.Push(new NumberValueEval(logoObject as NumberObject));
+                        evalStack.Push(new NumberValueEval(numberObject));
                     }
-                    else if (logoObject is BooleanObject)
+                    else if (logoObject is BooleanObject booleanObject)
                     {
-                        evalStack.Push(new BooleanValueEval(logoObject as BooleanObject));
+                        evalStack.Push(new BooleanValueEval(booleanObject));
                     }
                     else
                     {
@@ -913,27 +903,27 @@ namespace LogicalParser
                 case OperatorType.UnaryTan:
                     {
                         var eval = SafePop(evalStack, stringToken);
-                        if (eval is NumberEval)
+                        if (eval is NumberEval numberEval)
                         {
                             if (currentOperator == OperatorType.UnaryMinus)
                             {
-                                evalStack.Push(new NumberUnaryMinusEval(eval as NumberEval));
+                                evalStack.Push(new NumberUnaryMinusEval(numberEval));
                             }
                             else if (currentOperator == OperatorType.UnaryPlus)
                             {
-                                evalStack.Push(new NumberUnaryPlusEval(eval as NumberEval));
+                                evalStack.Push(new NumberUnaryPlusEval(numberEval));
                             }
                             else if (currentOperator == OperatorType.UnaryCos)
                             {
-                                evalStack.Push(new NumberUnaryCosEval(eval as NumberEval));
+                                evalStack.Push(new NumberUnaryCosEval(numberEval));
                             }
                             else if (currentOperator == OperatorType.UnarySin)
                             {
-                                evalStack.Push(new NumberUnarySinEval(eval as NumberEval));
+                                evalStack.Push(new NumberUnarySinEval(numberEval));
                             }
                             else if (currentOperator == OperatorType.UnaryTan)
                             {
-                                evalStack.Push(new NumberUnaryTanEval(eval as NumberEval));
+                                evalStack.Push(new NumberUnaryTanEval(numberEval));
                             }
                             else
                             {
@@ -957,39 +947,39 @@ namespace LogicalParser
                     {
                         var eval2 = SafePop(evalStack, stringToken);
                         var eval1 = SafePop(evalStack, stringToken);
-                        if ((eval1 is NumberEval) && (eval2 is NumberEval))
+                        if (eval1 is NumberEval numberEval1 && eval2 is NumberEval numberEval2)
                         {
                             if (currentOperator == OperatorType.Plus)
                             {
-                                evalStack.Push(new NumberPlusEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberPlusEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Minus)
                             {
-                                evalStack.Push(new NumberMinusEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberMinusEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Multiply)
                             {
-                                evalStack.Push(new NumberMultiplyEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberMultiplyEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Divide)
                             {
-                                evalStack.Push(new NumberDivideEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberDivideEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Exponential)
                             {
-                                evalStack.Push(new NumberExponentialEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberExponentialEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Modulus)
                             {
-                                evalStack.Push(new NumberModulusEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberModulusEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Min)
                             {
-                                evalStack.Push(new NumberMinEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberMinEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Max)
                             {
-                                evalStack.Push(new NumberMaxEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new NumberMaxEval(numberEval1, numberEval2));
                             }
                             else
                             {
@@ -1005,9 +995,9 @@ namespace LogicalParser
                 case OperatorType.UnaryNot:
                     {
                         var eval = SafePop(evalStack, stringToken);
-                        if (eval is BooleanEval)
+                        if (eval is BooleanEval booleanEval)
                         {
-                            evalStack.Push(new BooleanUnaryNotEval(eval as BooleanEval));
+                            evalStack.Push(new BooleanUnaryNotEval(booleanEval));
                         }
                         else
                         {
@@ -1021,19 +1011,19 @@ namespace LogicalParser
                     {
                         var eval2 = SafePop(evalStack, stringToken);
                         var eval1 = SafePop(evalStack, stringToken);
-                        if ((eval1 is BooleanEval) && (eval2 is BooleanEval))
+                        if (eval1 is BooleanEval booleanEval1 && eval2 is BooleanEval booleanEval2)
                         {
                             if (currentOperator == OperatorType.And)
                             {
-                                evalStack.Push(new BooleanAndEval(eval1 as BooleanEval, eval2 as BooleanEval));
+                                evalStack.Push(new BooleanAndEval(booleanEval1, booleanEval2));
                             }
                             else if (currentOperator == OperatorType.Or)
                             {
-                                evalStack.Push(new BooleanOrEval(eval1 as BooleanEval, eval2 as BooleanEval));
+                                evalStack.Push(new BooleanOrEval(booleanEval1, booleanEval2));
                             }
                             else if (currentOperator == OperatorType.Xor)
                             {
-                                evalStack.Push(new BooleanXorEval(eval1 as BooleanEval, eval2 as BooleanEval));
+                                evalStack.Push(new BooleanXorEval(booleanEval1, booleanEval2));
                             }
                             else
                             {
@@ -1056,46 +1046,46 @@ namespace LogicalParser
                         // NO! This can be number and number or bool and bool!
                         var eval2 = SafePop(evalStack, stringToken);
                         var eval1 = SafePop(evalStack, stringToken);
-                        if ((eval1 is NumberEval) && (eval2 is NumberEval))
+                        if (eval1 is NumberEval numberEval1 && eval2 is NumberEval numberEval2)
                         {
                             if (currentOperator == OperatorType.Equality)
                             {
-                                evalStack.Push(new BooleanNumberEqualityEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberEqualityEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.Inequality)
                             {
-                                evalStack.Push(new BooleanNumberInequalityEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberInequalityEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.GreaterThan)
                             {
-                                evalStack.Push(new BooleanNumberGreaterThanEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberGreaterThanEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.LessThan)
                             {
-                                evalStack.Push(new BooleanNumberLessThanEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberLessThanEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.GreaterThanOrEqual)
                             {
-                                evalStack.Push(new BooleanNumberGreaterThanOrEqualEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberGreaterThanOrEqualEval(numberEval1, numberEval2));
                             }
                             else if (currentOperator == OperatorType.LessThanOrEqual)
                             {
-                                evalStack.Push(new BooleanNumberLessThanOrEqualEval(eval1 as NumberEval, eval2 as NumberEval));
+                                evalStack.Push(new BooleanNumberLessThanOrEqualEval(numberEval1, numberEval2));
                             }
                             else
                             {
                                 ThrowError("Unable to parse", stringToken);
                             }
                         }
-                        else if ((eval1 is BooleanEval) && (eval2 is BooleanEval))
+                        else if (eval1 is BooleanEval booleanEval1 && eval2 is BooleanEval booleanEval2)
                         {
                             if (currentOperator == OperatorType.Equality)
                             {
-                                evalStack.Push(new BooleanBooleanEqualityEval(eval1 as BooleanEval, eval2 as BooleanEval));
+                                evalStack.Push(new BooleanBooleanEqualityEval(booleanEval1, booleanEval2));
                             }
                             else if (currentOperator == OperatorType.Inequality)
                             {
-                                evalStack.Push(new BooleanBooleanInequalityEval(eval1 as BooleanEval, eval2 as BooleanEval));
+                                evalStack.Push(new BooleanBooleanInequalityEval(booleanEval1, booleanEval2));
                             }
                             else
                             {

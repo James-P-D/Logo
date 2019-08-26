@@ -116,8 +116,8 @@ namespace Executor
             else if (angle > 0 && angle < 90)
             {
                 //int foo = (int)Math.Round((float)Math.Sin((Math.PI / 180) * (float)angle) * (float)distance);
-                newX += (int)Math.Round((Math.Sin((Math.PI / 180) * (float)angle) * (float)distance));
-                newY -= (int)Math.Round((Math.Cos((Math.PI / 180) * (float)angle) * (float)distance));
+                newX += (int)Math.Round(Math.Sin(Math.PI / 180 * (float)angle) * (float)distance);
+                newY -= (int)Math.Round(Math.Cos(Math.PI / 180 * (float)angle) * (float)distance);
             }
             else if (angle == 90)
             {
@@ -125,8 +125,8 @@ namespace Executor
             }
             else if (angle > 90 && angle < 180)
             {
-                newY += (int)Math.Round((Math.Sin((Math.PI / 180) * ((float)angle - 90)) * (float)distance));
-                newX += (int)Math.Round((Math.Cos((Math.PI / 180) * ((float)angle - 90)) * (float)distance));
+                newY += (int)Math.Round(Math.Sin(Math.PI / 180 * ((float)angle - 90)) * (float)distance);
+                newX += (int)Math.Round(Math.Cos(Math.PI / 180 * ((float)angle - 90)) * (float)distance);
             }
             else if (angle == 180)
             {
@@ -134,8 +134,8 @@ namespace Executor
             }
             else if (angle > 180 && angle < 270)
             {
-                newX -= (int)Math.Round((Math.Sin((Math.PI / 180) * ((float)angle - 180)) * (float)distance));
-                newY += (int)Math.Round((Math.Cos((Math.PI / 180) * ((float)angle - 180)) * (float)distance));
+                newX -= (int)Math.Round(Math.Sin(Math.PI / 180 * ((float)angle - 180)) * (float)distance);
+                newY += (int)Math.Round(Math.Cos(Math.PI / 180 * ((float)angle - 180)) * (float)distance);
             }
             else if (angle == 270)
             {
@@ -143,8 +143,8 @@ namespace Executor
             }
             else
             {
-                newY -= (int)Math.Round((Math.Sin((Math.PI / 180) * ((float)angle - 270)) * (float)distance));
-                newX -= (int)Math.Round((Math.Cos((Math.PI / 180) * ((float)angle - 270)) * (float)distance));
+                newY -= (int)Math.Round(Math.Sin(Math.PI / 180 * ((float)angle - 270)) * (float)distance);
+                newX -= (int)Math.Round(Math.Cos(Math.PI / 180 * ((float)angle - 270)) * (float)distance);
             }
         }
 
