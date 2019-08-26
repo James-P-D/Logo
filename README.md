@@ -1,5 +1,5 @@
 # Logo
-An implementation of the educational programming language [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) with the addition of variables, evaluations and basic control functions (repeat, if..then..else, do..while, break, continue etc.)
+An implementation of the educational programming language [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) with the addition of variables, evaluations and basic control functions (`repeat`, `if..then..else`, `do..while`, `break`, `continue` etc.)
 
 ![Screenshot](https://github.com/James-P-D/Logo/blob/master/screenshot.gif)
 
