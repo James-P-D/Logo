@@ -14,7 +14,8 @@ namespace LogicalParser.Commands.NumberEvaluation
         {
             get
             {
-                if (NumberEval2.Value == 0)
+                double TOLERANCE = 0.0001;
+                if (Math.Abs(NumberEval2.Value) < TOLERANCE)
                 {
                     throw new DivideByZeroException();
                 }

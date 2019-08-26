@@ -23,10 +23,7 @@ namespace LogicalParser.Commands.Control
         public List<Command> ThenCommands { get; }
         public List<Command> ElseCommands { get; }
 
-        public bool Value
-        {
-            get => BooleanEval.Value;
-        }
+        public bool Value => BooleanEval.Value;
 
         public override string ToString()
         {
