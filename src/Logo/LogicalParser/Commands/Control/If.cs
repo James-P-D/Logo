@@ -19,9 +19,9 @@ namespace LogicalParser.Commands.Control
             this.elseCommands.AddRange(elseCommands);
         }
 
-        private BooleanEval booleanEval { get; set; }
-        public List<Command> thenCommands { get; private set; }
-        public List<Command> elseCommands { get; private set; }
+        private BooleanEval booleanEval { get; }
+        public List<Command> thenCommands { get; }
+        public List<Command> elseCommands { get; }
 
         public bool Value
         {

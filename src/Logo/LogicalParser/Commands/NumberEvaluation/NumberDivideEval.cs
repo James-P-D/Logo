@@ -22,8 +22,8 @@ namespace LogicalParser.Commands.Evaluation
             }
         }
 
-        public NumberEval numberEval1 { get; private set; }
-        public NumberEval numberEval2 { get; private set; }
+        public NumberEval numberEval1 { get; }
+        public NumberEval numberEval2 { get; }
 
         public override string ToString()
         {

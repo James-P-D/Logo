@@ -9,8 +9,8 @@
             this.OriginalString = originalString;
         }
 
-        public string[] Tokens { get; private set; }
-        public int LineNumber { get; private set; }
-        public string OriginalString { get; private set; }
+        public string[] Tokens { get; }
+        public int LineNumber { get; }
+        public string OriginalString { get; }
     }
 }

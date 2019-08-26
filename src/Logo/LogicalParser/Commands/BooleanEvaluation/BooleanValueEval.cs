@@ -9,7 +9,7 @@ namespace LogicalParser.Commands.Evaluation
             this.booleanObject = booleanObject;
         }
 
-        private BooleanObject booleanObject { get; set; }
+        private BooleanObject booleanObject { get; }
 
         public override bool Value
         {

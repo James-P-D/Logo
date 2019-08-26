@@ -17,7 +17,7 @@ namespace LogicalParser.Commands
             }
         }
 
-        public BooleanEval BooleanEval { get; private set; }
+        public BooleanEval BooleanEval { get; }
 
         public override string ToString()
         {

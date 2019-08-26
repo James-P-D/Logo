@@ -2,10 +2,6 @@
 {
     public class CenterTurtle : Command
     {
-        public CenterTurtle()
-        {
-        }
-
         public override string ToString()
         {
             return string.Format("{0}", Parser.CENTER_TURTLE);

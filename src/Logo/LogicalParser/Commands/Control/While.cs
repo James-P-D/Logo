@@ -11,8 +11,8 @@ namespace LogicalParser.Commands.Control
             this.commands = new List<Command>(commands);
         }
 
-        private BooleanEval booleanEval { get; set; }
-        public List<Command> commands { get; private set; }
+        private BooleanEval booleanEval { get; }
+        public List<Command> commands { get; }
 
         public bool Value
         {

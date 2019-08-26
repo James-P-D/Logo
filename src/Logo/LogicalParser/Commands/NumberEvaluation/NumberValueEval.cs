@@ -9,7 +9,7 @@ namespace LogicalParser.Commands.Evaluation
             this.numberObject = numberObject;
         }
 
-        private NumberObject numberObject { get; set; }
+        private NumberObject numberObject { get; }
 
         public override float Value
         {

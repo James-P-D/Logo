@@ -15,7 +15,7 @@
             }
         }
 
-        public NumberEval NumberEval1 { get; private set; }
+        public NumberEval NumberEval1 { get; }
 
         public override string ToString()
         {

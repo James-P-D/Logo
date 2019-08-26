@@ -11,8 +11,8 @@ namespace LogicalParser.Commands.Control
             this.commands = new List<Command>(commands);
         }
 
-        private NumberEval numberEval { get; set; }
-        public List<Command> commands { get; private set; }
+        private NumberEval numberEval { get; }
+        public List<Command> commands { get; }
 
         public int Counter
         {

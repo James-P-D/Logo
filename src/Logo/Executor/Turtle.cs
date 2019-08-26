@@ -26,9 +26,9 @@ namespace Executor
         public float Y { get; private set; }
         public float Direction { get; private set; }
 
-        public float InitialX { get; private set; }
-        public float InitialY { get; private set; }
-        public float InitialDirection { get; private set; }
+        public float InitialX { get; }
+        public float InitialY { get; }
+        public float InitialDirection { get; }
 
         public bool IsPenDown { get; private set; }
         public bool IsVisible { get; private set; }

@@ -2,10 +2,6 @@
 {
     public abstract class NumberEval : Eval
     {
-        public NumberEval()
-        {
-        }
-
         public abstract float Value
         {
             get;

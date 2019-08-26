@@ -18,8 +18,8 @@ namespace LogicalParser.Commands
             }
         }
 
-        public BooleanEval BooleanEval1 { get; private set; }
-        public BooleanEval BooleanEval2 { get; private set; }
+        public BooleanEval BooleanEval1 { get; }
+        public BooleanEval BooleanEval2 { get; }
 
         public override string ToString()
         {

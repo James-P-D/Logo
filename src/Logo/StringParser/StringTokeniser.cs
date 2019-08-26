@@ -61,10 +61,6 @@ namespace StringParser
 
         #endregion
 
-        public StringTokeniser()
-        {
-        }
-
         #region Output Debug Information
 
         public delegate void AddOutputTextDelegate(string text);

@@ -7,7 +7,7 @@
             this.eval = eval;
         }
 
-        private Eval eval { get; set; }
+        private Eval eval { get; }
 
         public string Name
         {

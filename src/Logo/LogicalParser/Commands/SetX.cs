@@ -9,7 +9,7 @@ namespace LogicalParser.Commands
             this.numberEval = numberEval;
         }
 
-        private NumberEval numberEval { get; set; }
+        private NumberEval numberEval { get; }
 
         public int X
         {

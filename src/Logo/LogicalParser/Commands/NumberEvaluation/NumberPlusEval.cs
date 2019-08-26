@@ -16,8 +16,8 @@
             }
         }
 
-        public NumberEval NumberEval1 { get; private set; }
-        public NumberEval NumberEval2 { get; private set; }
+        public NumberEval NumberEval1 { get; }
+        public NumberEval NumberEval2 { get; }
 
         public override string ToString()
         {
