@@ -7,7 +7,18 @@ An implementation of the educational programming language [Logo](https://en.wiki
 
 Below is a quick overview of the available commands. For some sample programs, see the [examples](https://github.com/James-P-D/Logo/tree/master/src/Logo/Logo/examples) folder.
 
-### Basic Movements
+## Contents
+
+1. Basic Movements
+2. Colours and Pen Up/Down
+3. Variables
+4. Getting Values
+5. Repeat Loops
+6. If..Then..Else, Break and Continue
+7. Do..While Loops
+8. Miscellaneous Commands
+
+### 1. Basic Movements
 
 The turtle can be moved in four directions without turning:
 ```
@@ -47,7 +58,7 @@ hideturtle;
 showturtle;
 ```
 
-### Colours and Pen Up/Down
+### 2. Colours and Pen Up/Down
 
 By default the turtle pen colour will always be black, but it is possible to set the ARGB components:
 ```
@@ -65,7 +76,7 @@ penup;
 pendown;
 ```
 
-### Variables
+### 3. Variables
 
 Variables can be declared using the keyword `number` followed by a variable name. 
 ```
@@ -94,7 +105,7 @@ boolean bool2 = false;
 boolean bool3 = bool1 && bool2;
 ```
 
-### Getting Values
+### 4. Getting Values
 
 A small number of commands return values. These commands are as follows:
 ```
@@ -115,7 +126,7 @@ number savedX = getx;
 number savedY = gety;
 ```
 
-### Repeat Loops
+### 5. Repeat Loops
 
 We can repeat a set of commands by using the `repeat` command:
 ```
@@ -137,7 +148,7 @@ repeat 4 {
 }
 ```
 
-### If..Then..Else, Break and Continue
+### 6. If..Then..Else, Break and Continue
 
 The interpeter also supports `if..then..else` commands, plus the ability to `break` from loops or to `continue`.
 
@@ -155,7 +166,7 @@ repeat 36 {
 }
 ```
 
-### Do..While Loops
+### 7. Do..While Loops
 
 The interpeter also supports `do..while` loops:
 ```
@@ -169,5 +180,5 @@ while (counter < 36) {
 }
 ```
 
-### Miscellaneous Commands
+### 8. Miscellaneous Commands
 
