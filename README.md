@@ -9,7 +9,7 @@ Below is a quick overview of the available commands. For some sample programs, s
 
 ## Contents
 
-1. [Basic Movements](1.-Basic-Movements)
+1. [Basic Movements](#1.-Basic-Movements)
 2. [Colours and Pen Up/Down]()
 3. [Variables]()
 4. [Getting Values]()
