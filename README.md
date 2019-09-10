@@ -9,7 +9,7 @@ Below is a quick overview of the available commands. For some sample programs, s
 
 ## Contents
 
-1. [Basic Movements](#1.-Basic-Movements)
+1. [Basic Movements](#Basic-Movements)
 2. [Colours and Pen Up/Down]()
 3. [Variables]()
 4. [Getting Values]()
@@ -18,7 +18,7 @@ Below is a quick overview of the available commands. For some sample programs, s
 7. [Do..While Loops]()
 8. [Miscellaneous Commands]()
 
-### 1. Basic Movements
+### Basic Movements
 
 The turtle can be moved in four directions without turning:
 ```
