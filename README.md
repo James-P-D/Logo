@@ -10,12 +10,12 @@ Below is a quick overview of the available commands. For some sample programs, s
 ## Contents
 
 1. [Basic Movements](#Basic-Movements)
-2. [Colours and Pen Up/Down](#Colours-and-Pen-Up/Down)
+2. [Colours and Pen Up/Down](#Colours-and-PenUp,-PenDown)
 3. [Variables](#Variables)
 4. [Getting Values](#Getting-Values)
 5. [Repeat Loops](#Repeat-Loops)
-6. [If..Then..Else, Break and Continue](#If..Then..Else,-Break-and-Continue)
-7. [Do..While Loops](#Do..While-Loops)
+6. [If..Then..Else, Break and Continue](#If,-Then,-Else,-Break-and-Continue)
+7. [Do..While Loops](#Do-While-Loops)
 8. [Miscellaneous Commands](#Miscellaneous-Commands)
 
 ### Basic Movements
@@ -58,7 +58,7 @@ hideturtle;
 showturtle;
 ```
 
-### Colours and Pen Up/Down
+### Colours and PenUp, PenDown
 
 By default the turtle pen colour will always be black, but it is possible to set the ARGB components:
 ```
@@ -148,7 +148,7 @@ repeat 4 {
 }
 ```
 
-### If..Then..Else, Break and Continue
+### If, Then, Else, Break and Continue
 
 The interpeter also supports `if..then..else` commands, plus the ability to `break` from loops or to `continue`.
 
@@ -166,7 +166,7 @@ repeat 36 {
 }
 ```
 
-### Do..While Loops
+### Do While Loops
 
 The interpeter also supports `do..while` loops:
 ```
