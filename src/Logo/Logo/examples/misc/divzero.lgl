@@ -1,0 +1,6 @@
+int x = 5;
+int y = 0;
+int z = y;
+int fucked = x / y;
+
+forward z;

@@ -1,0 +1,29 @@
+number length = 10;
+number increase = 10;
+
+repeat 36 {
+
+colorr 255;
+colorg 0;
+colorb 0;
+
+forward length;
+rightturn 120;
+
+colorr 0;
+colorg 255;
+colorb 0;
+
+forward length;
+rightturn 120;
+
+colorr 0;
+colorg 0;
+colorb 255;
+
+forward length;
+rightturn 120;
+
+length = length + increase;
+rightturn 10;
+}

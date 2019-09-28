@@ -1,0 +1,17 @@
+ht;
+repeat 36 {
+  int x = 2;
+  repeat 36 {
+    forward x;
+    rt 10;
+    x = x + 1;
+  }
+  repeat 36 {
+    forward x;
+    rt 10;
+    x = x - 1;
+  }
+
+rt 10;
+}
+

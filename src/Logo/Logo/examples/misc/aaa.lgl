@@ -1,0 +1,9 @@
+int x = 5;
+int y = 0;
+int z = y;
+
+repeat x + y {
+  forward z;
+}
+
+int j = x / y;

@@ -1,0 +1,25 @@
+ht;
+repeat 360 {
+  repeat 18 {
+    forward 5;
+    rt 10;
+  }
+  repeat 18 {
+    forward 10;
+    lt 10;
+  }
+  repeat 36 {
+    forward 15;
+    rt 10;
+  }
+  repeat 18 {
+    forward 10;
+    lt 10;
+  }
+  repeat 18 {
+    forward 5;
+    rt 10;
+  }
+
+rt 1;
+}
