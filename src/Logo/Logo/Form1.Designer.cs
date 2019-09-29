@@ -268,6 +268,7 @@
             this.programTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.programTextBox.Size = new System.Drawing.Size(334, 227);
             this.programTextBox.TabIndex = 3;
+            this.programTextBox.WordWrap = false;
             this.programTextBox.TextChanged += new System.EventHandler(this.programTextBox_TextChanged);
             // 
             // stopButton
@@ -290,7 +291,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(-2, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(163, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(43, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
