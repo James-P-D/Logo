@@ -1,0 +1,15 @@
+// TURN ON WRAP BORDERS!
+
+number length = 5;
+
+repeat (360 * 3) {
+  repeat 3 {
+    forward length;
+    rightturn 90;
+  }
+  forward length - 2;
+  rightturn 90;
+
+  length = length + 1;
+  rightturn 1;
+}
