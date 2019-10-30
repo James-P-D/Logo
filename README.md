@@ -1,5 +1,5 @@
 # Logo
-An implementation of the educational programming language [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) with the addition of variables, evaluations and basic control functions (`repeat`, `if..then..else`, `do..while`, `break`, `continue` etc.)
+An implementation of the educational programming language [Logo](https://en.wikipedia.org/wiki/Logo_(programming_language)) with the addition of variables, evaluations and basic control functions (`repeat`, `if..then..else`, `while`, `break`, `continue` etc.)
 
 ![Screenshot](https://github.com/James-P-D/Logo/blob/master/screenshot.gif)
 
@@ -15,7 +15,7 @@ Below is a quick overview of the available commands. For some sample programs, s
 4. [Getting Values](#Getting-Values)
 5. [Repeat Loops](#Repeat-Loops)
 6. [If..Then..Else, Break and Continue](#If-Then-Else-Break-and-Continue)
-7. [Do..While Loops](#Do-While-Loops)
+7. [While Loops](#While-Loops)
 8. [Miscellaneous Commands](#Miscellaneous-Commands)
 
 ### Basic Movements
@@ -166,9 +166,9 @@ repeat 36 {
 }
 ```
 
-### Do While Loops
+### While Loops
 
-The interpeter also supports `do..while` loops:
+The interpeter also supports `while` loops:
 ```
 number counter = 0;
 while (counter < 36) {
