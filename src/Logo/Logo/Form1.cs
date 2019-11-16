@@ -25,6 +25,7 @@ using Executor;
 // Check variables (do we need that value in there?)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
+// Check exceptions (throw new Exception("?!?!?!?");)
 namespace Logo
 {
     public partial class Form1 : Form
@@ -142,6 +143,26 @@ namespace Logo
         private void runButton_Click(object sender, EventArgs e)
         {
             Run();
+        }
+
+        private void increaseFontSizeButton_Click(object sender, EventArgs e)
+        {
+            float fontSize = this.programTextBox.Font.Size;
+            fontSize = Math.Max(5F, Math.Min(fontSize + 1F, 20F));
+            this.programTextBox.Font = new Font("Courier New",
+                fontSize, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point,
+                0);
+        }
+
+        private void decreaseFontSizeButton_Click(object sender, EventArgs e)
+        {
+            float fontSize = this.programTextBox.Font.Size;
+            fontSize = Math.Max(5F, Math.Min(fontSize - 1F, 20F));
+            this.programTextBox.Font = new Font("Courier New",
+                fontSize, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point,
+                0);
         }
 
         private void StringTokeniserAddOutputText(string text)
@@ -533,7 +554,5 @@ namespace Logo
             ThreadHelper.AddText(this, outputTextBox, text + "\r\n");
             ThreadHelper.ScrollToEnd(this, outputTextBox);
         }
-
-        
     }
 }

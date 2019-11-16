@@ -59,6 +59,8 @@
             this.updateUICheckBox = new System.Windows.Forms.CheckBox();
             this.stepButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
+            this.increaseFontSizeButton = new System.Windows.Forms.Button();
+            this.decreaseFontSizeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -67,10 +69,10 @@
             // runButton
             // 
             this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.runButton.Location = new System.Drawing.Point(747, 253);
+            this.runButton.Location = new System.Drawing.Point(707, 253);
             this.runButton.Margin = new System.Windows.Forms.Padding(2);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(80, 26);
+            this.runButton.Size = new System.Drawing.Size(60, 26);
             this.runButton.TabIndex = 0;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
@@ -274,10 +276,10 @@
             // stopButton
             // 
             this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.stopButton.Location = new System.Drawing.Point(831, 253);
+            this.stopButton.Location = new System.Drawing.Point(771, 253);
             this.stopButton.Margin = new System.Windows.Forms.Padding(2);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(80, 26);
+            this.stopButton.Size = new System.Drawing.Size(60, 26);
             this.stopButton.TabIndex = 4;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
@@ -382,10 +384,10 @@
             // stepButton
             // 
             this.stepButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.stepButton.Location = new System.Drawing.Point(663, 253);
+            this.stepButton.Location = new System.Drawing.Point(643, 253);
             this.stepButton.Margin = new System.Windows.Forms.Padding(2);
             this.stepButton.Name = "stepButton";
-            this.stepButton.Size = new System.Drawing.Size(80, 26);
+            this.stepButton.Size = new System.Drawing.Size(60, 26);
             this.stepButton.TabIndex = 10;
             this.stepButton.Text = "Step";
             this.stepButton.UseVisualStyleBackColor = true;
@@ -397,17 +399,41 @@
             this.loadButton.Location = new System.Drawing.Point(579, 253);
             this.loadButton.Margin = new System.Windows.Forms.Padding(2);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(80, 26);
+            this.loadButton.Size = new System.Drawing.Size(60, 26);
             this.loadButton.TabIndex = 11;
             this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = true;
             this.loadButton.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
+            // increaseFontSizeButton
+            // 
+            this.increaseFontSizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.increaseFontSizeButton.Location = new System.Drawing.Point(855, 254);
+            this.increaseFontSizeButton.Name = "increaseFontSizeButton";
+            this.increaseFontSizeButton.Size = new System.Drawing.Size(26, 26);
+            this.increaseFontSizeButton.TabIndex = 12;
+            this.increaseFontSizeButton.Text = "+";
+            this.increaseFontSizeButton.UseVisualStyleBackColor = true;
+            this.increaseFontSizeButton.Click += new System.EventHandler(this.increaseFontSizeButton_Click);
+            // 
+            // decreaseFontSizeButton
+            // 
+            this.decreaseFontSizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.decreaseFontSizeButton.Location = new System.Drawing.Point(887, 254);
+            this.decreaseFontSizeButton.Name = "decreaseFontSizeButton";
+            this.decreaseFontSizeButton.Size = new System.Drawing.Size(26, 26);
+            this.decreaseFontSizeButton.TabIndex = 13;
+            this.decreaseFontSizeButton.Text = "-";
+            this.decreaseFontSizeButton.UseVisualStyleBackColor = true;
+            this.decreaseFontSizeButton.Click += new System.EventHandler(this.decreaseFontSizeButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 695);
+            this.Controls.Add(this.decreaseFontSizeButton);
+            this.Controls.Add(this.increaseFontSizeButton);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.stepButton);
             this.Controls.Add(this.updateUICheckBox);
@@ -423,7 +449,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(938, 558);
             this.Name = "Form1";
-            this.Text = "Logo";
+            this.Text = "+";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Click += new System.EventHandler(this.updateUICheckBox_CheckedChanged);
@@ -470,6 +496,8 @@
     private System.Windows.Forms.CheckBox updateUICheckBox;
         private System.Windows.Forms.Button stepButton;
         private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.Button increaseFontSizeButton;
+        private System.Windows.Forms.Button decreaseFontSizeButton;
     }
 }
 
