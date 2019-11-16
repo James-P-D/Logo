@@ -62,10 +62,10 @@ showturtle;
 
 By default the turtle pen colour will always be black, but it is possible to set the ARGB components:
 ```
-colora X;
-colorr X;
-colorg X;
-colorb X;
+setcolora X;
+setcolorr X;
+setcolorg X;
+setcolorb X;
 ```
 
 `X` can be an integer literal, a variable or an evaluation consisting of integers and variables, but the value will be capped to the range `0-255`.
@@ -116,6 +116,10 @@ A small number of commands return values. These commands are as follows:
 <nummber> getcolorr;
 <nummber> getcolorg;
 <nummber> getcolorb;
+<nummber> getmaxx;
+<nummber> getmaxy;
+<nummber> getminx;
+<nummber> getminy;
 <boolean> ispenup;
 <boolean> ispendown;
 ```
