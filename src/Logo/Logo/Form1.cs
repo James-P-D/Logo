@@ -12,13 +12,14 @@ using LogicalParser.Objects;
 using StringParser;
 using Executor;
 
-//TODO;
+//TODO;c
+// Check case-sensitivity
+// Rename colorX to setcolorx etc.
 // Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
 // Initialise canvas and turtle (including textboxes and initial turtle icon)
 // Fix update textboxes (not working!)
 // floats? and ints? bytes? casting?!?
-// do {} until();/while();?
 // Check for additional unneccesary parameters to commands. if you run 'PENUP x' what happens?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Getting values? GetX, GetY, GetDirection, IsPenUp, IsPenDown?

@@ -1,8 +1,8 @@
 // We can set the RGB properties for the turtle pen
 
-colorr 255;
-colorg 0;
-colorb 0;
+setcolorr 255;
+setcolorg 0;
+setcolorb 0;
 repeat 36 {
   forward 10;
   rightturn 10;
@@ -10,9 +10,9 @@ repeat 36 {
 
 rightturn 120;
 
-colorr 0;
-colorg 255;
-colorb 0;
+setcolorr 0;
+setcolorg 255;
+setcolorb 0;
 repeat 36 {
   forward 10;
   rightturn 10;
@@ -20,9 +20,9 @@ repeat 36 {
 
 rightturn 120;
 
-colorr 0;
-colorg 0;
-colorb 255;
+setcolorr 0;
+setcolorg 0;
+setcolorb 255;
 repeat 36 {
   forward 10;
   rightturn 10;

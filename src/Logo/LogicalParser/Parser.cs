@@ -24,10 +24,10 @@ namespace LogicalParser
 
         public const string PenUp = "penup";
         public const string PenDown = "pendown";
-        public const string ColorA = "colora";
-        public const string ColorR = "colorr";
-        public const string ColorG = "colorg";
-        public const string ColorB = "colorb";
+        public const string ColorA = "setcolora";
+        public const string ColorR = "setcolorr";
+        public const string ColorG = "setcolorg";
+        public const string ColorB = "setcolorb";
         public const string CenterTurtle = "centerturtle";
         public const string HideTurtle = "hideturtle";
         public const string ShowTurtle = "showturtle";
