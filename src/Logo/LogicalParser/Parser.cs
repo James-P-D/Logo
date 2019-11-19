@@ -24,10 +24,10 @@ namespace LogicalParser
 
         public const string PenUp = "penup";
         public const string PenDown = "pendown";
-        public const string ColorA = "setcolora";
-        public const string ColorR = "setcolorr";
-        public const string ColorG = "setcolorg";
-        public const string ColorB = "setcolorb";
+        public const string SetColorA = "setcolora";
+        public const string SetColorR = "setcolorr";
+        public const string SetColorG = "setcolorg";
+        public const string SetColorB = "setcolorb";
         public const string CenterTurtle = "centerturtle";
         public const string HideTurtle = "hideturtle";
         public const string ShowTurtle = "showturtle";
@@ -70,7 +70,10 @@ namespace LogicalParser
 
                                         PenUp,
                                         PenDown,
-                                        ColorA, ColorR, ColorG, ColorB,
+                                        SetColorA,
+                                        SetColorR,
+                                        SetColorG,
+                                        SetColorB,
                                         CenterTurtle,
                                         HideTurtle,
                                         ShowTurtle,
@@ -502,7 +505,7 @@ namespace LogicalParser
                     {
                         commands.Add(new PenDown());
                     }
-                    else if (firstToken.Equals(ColorA))
+                    else if (firstToken.Equals(SetColorA))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval numberEval)
@@ -514,7 +517,7 @@ namespace LogicalParser
                             ThrowError("Value doesn't resolve to a Number", stringToken);
                         }
                     }
-                    else if (firstToken.Equals(ColorR))
+                    else if (firstToken.Equals(SetColorR))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval numberEval)
@@ -526,7 +529,7 @@ namespace LogicalParser
                             ThrowError("Value doesn't resolve to a Number", stringToken);
                         }
                     }
-                    else if (firstToken.Equals(ColorG))
+                    else if (firstToken.Equals(SetColorG))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval numberEval)
@@ -538,7 +541,7 @@ namespace LogicalParser
                             ThrowError("Value doesn't resolve to a Number", stringToken);
                         }
                     }
-                    else if (firstToken.Equals(ColorB))
+                    else if (firstToken.Equals(SetColorB))
                     {
                         var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
                         if (eval is NumberEval numberEval)
