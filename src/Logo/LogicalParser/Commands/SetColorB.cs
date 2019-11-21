@@ -15,7 +15,7 @@ namespace LogicalParser.Commands
 
         public override string ToString()
         {
-            return $"{Parser.ColorB} {NumberEval}";
+            return $"{Parser.SetColorB} {NumberEval}";
         }
 
     }
