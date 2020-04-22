@@ -12,11 +12,9 @@ Below is a quick overview of the available commands. For some sample programs, s
 1. [Basic Movements](#Basic-Movements)
 2. [Colours and Pen Up/Down](#Colours-and-PenUp-PenDown)
 3. [Variables](#Variables)
-4. [Getting Values](#Getting-Values)
-5. [Repeat Loops](#Repeat-Loops)
-6. [If..Then..Else, Break and Continue](#If-Then-Else-Break-and-Continue)
-7. [While Loops](#While-Loops)
-8. [Miscellaneous Commands](#Miscellaneous-Commands)
+4. [Repeat Loops](#Repeat-Loops)
+5. [If..Then..Else, Break and Continue](#If-Then-Else-Break-and-Continue)
+6. [While Loops](#While-Loops)
 
 ### Basic Movements
 
@@ -60,7 +58,7 @@ showturtle;
 
 ### Colours and PenUp PenDown
 
-By default the turtle pen colour will always be black, but it is possible to set the ARGB components:
+By default the turtle pen colour will always be black, but it is possible to set the [ARGB](https://en.wikipedia.org/wiki/RGBA_color_model) components:
 ```
 setcolora X;
 setcolorr X;
@@ -103,31 +101,6 @@ Finally it is possible to create `boolean` variables:
 boolean bool1;
 boolean bool2 = false;
 boolean bool3 = bool1 && bool2;
-```
-
-### Getting Values
-
-A small number of commands return values. These commands are as follows:
-```
-<nummber> getx;
-<nummber> gety;
-<nummber> getdirection;
-<nummber> getcolora;
-<nummber> getcolorr;
-<nummber> getcolorg;
-<nummber> getcolorb;
-<nummber> getmaxx;
-<nummber> getmaxy;
-<nummber> getminx;
-<nummber> getminy;
-<boolean> ispenup;
-<boolean> ispendown;
-```
-
-So, for example, if we wished to save the X and Y values of the turtle before moving it, we might use:
-```
-number savedX = getx;
-number savedY = gety;
 ```
 
 ### Repeat Loops
@@ -183,6 +156,3 @@ while (counter < 36) {
   counter = counter + 1;
 }
 ```
-
-### 8. Miscellaneous Commands
-
