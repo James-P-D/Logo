@@ -1,18 +1,18 @@
 ﻿namespace LogicalParser.Objects.Number
 {
-    public class NumberVariable : NumberObject
+  public class NumberVariable : NumberObject
+  {
+    public NumberVariable(string name) :
+      base(0)
     {
-        public NumberVariable(string name) :
-          base(0)
-        {
-            Name = name;
-        }
-
-        public string Name { get; }
-
-        public override string ToString()
-        {
-            return $"{Name}";
-        }
+      Name = name;
     }
+
+    public string Name { get; }
+
+    public override string ToString()
+    {
+      return $"{Name}";
+    }
+  }
 }

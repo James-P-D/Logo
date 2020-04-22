@@ -1,10 +1,10 @@
 ﻿namespace LogicalParser.Commands
 {
-    public class CenterTurtle : Command
+  public class CenterTurtle : Command
+  {
+    public override string ToString()
     {
-        public override string ToString()
-        {
-            return $"{Parser.CenterTurtle}";
-        }
+      return $"{Parser.CenterTurtle}";
     }
+  }
 }

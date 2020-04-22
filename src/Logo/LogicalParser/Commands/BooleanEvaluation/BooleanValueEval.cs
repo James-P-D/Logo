@@ -2,20 +2,20 @@
 
 namespace LogicalParser.Commands.BooleanEvaluation
 {
-    public class BooleanValueEval : BooleanEval
+  public class BooleanValueEval : BooleanEval
+  {
+    public BooleanValueEval(BooleanObject booleanObject)
     {
-        public BooleanValueEval(BooleanObject booleanObject)
-        {
-            BooleanObject = booleanObject;
-        }
-
-        private BooleanObject BooleanObject { get; }
-
-        public override bool Value => BooleanObject.Value;
-
-        public override string ToString()
-        {
-            return $"{BooleanObject}";
-        }
+      BooleanObject = booleanObject;
     }
+
+    private BooleanObject BooleanObject { get; }
+
+    public override bool Value => BooleanObject.Value;
+
+    public override string ToString()
+    {
+      return $"{BooleanObject}";
+    }
+  }
 }

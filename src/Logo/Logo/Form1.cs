@@ -14,7 +14,6 @@ using Executor;
 
 //TODO;c
 // Check case-sensitivity
-// Rename colorX to setcolorx etc.
 // Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
 // Initialise canvas and turtle (including textboxes and initial turtle icon)
@@ -44,12 +43,7 @@ namespace Logo
             executor = new Executor.Executor();
             executor.AddOutputTextEvent += Executor_AddOutputTextEvent;
             executor.UpdateEvent += Executor_UpdateEvent;
-            programTextBox.Text =
-                "number x1 = getx;\n\r" +
-                "output x1;\n\r" +
-                "forward 100;\n\r" +
-                "number x2 = getx;\n\r" +
-                "output x2; \n\r";
+            programTextBox.Text = string.Empty;
         }
 
         private void Form1_Load(object sender, EventArgs e)

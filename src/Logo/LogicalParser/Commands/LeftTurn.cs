@@ -2,20 +2,20 @@
 
 namespace LogicalParser.Commands
 {
-    public class LeftTurn : Command
+  public class LeftTurn : Command
+  {
+    public LeftTurn(NumberEval numberEval)
     {
-        public LeftTurn(NumberEval numberEval)
-        {
-            NumberEval = numberEval;
-        }
-
-        private NumberEval NumberEval { get; }
-
-        public float Angle => NumberEval.Value;
-
-        public override string ToString()
-        {
-            return $"{Parser.LeftTurn} {NumberEval}";
-        }
+      NumberEval = numberEval;
     }
+
+    private NumberEval NumberEval { get; }
+
+    public float Angle => NumberEval.Value;
+
+    public override string ToString()
+    {
+      return $"{Parser.LeftTurn} {NumberEval}";
+    }
+  }
 }

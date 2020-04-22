@@ -1,10 +1,10 @@
 ﻿namespace LogicalParser.Commands.Control
 {
-    public class Continue : Command
+  public class Continue : Command
+  {
+    public override string ToString()
     {
-        public override string ToString()
-        {
-            return $"{Parser.Continue}";
-        }
+      return $"{Parser.Continue}";
     }
+  }
 }

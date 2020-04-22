@@ -1,16 +1,16 @@
 ﻿namespace LogicalParser.Objects.Number
 {
-    public class NumberLiteral : NumberObject
+  public class NumberLiteral : NumberObject
+  {
+    public NumberLiteral(float val)
+      : base(val)
     {
-        public NumberLiteral(float val)
-          : base(val)
-        {
 
-        }
-
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
     }
+
+    public override string ToString()
+    {
+      return $"{Value}";
+    }
+  }
 }

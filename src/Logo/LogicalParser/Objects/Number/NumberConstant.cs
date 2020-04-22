@@ -1,18 +1,18 @@
 ﻿namespace LogicalParser.Objects.Number
 {
-    public class NumberConstant : NumberObject
+  public class NumberConstant : NumberObject
+  {
+    public NumberConstant(string name, float val) :
+      base(val)
     {
-        public NumberConstant(string name, float val) :
-          base(val)
-        {
-            Name = name;
-        }
-
-        public string Name { get; }
-
-        public override string ToString()
-        {
-            return $"{Name}";
-        }
+      Name = name;
     }
+
+    public string Name { get; }
+
+    public override string ToString()
+    {
+      return $"{Name}";
+    }
+  }
 }

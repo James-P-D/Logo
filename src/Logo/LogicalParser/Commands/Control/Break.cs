@@ -1,10 +1,10 @@
 ﻿namespace LogicalParser.Commands.Control
 {
-    public class Break : Command
+  public class Break : Command
+  {
+    public override string ToString()
     {
-        public override string ToString()
-        {
-            return $"{Parser.Break}";
-        }
+      return $"{Parser.Break}";
     }
+  }
 }

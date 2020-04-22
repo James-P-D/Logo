@@ -1,6 +1,6 @@
 ﻿namespace LogicalParser.Objects
 {
-    public class LogoObject
-    {
-    }
+  public class LogoObject
+  {
+  }
 }

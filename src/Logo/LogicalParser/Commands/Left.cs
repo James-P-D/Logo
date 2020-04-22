@@ -2,20 +2,20 @@
 
 namespace LogicalParser.Commands
 {
-    public class Left : Command
+  public class Left : Command
+  {
+    public Left(NumberEval numberEval)
     {
-        public Left(NumberEval numberEval)
-        {
-            NumberEval = numberEval;
-        }
-
-        private NumberEval NumberEval { get; }
-
-        public float Distance => NumberEval.Value;
-
-        public override string ToString()
-        {
-            return $"{Parser.Left} {NumberEval}";
-        }
+      NumberEval = numberEval;
     }
+
+    private NumberEval NumberEval { get; }
+
+    public float Distance => NumberEval.Value;
+
+    public override string ToString()
+    {
+      return $"{Parser.Left} {NumberEval}";
+    }
+  }
 }

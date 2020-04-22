@@ -2,7 +2,7 @@
 
 namespace LogicalParser.Commands
 {
-    public class Eval : LogoObject
-    {
-    }
+  public class Eval : LogoObject
+  {
+  }
 }

@@ -1,16 +1,16 @@
 ﻿namespace LogicalParser.Objects.Boolean
 {
-    public class BooleanLiteral : BooleanObject
+  public class BooleanLiteral : BooleanObject
+  {
+    public BooleanLiteral(bool val)
+      : base(val)
     {
-        public BooleanLiteral(bool val)
-          : base(val)
-        {
 
-        }
-
-        public override string ToString()
-        {
-            return $"{Value}";
-        }
     }
+
+    public override string ToString()
+    {
+      return $"{Value}";
+    }
+  }
 }

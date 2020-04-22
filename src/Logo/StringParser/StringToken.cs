@@ -1,16 +1,16 @@
 ﻿namespace StringParser
 {
-    public class StringToken
+  public class StringToken
+  {
+    public StringToken(string[] tokens, int lineNumber, string originalString)
     {
-        public StringToken(string[] tokens, int lineNumber, string originalString)
-        {
-            Tokens = tokens;
-            LineNumber = lineNumber;
-            OriginalString = originalString;
-        }
-
-        public string[] Tokens { get; }
-        public int LineNumber { get; }
-        public string OriginalString { get; }
+      Tokens = tokens;
+      LineNumber = lineNumber;
+      OriginalString = originalString;
     }
+
+    public string[] Tokens { get; }
+    public int LineNumber { get; }
+    public string OriginalString { get; }
+  }
 }

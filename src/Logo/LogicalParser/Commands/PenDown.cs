@@ -1,11 +1,11 @@
 ﻿namespace LogicalParser.Commands
 {
-    public class PenDown : Command
+  public class PenDown : Command
+  {
+    public override string ToString()
     {
-        public override string ToString()
-        {
-            return $"{Parser.PenDown}";
-        }
-
+      return $"{Parser.PenDown}";
     }
+
+  }
 }
