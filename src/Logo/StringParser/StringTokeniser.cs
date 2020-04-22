@@ -24,6 +24,10 @@ namespace StringParser
     public const string Exponential = "^";
     public const string Minus = "-";
     public const string Plus = "+";
+
+    // In general notation there is no difference between binary minus and unary minus ('5 - 4' and '-6' respectively), but in
+    // reality they are two totally different operators. When we come to parsing evaluations, we'll need to distinguish between
+    // the two so the statement 'x = (+5 - (3 * -2));' will become 'x = (@5 - (3 * #2));'
     public const string UnaryMinus = "#";
     public const string UnaryPlus = "@";
 
@@ -94,9 +98,9 @@ namespace StringParser
       Output(allLines, 0);
       var crlfRemoved = RemoveCrlf(allLines);
       Output(crlfRemoved, 1);
-      var commentLess = RemoveComments(crlfRemoved);
-      Output(commentLess, 2);
-      var formattedLines = FormatLines(commentLess);
+      var commentsRemoved = RemoveComments(crlfRemoved);
+      Output(commentsRemoved, 2);
+      var formattedLines = FormatLines(commentsRemoved);
       Output(formattedLines, 3);
 
       for (var i = 0; i < formattedLines.Length; i++)
@@ -336,8 +340,6 @@ namespace StringParser
       }
 
       AddSegment(subStrings, currentSubStr);
-
-
 
       return subStrings.ToArray();
     }
