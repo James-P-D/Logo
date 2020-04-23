@@ -153,6 +153,22 @@ namespace LogicalParser
       Parse(0, out _, stringTokens, commands, objects, true);
     }
 
+    private void CheckNumberOfParameters(StringToken firstToken, int expectedParameters, int actualParameters)
+    {
+      if (expectedParameters != actualParameters)
+      {
+        ThrowError($"Command {firstToken.Tokens.First()} requires {expectedParameters} parameters not {actualParameters}", firstToken);
+      }
+    }
+
+    private void CheckMinNumberOfParameters(StringToken firstToken, int expectedMinParameters, int actualParameters)
+    {
+      if (actualParameters < expectedMinParameters)
+      {
+        ThrowError($"Command {firstToken.Tokens.First()} requires at least {expectedMinParameters} parameters", firstToken);
+      }
+    }
+
     private void Parse(int stringTokenIndex, out int newStringTokenIndex, StringToken[] stringTokens,
       List<Command> commands, List<LogoObject> objects, bool outerLoop)
     {
@@ -290,11 +306,8 @@ namespace LogicalParser
         {
           if (firstToken.Equals(Number))
           {
-            if (parameters == 0)
-            {
-              ThrowError($"Parameter expected to variable '{firstToken}'", stringToken);
-            }
-            else if (parameters == 1)
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
+            if (parameters == 1)
             {
               var param1 = stringToken.Tokens[1];
 
@@ -395,6 +408,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(Forward))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -407,6 +421,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(Backward))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -419,6 +434,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(Left))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -431,6 +447,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(Right))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -443,6 +460,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(RightTurn))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -455,6 +473,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(LeftTurn))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -467,6 +486,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetDirection))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -479,6 +499,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetX))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -491,6 +512,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetY))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -503,14 +525,17 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(PenUp))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new PenUp());
           }
           else if (firstToken.Equals(PenDown))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new PenDown());
           }
           else if (firstToken.Equals(SetColorA))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -523,6 +548,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetColorR))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -535,6 +561,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetColorG))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -547,6 +574,7 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(SetColorB))
           {
+            CheckMinNumberOfParameters(stringToken, 1, parameters);
             var eval = ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken);
             if (eval is NumberEval numberEval)
             {
@@ -559,26 +587,32 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(CenterTurtle))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new CenterTurtle());
           }
           else if (firstToken.Equals(HideTurtle))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new HideTurtle());
           }
           else if (firstToken.Equals(ShowTurtle))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new ShowTurtle());
           }
           else if (firstToken.Equals(Output))
           {
+            CheckNumberOfParameters(stringToken, 1, parameters);
             commands.Add(new Output(ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken)));
           }
           else if (firstToken.Equals(Break))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new Break());
           }
           else if (firstToken.Equals(Continue))
           {
+            CheckNumberOfParameters(stringToken, 0, parameters);
             commands.Add(new Continue());
           }
           else

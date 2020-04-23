@@ -13,18 +13,19 @@ using StringParser;
 using Executor;
 
 //TODO;c
-// Check case-sensitivity
 // Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
 // Initialise canvas and turtle (including textboxes and initial turtle icon)
 // Fix update textboxes (not working!)
 // floats? and ints? bytes? casting?!?
-// Check for additional unneccesary parameters to commands. if you run 'PENUP x' what happens?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there?)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
+// Check 'Unable to parse' 'StringParser.StringToken' on e.g. 'setcolora 223 + ;'
+// Check 'Unable to parse' in general. 
 // Check exceptions (throw new Exception("?!?!?!?");)
+
 namespace Logo
 {
   public partial class Form1 : Form
@@ -501,7 +502,7 @@ namespace Logo
     {
       var saveFileDialog = new SaveFileDialog();
       saveFileDialog.InitialDirectory = INITIAL_DIRECTORY;
-      saveFileDialog.Filter = "logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
+      saveFileDialog.Filter = @"logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
       saveFileDialog.DefaultExt = "lgl";
       var dialogResult = saveFileDialog.ShowDialog();
       if (dialogResult == DialogResult.OK)
