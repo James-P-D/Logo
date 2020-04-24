@@ -17,7 +17,6 @@ using Executor;
 // Dynamic showing of image     MORE TESTING
 // Fix load (disable step/run buttons on textbox changed)
 // Initialise canvas and turtle (including textboxes and initial turtle icon) and make it work for restarts
-// Fix update textboxes (not working!)
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
@@ -94,8 +93,7 @@ namespace Logo
         ThreadHelper.SetImage(this, pictureBox1, imageWithoutTurtle);
       }
     }
-
-
+    
     void Executor_UpdateEvent(Turtle turtle, int x1, int y1)
     {
       //Thread.Sleep(10);
@@ -103,7 +101,10 @@ namespace Logo
 
     void Executor_AddOutputTextEvent(string text)
     {
-      AddOutputText(text);
+      if (this.updateTextBoxes)
+      {
+        AddOutputText(text);
+      }
     }
 
     private bool running = false;
@@ -204,8 +205,6 @@ namespace Logo
       }
     }
 
-
-
     private void UpdateTextboxes(Turtle turtle)
     {
       ThreadHelper.SetText(this, turtleXTextBox, turtle.X.ToString(CultureInfo.InvariantCulture));
@@ -283,8 +282,8 @@ namespace Logo
       turtle.CalculateNewPosition(turtle.CalculateNewDirection(-45), -20, ref bottomRightX, ref bottomRightY);
 
       imageWithTurtle = (Image) imageWithoutTurtle.Clone();
-      float xCenter = imageWithTurtle.Width / 2;
-      float yCenter = imageWithTurtle.Height / 2;
+      float xCenter = imageWithTurtle.Width / 2f;
+      float yCenter = imageWithTurtle.Height / 2f;
 
       using (var grp = Graphics.FromImage(imageWithTurtle))
       {
@@ -332,6 +331,7 @@ namespace Logo
           (int) (e.UserState as object[])?[1],
           (int) (e.UserState as object[])?[2]);
         UpdateTextboxes((e.UserState as object[])?[0] as Turtle);
+        xxx
       }
 
       //TODO: Do we still need this?!?
@@ -394,7 +394,7 @@ namespace Logo
     {
       var openFileDialog = new OpenFileDialog();
       openFileDialog.InitialDirectory = INITIAL_DIRECTORY;
-      openFileDialog.Filter = "logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
+      openFileDialog.Filter = @"logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
       openFileDialog.DefaultExt = "lgl";
       var dialogResult = openFileDialog.ShowDialog();
       if (dialogResult == DialogResult.OK)
@@ -477,7 +477,6 @@ namespace Logo
 
     private bool Save()
     {
-
       try
       {
         File.WriteAllText(currentFilename, programTextBox.Text);
