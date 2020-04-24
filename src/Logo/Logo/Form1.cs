@@ -15,11 +15,12 @@ using Executor;
 //TODO;c
 // Introduce <Step> for single execution of commands
 // Dynamic showing of image     MORE TESTING
-// Initialise canvas and turtle (including textboxes and initial turtle icon)
+// Fix load (disable step/run buttons on textbox changed)
+// Initialise canvas and turtle (including textboxes and initial turtle icon) and make it work for restarts
 // Fix update textboxes (not working!)
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
-// Check variables (do we need that value in there?)
+// Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
 // Check 'Unable to parse' 'StringParser.StringToken' on e.g. 'setcolora 223 + ;'
@@ -65,7 +66,7 @@ namespace Logo
       }
 
       DrawTurtle();
-
+      UpdateTextboxes(this.turtle);
       ThreadHelper.SetImage(this, pictureBox1, imageWithTurtle);
     }
 
