@@ -173,43 +173,35 @@ namespace Executor
               }
               else if (eval is NumberMultiplyEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberMultiplyEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberMultiplyEval).Value}");
               }
               else if (eval is NumberDivideEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberDivideEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberDivideEval).Value}");
               }
               else if (eval is NumberExponentialEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberExponentialEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberExponentialEval).Value}");
               }
               else if (eval is NumberModulusEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberModulusEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberModulusEval).Value}");
               }
               else if (eval is NumberUnaryMinusEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryMinusEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryMinusEval).Value}");
               }
               else if (eval is NumberUnaryPlusEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryPlusEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryPlusEval).Value}");
               }
               else if (eval is BooleanValueEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanValueEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanValueEval).Value}");
               }
               else if (eval is BooleanUnaryNotEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanUnaryNotEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanUnaryNotEval).Value}");
               }
               else if (eval is BooleanAndEval)
               {
@@ -225,58 +217,47 @@ namespace Executor
               }
               else if (eval is BooleanBooleanEqualityEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanEqualityEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanEqualityEval).Value}");
               }
               else if (eval is BooleanNumberEqualityEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberEqualityEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberEqualityEval).Value}");
               }
               else if (eval is BooleanBooleanInequalityEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanInequalityEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanBooleanInequalityEval).Value}");
               }
               else if (eval is BooleanNumberInequalityEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberInequalityEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberInequalityEval).Value}");
               }
               else if (eval is BooleanNumberGreaterThanEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanEval).Value}");
               }
               else if (eval is BooleanNumberLessThanEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanEval).Value}");
               }
               else if (eval is BooleanNumberGreaterThanOrEqualEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanOrEqualEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanOrEqualEval).Value}");
               }
               else if (eval is BooleanNumberLessThanOrEqualEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanOrEqualEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanOrEqualEval).Value}");
               }
               else if (eval is NumberUnarySinEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnarySinEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberUnarySinEval).Value}");
               }
               else if (eval is NumberUnaryCosEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryCosEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryCosEval).Value}");
               }
               else if (eval is NumberUnaryTanEval)
               {
-                AddOutputText(
-                  $"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryTanEval).Value}");
+                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as NumberUnaryTanEval).Value}");
               }
               else if (eval is NumberMinEval)
               {
