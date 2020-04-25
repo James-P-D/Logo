@@ -29,7 +29,7 @@ using LogicalParser.Objects;
 // Check exceptions (throw new Exception("?!?!?!?");)
 // Check whether 'updatetextboxes' affects outputing variables!
 // Move turtle? Can we just stick it in Executor and get rid of the one in the Form?
-// 
+// Check break/continue still work (currently we have some breakOut and continueOut bools. Doe we need them?)
 
 namespace Logo
 {
