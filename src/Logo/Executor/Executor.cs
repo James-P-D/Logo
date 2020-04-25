@@ -4,6 +4,7 @@ using LogicalParser.Commands;
 using LogicalParser.Objects;
 using LogicalParser.Commands.Control;
 using System.ComponentModel;
+using System.Threading;
 using LogicalParser.Commands.BooleanEvaluation;
 using LogicalParser.Commands.NumberEvaluation;
 
@@ -11,6 +12,12 @@ namespace Executor
 {
   public class Executor
   {
+    #region Properties
+
+    private EventWaitHandle waitHandle = new ManualResetEvent(initialState: true);
+
+    #endregion
+
     #region Events and Delegates
 
     public delegate void AddOutputTextDelegate(string text);
@@ -33,7 +40,7 @@ namespace Executor
 
     #endregion
 
-    public bool Execute(object sender, List<Command> commands, List<LogoObject> objects, Turtle turtle, int indent,
+    public bool Execute(List<Command> commands, List<LogoObject> objects, Turtle turtle, int indent,
       ref bool breakOut, ref bool continueOut)
     {
       breakOut = false;
@@ -41,8 +48,9 @@ namespace Executor
       {
         foreach (var command in commands)
         {
+#if DEBUG
           AddOutputText($"{GetIndent(indent)}{command}");
-          //Thread.Sleep(1);
+#endif
 
           if (!Running)
           {
@@ -241,11 +249,13 @@ namespace Executor
               }
               else if (eval is BooleanNumberGreaterThanOrEqualEval)
               {
-                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanOrEqualEval).Value}");
+                AddOutputText(
+                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberGreaterThanOrEqualEval).Value}");
               }
               else if (eval is BooleanNumberLessThanOrEqualEval)
               {
-                AddOutputText($"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanOrEqualEval).Value}");
+                AddOutputText(
+                  $"OUTPUT: {(command as Output).Name} = {(eval as BooleanNumberLessThanOrEqualEval).Value}");
               }
               else if (eval is NumberUnarySinEval)
               {
@@ -280,7 +290,7 @@ namespace Executor
               {
                 var repeatBreak = false;
                 var repeatContinue = false;
-                if (!Execute(sender, (command as Repeat).Commands, objects, turtle, indent + 2, ref repeatBreak,
+                if (!Execute((command as Repeat).Commands, objects, turtle, indent + 2, ref repeatBreak,
                   ref repeatContinue))
                 {
                   return false;
@@ -305,7 +315,7 @@ namespace Executor
               {
                 var whileBreak = false;
                 var whileContinue = false;
-                if (!Execute(sender, (command as While).Commands, objects, turtle, indent + 2, ref whileBreak,
+                if (!Execute((command as While).Commands, objects, turtle, indent + 2, ref whileBreak,
                   ref whileContinue))
                 {
                   return false;
@@ -330,7 +340,7 @@ namespace Executor
               {
                 var ifBreak = false;
                 var ifContinue = false;
-                if (!Execute(sender, (command as If).ThenCommands, objects, turtle, indent + 2, ref ifBreak,
+                if (!Execute((command as If).ThenCommands, objects, turtle, indent + 2, ref ifBreak,
                   ref ifContinue))
                 {
                   return false;
@@ -353,7 +363,7 @@ namespace Executor
               {
                 var elseBreak = false;
                 var elseContinue = false;
-                if (!Execute(sender, (command as If).ElseCommands, objects, turtle, indent + 2, ref elseBreak,
+                if (!Execute((command as If).ElseCommands, objects, turtle, indent + 2, ref elseBreak,
                   ref elseContinue))
                 {
                   return false;
@@ -395,12 +405,10 @@ namespace Executor
               throw new Exception($"Don't recognise command '{command}'");
             }
 
-            var foo = sender;
-            (sender as BackgroundWorker).ReportProgress(0, new object[] {turtle, x1, y1});
-
-            //TODO: Do we need this?
-            //Update(turtle, x1, y1);
+            Update(turtle, x1, y1);
           }
+
+          this.waitHandle.WaitOne();
         }
 
         return true;
@@ -410,6 +418,11 @@ namespace Executor
         AddOutputText("ERROR: " + ex.Message);
         return false;
       }
+    }
+
+    public void ResumeThread()
+    {
+      this.waitHandle.Set();
     }
 
     public bool Running { get; set; }

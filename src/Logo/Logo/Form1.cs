@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Executor;
+using LogicalParser;
+using StringParser;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
-using LogicalParser;
 using LogicalParser.Commands;
 using LogicalParser.Objects;
-using StringParser;
-using Executor;
 
 //TODO;c
 // Introduce <Step> for single execution of commands
-// Dynamic showing of image     MORE TESTING
+// Fix <Stop>
+// Dynamic showing of image     MORE TESTING - Sort out UpdatePicture()/UpdateImage() too confusing! Why do we need two?
 // Fix load (disable step/run buttons on textbox changed)
-// Initialise canvas and turtle (including textboxes and initial turtle icon) and make it work for restarts
+// Can we make sure thread only fires updates on drawing when turtle position/direction has changed? (What about updating RGB textboxes, etc.?)
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
@@ -25,6 +27,9 @@ using Executor;
 // Check 'Unable to parse' 'StringParser.StringToken' on e.g. 'setcolora 223 + ;'
 // Check 'Unable to parse' in general. 
 // Check exceptions (throw new Exception("?!?!?!?");)
+// Check whether 'updatetextboxes' affects outputing variables!
+// Move turtle? Can we just stick it in Executor and get rid of the one in the Form?
+// 
 
 namespace Logo
 {
@@ -33,6 +38,18 @@ namespace Logo
     private Image imageWithoutTurtle;
     private Image imageWithTurtle;
     private Turtle turtle;
+    private bool compiled = false;
+    private bool running = false;
+    private bool wrapBorders = false;
+    private bool updateTextBoxes = true;
+
+    private List<Command> commands;
+    private List<LogoObject> objects;
+
+    private bool isDirty = false;
+    private const string INITIAL_DIRECTORY = @".\Samples";
+    private string currentFilename;
+    private readonly Executor.Executor executor;
 
     public Form1()
     {
@@ -43,7 +60,64 @@ namespace Logo
       executor = new Executor.Executor();
       executor.AddOutputTextEvent += Executor_AddOutputTextEvent;
       executor.UpdateEvent += Executor_UpdateEvent;
-      programTextBox.Text = string.Empty;
+      //programTextBox.Text = string.Empty;
+/*
+      programTextBox.Text = @"
+  repeat 36 {
+    forward 20;
+    rightturn 10;
+  }";
+*/
+
+
+
+      programTextBox.Text = @"
+
+number iterations = 80;
+setcolorr 0;
+setcolorg 0;
+setcolorb 0;
+setcolora 0;
+
+repeat iterations {
+  setcolorr 50;
+  setcolora 50;
+  repeat 36 {
+    forward 20;
+    rightturn 10;
+  }
+
+  setcolorr 100;
+  setcolora 100;
+  repeat 36 {
+    forward 30;
+    rightturn 10;
+  }
+
+  setcolorr 150;
+  setcolora 150;
+  repeat 36 {
+    forward 40;
+    rightturn 10;
+  }
+
+  setcolorr 200;
+  setcolora 200;
+  repeat 36 {
+    forward 50;
+    rightturn 10;
+  }
+
+  setcolorr 250;
+  setcolora 250;
+  repeat 36 {
+    forward 60;
+    rightturn 10;
+  }
+
+  rightturn 360 / iterations;
+}";
+
     }
 
     private void Form1_Load(object sender, EventArgs e)
@@ -93,28 +167,18 @@ namespace Logo
         ThreadHelper.SetImage(this, pictureBox1, imageWithoutTurtle);
       }
     }
-    
+
     void Executor_UpdateEvent(Turtle turtle, int x1, int y1)
     {
-      //Thread.Sleep(10);
+      UpdatePicture(turtle, x1, y1);
+      UpdateTextboxes(turtle);
+      executor.ResumeThread();
     }
 
     void Executor_AddOutputTextEvent(string text)
     {
-      if (this.updateTextBoxes)
-      {
-        AddOutputText(text);
-      }
+      AddOutputText(text);
     }
-
-    private bool running = false;
-    private bool wrapBorders = false;
-    private bool updateTextBoxes = true;
-
-    private bool isDirty = false;
-    private const string INITIAL_DIRECTORY = @".\Samples";
-    private string currentFilename;
-    private readonly Executor.Executor executor;
 
     private void stopButton_Click(object sender, EventArgs e)
     {
@@ -129,7 +193,7 @@ namespace Logo
 
     private void LoadButton_Click(object sender, EventArgs e)
     {
-
+      this.LoadProgram();
     }
 
     private void StepButton_Click(object sender, EventArgs e)
@@ -139,7 +203,7 @@ namespace Logo
 
     private void runButton_Click(object sender, EventArgs e)
     {
-      Run();
+      this.Run();
     }
 
     private void increaseFontSizeButton_Click(object sender, EventArgs e)
@@ -167,12 +231,11 @@ namespace Logo
       AddOutputText(text);
     }
 
-    private void Run()
+    private bool LoadProgram()
     {
+      this.compiled = false;
       ClearOutputText();
       var stringTokeniser = new StringTokeniser();
-      InitialiseCanvasAndTurtle();
-
       try
       {
         stringTokeniser.AddOutputTextEvent += StringTokeniserAddOutputText;
@@ -180,24 +243,18 @@ namespace Logo
         var stringTokens = stringTokeniser.Parse(allLines);
 
         var logicalParser = new Parser();
-        logicalParser.Parse(stringTokens, out var commands, out var objects);
+        logicalParser.Parse(stringTokens, out this.commands, out this.objects);
 
-        running = true;
-        var runThread = new BackgroundWorker();
-        runThread.RunWorkerCompleted += runThread_RunWorkerCompleted;
-        runThread.DoWork += runThread_DoWork;
-        runThread.ProgressChanged += runThread_ProgressChanged;
-        runThread.WorkerReportsProgress = true;
-
-        AddOutputText("*** Compile successful ***");
-
-        runThread.RunWorkerAsync(new object[] {commands, objects, turtle});
+        AddOutputText("*** Compile success ***");
+        this.compiled = true;
+        return true;
       }
       catch (Exception ex)
       {
         running = false;
         AddOutputText("ERROR: " + ex.Message);
         AddOutputText("*** Compile failed ***");
+        return false;
       }
       finally
       {
@@ -205,16 +262,41 @@ namespace Logo
       }
     }
 
+    private void Run()
+    {
+      // If the Logo program has been changed, 
+      if (!this.compiled)
+      {
+        if (!this.LoadProgram())
+        {
+          return;
+        }
+      }
+
+      this.InitialiseCanvasAndTurtle();
+
+      var mainBreak = false;
+      var mainContinue = false;
+      var backgroundThread = new Thread(() => executor.Execute(commands, objects, turtle, 0, ref mainBreak, ref mainContinue));
+      //TODO: Do we need to set running?
+      executor.Running = true;
+
+      backgroundThread.Start();
+    }
+
     private void UpdateTextboxes(Turtle turtle)
     {
-      ThreadHelper.SetText(this, turtleXTextBox, turtle.X.ToString(CultureInfo.InvariantCulture));
-      ThreadHelper.SetText(this, turtleYTextBox, turtle.Y.ToString(CultureInfo.InvariantCulture));
-      ThreadHelper.SetText(this, turtleDirectionTextBox, turtle.Direction.ToString(CultureInfo.InvariantCulture));
+      if (this.updateTextBoxes)
+      {
+        ThreadHelper.SetText(this, turtleXTextBox, turtle.X.ToString(CultureInfo.InvariantCulture));
+        ThreadHelper.SetText(this, turtleYTextBox, turtle.Y.ToString(CultureInfo.InvariantCulture));
+        ThreadHelper.SetText(this, turtleDirectionTextBox, turtle.Direction.ToString(CultureInfo.InvariantCulture));
 
-      ThreadHelper.SetText(this, turtleRColourTextBox, turtle.ColorR.ToString());
-      ThreadHelper.SetText(this, turtleGColourTextBox, turtle.ColorG.ToString());
-      ThreadHelper.SetText(this, turtleBColourTextBox, turtle.ColorB.ToString());
-      ThreadHelper.SetText(this, turtleAColourTextBox, turtle.ColorA.ToString());
+        ThreadHelper.SetText(this, turtleRColourTextBox, turtle.ColorR.ToString());
+        ThreadHelper.SetText(this, turtleGColourTextBox, turtle.ColorG.ToString());
+        ThreadHelper.SetText(this, turtleBColourTextBox, turtle.ColorB.ToString());
+        ThreadHelper.SetText(this, turtleAColourTextBox, turtle.ColorA.ToString());
+      }
     }
 
     private void UpdateImage(Turtle turtle, int x1, int y1)
@@ -297,79 +379,8 @@ namespace Logo
           new Point((int) (bottomRightX + xCenter), (int) (bottomRightY + yCenter)));
       }
     }
-
-    void runThread_DoWork(object sender, DoWorkEventArgs e)
-    {
-      var commands = e.Argument is object[] ? ((object[]) e.Argument)[0] as List<Command> : null;
-      if (((object[]) e.Argument).Length > 1)
-      {
-        var objects = e.Argument is object[] ? ((object[]) e.Argument)[1] as List<LogoObject> : null;
-        var turtle = e.Argument is object[] ? ((object[]) e.Argument)[2] as Turtle : null;
-
-        var mainBreak = false;
-        var mainContinue = false;
-        executor.Running = true;
-        if (executor.Execute(sender, commands, objects, turtle, 0, ref mainBreak, ref mainContinue))
-        {
-          AddOutputText("*** Execution successful ***");
-        }
-        else
-        {
-          AddOutputText("*** Execution failed ***");
-        }
-      }
-    }
-
+    
     readonly object locker = new object();
-
-    void runThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
-    {
-      lock (locker)
-      {
-        UpdatePicture(
-          (e.UserState as object[])?[0] as Turtle,
-          (int) (e.UserState as object[])?[1],
-          (int) (e.UserState as object[])?[2]);
-        UpdateTextboxes((e.UserState as object[])?[0] as Turtle);
-        xxx
-      }
-
-      //TODO: Do we still need this?!?
-      // Yes! This doesn't seem to cause the same threading issue as firing on events!
-      /*
-        var x1 = (int)(e.UserState as object[])[0];
-        var y1 = (int)(e.UserState as object[])[1];
-        var x2 = (int)(e.UserState as object[])[2];
-        var y2 = (int)(e.UserState as object[])[3];
-        var direction1 = (int)(e.UserState as object[])[4];
-        var direction2 = (int)(e.UserState as object[])[5];
-        var isPenDown = (bool)(e.UserState as object[])[6];
-        var isVisible = (bool)(e.UserState as object[])[7];
-        var image = (Image)(e.UserState as object[])[8];
-        lock (image)
-        {
-            var xCenter = image.Width / 2;
-            var yCenter = image.Height / 2;
-            //Console.WriteLine("{0}, {1} -> {2}, {3}", x1, y1, x2, y2);
-            //Console.WriteLine("------------");
-
-            //using (Graphics grp = Graphics.FromImage(image))
-            //{
-            //  //Console.WriteLine("{0}, {1} -> {2}, {3}", x1, y1, x2, y2);
-            //  grp.DrawLine(Pens.Black, new Point(x1 + xCenter, y1 + yCenter), new Point(x2 + xCenter, y2 + yCenter));
-            //}
-            //this.pictureBox1.Image = (Image)image.Clone();
-
-            ThreadHelper.SetText(this, turtleXTextBox, x2.ToString());
-            ThreadHelper.SetText(this, turtleYTextBox, y2.ToString());
-
-            //Thread.Sleep(100);
-        }
-
-        ThreadHelper.SetText(this, turtleXTextBox, x2.ToString());
-        ThreadHelper.SetText(this, turtleYTextBox, y2.ToString());
-        */
-    }
 
     void runThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
@@ -378,7 +389,8 @@ namespace Logo
 
     private void programTextBox_TextChanged(object sender, EventArgs e)
     {
-      isDirty = true;
+      this.isDirty = true;
+      this.compiled = false;
 
       if (!string.IsNullOrEmpty(currentFilename))
       {
