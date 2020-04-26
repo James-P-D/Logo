@@ -19,25 +19,23 @@ using LogicalParser.Objects;
 // Dynamic showing of image     MORE TESTING - Sort out UpdatePicture()/UpdateImage() too confusing! Why do we need two?
 // Fix load (disable step/run buttons on textbox changed)
 // Can we make sure thread only fires updates on drawing when turtle position/direction has changed? (What about updating RGB textboxes, etc.?)
+// How do we know when thread has ended?
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
-// Check 'Unable to parse' 'StringParser.StringToken' on e.g. 'setcolora 223 + ;'
 // Check 'Unable to parse' in general. 
 // Check exceptions (throw new Exception("?!?!?!?");)
 // Check whether 'updatetextboxes' affects outputing variables!
-// Move turtle? Can we just stick it in Executor and get rid of the one in the Form?
 // Check break/continue still work (currently we have some breakOut and continueOut bools. Doe we need them?)
-
+// Do we need to use ThreadHelper.SetImage to set the image? Aren't we on the right thread anyway now?
 namespace Logo
 {
   public partial class Form1 : Form
   {
     private Image imageWithoutTurtle;
     private Image imageWithTurtle;
-    private Turtle turtle;
     private bool compiled = false;
     private bool running = false;
     private bool wrapBorders = false;
@@ -129,17 +127,16 @@ repeat iterations {
     {
       var imageWidth = pictureBox1.Width;
       var imageHeight = pictureBox1.Height;
-
-      turtle = new Turtle(0, 0, 0);
-
+      
       imageWithoutTurtle = new Bitmap(imageWidth, imageHeight, PixelFormat.Format24bppRgb);
       using (var grp = Graphics.FromImage(imageWithoutTurtle))
       {
         grp.FillRectangle(Brushes.White, 0, 0, imageWidth, imageHeight);
       }
 
-      DrawTurtle();
-      UpdateTextboxes(this.turtle);
+      Turtle turtle=new Turtle();
+      DrawTurtle(turtle);
+      UpdateTextboxes(turtle);
       ThreadHelper.SetImage(this, pictureBox1, imageWithTurtle);
     }
 
@@ -156,14 +153,11 @@ repeat iterations {
 
       if (turtle.IsVisible)
       {
-        DrawTurtle();
-        //this.pictureBox1.Image = this.imageWithTurtle;
-        //this.pictureBox1.Image = DrawTurtle(turtle, image);                
+        DrawTurtle(turtle);
         ThreadHelper.SetImage(this, pictureBox1, imageWithTurtle);
       }
       else
       {
-        //this.pictureBox1.Image = (Image)image.Clone();
         ThreadHelper.SetImage(this, pictureBox1, imageWithoutTurtle);
       }
     }
@@ -277,7 +271,7 @@ repeat iterations {
 
       var mainBreak = false;
       var mainContinue = false;
-      var backgroundThread = new Thread(() => executor.Execute(commands, objects, turtle, 0, ref mainBreak, ref mainContinue));
+      var backgroundThread = new Thread(() => executor.Execute(commands, objects, new Turtle(), 0, ref mainBreak, ref mainContinue));
       //TODO: Do we need to set running?
       executor.Running = true;
 
@@ -351,7 +345,7 @@ repeat iterations {
       }
     }
 
-    private void DrawTurtle()
+    private void DrawTurtle(Turtle turtle)
     {
       var x = turtle.X;
       var y = turtle.Y;

@@ -4,6 +4,10 @@ namespace Executor
 {
   public class Turtle
   {
+    public Turtle() : this(0, 0, 0)
+    {
+    }
+
     public Turtle(float x, float y, float direction)
     {
       InitialX = x;
