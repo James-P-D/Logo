@@ -16,9 +16,9 @@ using LogicalParser.Objects;
 //TODO;c
 // Introduce <Step> for single execution of commands
 // Fix <Stop>
+// How do we know when thread has ended?
 // Dynamic showing of image     MORE TESTING - Sort out UpdatePicture()/UpdateImage() too confusing! Why do we need two?
 // Fix load (disable step/run buttons on textbox changed)
-// How do we know when thread has ended?
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
@@ -27,7 +27,6 @@ using LogicalParser.Objects;
 // Check 'Unable to parse' in general. 
 // Check exceptions (throw new Exception("?!?!?!?");)
 // Check break/continue still work (currently we have some breakOut and continueOut bools. Doe we need them?)
-// Do we need to use ThreadHelper.SetImage to set the image? Aren't we on the right thread anyway now?
 namespace Logo
 {
   public partial class Form1 : Form
