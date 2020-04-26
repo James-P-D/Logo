@@ -18,7 +18,6 @@ using LogicalParser.Objects;
 // Fix <Stop>
 // Dynamic showing of image     MORE TESTING - Sort out UpdatePicture()/UpdateImage() too confusing! Why do we need two?
 // Fix load (disable step/run buttons on textbox changed)
-// Can we make sure thread only fires updates on drawing when turtle position/direction has changed? (What about updating RGB textboxes, etc.?)
 // How do we know when thread has ended?
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)

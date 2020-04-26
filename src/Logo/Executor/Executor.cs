@@ -48,6 +48,7 @@ namespace Executor
       {
         foreach (var command in commands)
         {
+          bool requiresRedraw = false;
 #if DEBUG
           AddOutputText($"{GetIndent(indent)}{command}");
 #endif
@@ -74,26 +75,32 @@ namespace Executor
             if (command is RightTurn)
             {
               turtle.RightTurn((command as RightTurn).Angle);
+              requiresRedraw = true;
             }
             else if (command is LeftTurn)
             {
               turtle.LeftTurn((command as LeftTurn).Angle);
+              requiresRedraw = true;
             }
             else if (command is Forward)
             {
               turtle.Forward((command as Forward).Distance);
+              requiresRedraw = true;
             }
             else if (command is Backward)
             {
               turtle.Backward((command as Backward).Distance);
+              requiresRedraw = true;
             }
             else if (command is Left)
             {
               turtle.Left((command as Left).Distance);
+              requiresRedraw = true;
             }
             else if (command is Right)
             {
               turtle.Right((command as Right).Distance);
+              requiresRedraw = true;
             }
             else if (command is PenUp)
             {
@@ -106,26 +113,32 @@ namespace Executor
             else if (command is SetColorA)
             {
               turtle.SetColorA((command as SetColorA).A);
+              requiresRedraw = true;
             }
             else if (command is SetColorR)
             {
               turtle.SetColorR((command as SetColorR).R);
+              requiresRedraw = true;
             }
             else if (command is SetColorG)
             {
               turtle.SetColorG((command as SetColorG).G);
+              requiresRedraw = true;
             }
             else if (command is SetColorB)
             {
               turtle.SetColorB((command as SetColorB).B);
+              requiresRedraw = true;
             }
             else if (command is HideTurtle)
             {
               turtle.Hide();
+              requiresRedraw = true;
             }
             else if (command is ShowTurtle)
             {
               turtle.Show();
+              requiresRedraw = true;
             }
             else if (command is CenterTurtle)
             {
@@ -137,10 +150,12 @@ namespace Executor
               x1 = (int) turtle.X;
               y1 = (int) turtle.Y;
               direction1 = turtle.Direction;
+              requiresRedraw = true;
             }
             else if (command is SetDirection)
             {
               turtle.SetDirection((command as SetDirection).Direction);
+              requiresRedraw = true;
             }
             else if (command is SetX)
             {
@@ -152,6 +167,7 @@ namespace Executor
               x1 = (int) turtle.X;
               y1 = (int) turtle.Y;
               direction1 = turtle.Direction;
+              requiresRedraw = true;
             }
             else if (command is SetY)
             {
@@ -163,6 +179,7 @@ namespace Executor
               x1 = (int) turtle.X;
               y1 = (int) turtle.Y;
               direction1 = turtle.Direction;
+              requiresRedraw = true;
             }
             else if (command is Output)
             {
@@ -405,10 +422,12 @@ namespace Executor
               throw new Exception($"Don't recognise command '{command}'");
             }
 
-            Update(turtle, x1, y1);
+            if (requiresRedraw)
+            {
+              Update(turtle, x1, y1);
+              this.waitHandle.WaitOne();
+            }
           }
-
-          this.waitHandle.WaitOne();
         }
 
         return true;
