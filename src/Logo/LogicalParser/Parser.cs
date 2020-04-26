@@ -1168,7 +1168,7 @@ namespace LogicalParser
       }
       else
       {
-        ThrowError($"Unable to parse '{stringToken}'", stringToken);
+        ThrowError($"Unable to parse", stringToken);
         return null;
       }
     }
