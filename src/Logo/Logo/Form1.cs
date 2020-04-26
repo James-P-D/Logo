@@ -17,7 +17,6 @@ using LogicalParser.Objects;
 // Introduce <Step> for single execution of commands
 // Fix <Stop>
 // How do we know when thread has ended?
-// Dynamic showing of image     MORE TESTING - Sort out UpdatePicture()/UpdateImage() too confusing! Why do we need two?
 // Fix load (disable step/run buttons on textbox changed)
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
@@ -137,6 +136,87 @@ repeat iterations {
       ThreadHelper.SetImage(this, pictureBox1, imageWithTurtle);
     }
 
+    private void UpdateImage(Turtle turtle, int x1, int y1)
+    {
+      using (var grp = Graphics.FromImage(imageWithoutTurtle))
+      {
+        var xCenter = imageWithoutTurtle.Width / 2;
+        var yCenter = imageWithoutTurtle.Height / 2;
+
+        var startX = x1 + xCenter;
+        var startY = y1 + yCenter;
+        var endX = (int)turtle.X + xCenter;
+        var endY = (int)turtle.Y + yCenter;
+
+        var pen = new Pen(Color.FromArgb(turtle.ColorA, turtle.ColorR, turtle.ColorG, turtle.ColorB));
+        grp.DrawLine(pen, new Point(startX, startY), new Point(endX, endY));
+
+        if (wrapBorders)
+        {
+          if (
+            endX < 0 || endX > imageWithoutTurtle.Width ||
+            endY < 0 || endY > imageWithoutTurtle.Height)
+          {
+            if (endX < 0)
+            {
+              startX = x1 + xCenter + imageWithoutTurtle.Width;
+              turtle.SetX(turtle.X + imageWithoutTurtle.Width);
+            }
+            else if (endX > imageWithoutTurtle.Width)
+            {
+              startX = x1 + xCenter - imageWithoutTurtle.Width;
+              turtle.SetX(turtle.X - imageWithoutTurtle.Width);
+            }
+
+            if (endY < 0)
+            {
+              startY = y1 + yCenter + imageWithoutTurtle.Height;
+              turtle.SetY(turtle.Y + imageWithoutTurtle.Height);
+            }
+            else if (endY > imageWithoutTurtle.Height)
+            {
+              startY = y1 + yCenter - imageWithoutTurtle.Height;
+              turtle.SetY(turtle.Y - imageWithoutTurtle.Height);
+            }
+
+            endX = (int)turtle.X + xCenter;
+            endY = (int)turtle.Y + yCenter;
+
+            grp.DrawLine(pen, new Point(startX, startY), new Point(endX, endY));
+          }
+        }
+      }
+    }
+
+    private void DrawTurtle(Turtle turtle)
+    {
+      var x = turtle.X;
+      var y = turtle.Y;
+      var bottomLeftX = x;
+      var bottomLeftY = y;
+      var bottomRightX = x;
+      var bottomRightY = y;
+
+      turtle.CalculateNewPosition(turtle.CalculateNewDirection(45), -20, ref bottomLeftX, ref bottomLeftY);
+      turtle.CalculateNewPosition(turtle.CalculateNewDirection(-45), -20, ref bottomRightX, ref bottomRightY);
+
+      imageWithTurtle = (Image)imageWithoutTurtle.Clone();
+      float xCenter = imageWithTurtle.Width / 2f;
+      float yCenter = imageWithTurtle.Height / 2f;
+
+      using (var grp = Graphics.FromImage(imageWithTurtle))
+      {
+        var pen = Pens.Black;
+
+        grp.DrawLine(pen, new Point((int)(turtle.X + xCenter), (int)(turtle.Y + yCenter)),
+          new Point((int)(bottomLeftX + xCenter), (int)(bottomLeftY + yCenter)));
+        grp.DrawLine(pen, new Point((int)(turtle.X + xCenter), (int)(turtle.Y + yCenter)),
+          new Point((int)(bottomRightX + xCenter), (int)(bottomRightY + yCenter)));
+        grp.DrawLine(pen, new Point((int)(bottomLeftX + xCenter), (int)(bottomLeftY + yCenter)),
+          new Point((int)(bottomRightX + xCenter), (int)(bottomRightY + yCenter)));
+      }
+    }
+
     private void UpdatePicture(Turtle turtle, int x1, int y1)
     {
       if (turtle.IsPenDown)
@@ -158,7 +238,7 @@ repeat iterations {
         ThreadHelper.SetImage(this, pictureBox1, imageWithoutTurtle);
       }
     }
-
+    
     void Executor_UpdateEvent(Turtle turtle, int x1, int y1)
     {
       UpdatePicture(turtle, x1, y1);
@@ -287,87 +367,6 @@ repeat iterations {
         ThreadHelper.SetText(this, turtleGColourTextBox, turtle.ColorG.ToString());
         ThreadHelper.SetText(this, turtleBColourTextBox, turtle.ColorB.ToString());
         ThreadHelper.SetText(this, turtleAColourTextBox, turtle.ColorA.ToString());
-      }
-    }
-
-    private void UpdateImage(Turtle turtle, int x1, int y1)
-    {
-      using (var grp = Graphics.FromImage(imageWithoutTurtle))
-      {
-        var xCenter = imageWithoutTurtle.Width / 2;
-        var yCenter = imageWithoutTurtle.Height / 2;
-
-        var startX = x1 + xCenter;
-        var startY = y1 + yCenter;
-        var endX = (int) turtle.X + xCenter;
-        var endY = (int) turtle.Y + yCenter;
-
-        var pen = new Pen(Color.FromArgb(turtle.ColorA, turtle.ColorR, turtle.ColorG, turtle.ColorB));
-        grp.DrawLine(pen, new Point(startX, startY), new Point(endX, endY));
-
-        if (wrapBorders)
-        {
-          if (
-            endX < 0 || endX > imageWithoutTurtle.Width ||
-            endY < 0 || endY > imageWithoutTurtle.Height)
-          {
-            if (endX < 0)
-            {
-              startX = x1 + xCenter + imageWithoutTurtle.Width;
-              turtle.SetX(turtle.X + imageWithoutTurtle.Width);
-            }
-            else if (endX > imageWithoutTurtle.Width)
-            {
-              startX = x1 + xCenter - imageWithoutTurtle.Width;
-              turtle.SetX(turtle.X - imageWithoutTurtle.Width);
-            }
-
-            if (endY < 0)
-            {
-              startY = y1 + yCenter + imageWithoutTurtle.Height;
-              turtle.SetY(turtle.Y + imageWithoutTurtle.Height);
-            }
-            else if (endY > imageWithoutTurtle.Height)
-            {
-              startY = y1 + yCenter - imageWithoutTurtle.Height;
-              turtle.SetY(turtle.Y - imageWithoutTurtle.Height);
-            }
-
-            endX = (int) turtle.X + xCenter;
-            endY = (int) turtle.Y + yCenter;
-
-            grp.DrawLine(pen, new Point(startX, startY), new Point(endX, endY));
-          }
-        }
-      }
-    }
-
-    private void DrawTurtle(Turtle turtle)
-    {
-      var x = turtle.X;
-      var y = turtle.Y;
-      var bottomLeftX = x;
-      var bottomLeftY = y;
-      var bottomRightX = x;
-      var bottomRightY = y;
-
-      turtle.CalculateNewPosition(turtle.CalculateNewDirection(45), -20, ref bottomLeftX, ref bottomLeftY);
-      turtle.CalculateNewPosition(turtle.CalculateNewDirection(-45), -20, ref bottomRightX, ref bottomRightY);
-
-      imageWithTurtle = (Image) imageWithoutTurtle.Clone();
-      float xCenter = imageWithTurtle.Width / 2f;
-      float yCenter = imageWithTurtle.Height / 2f;
-
-      using (var grp = Graphics.FromImage(imageWithTurtle))
-      {
-        var pen = Pens.Black;
-
-        grp.DrawLine(pen, new Point((int) (turtle.X + xCenter), (int) (turtle.Y + yCenter)),
-          new Point((int) (bottomLeftX + xCenter), (int) (bottomLeftY + yCenter)));
-        grp.DrawLine(pen, new Point((int) (turtle.X + xCenter), (int) (turtle.Y + yCenter)),
-          new Point((int) (bottomRightX + xCenter), (int) (bottomRightY + yCenter)));
-        grp.DrawLine(pen, new Point((int) (bottomLeftX + xCenter), (int) (bottomLeftY + yCenter)),
-          new Point((int) (bottomRightX + xCenter), (int) (bottomRightY + yCenter)));
       }
     }
     
