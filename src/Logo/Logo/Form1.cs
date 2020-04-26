@@ -26,7 +26,6 @@ using LogicalParser.Objects;
 // Move error strings to resources file
 // Check 'Unable to parse' in general. 
 // Check exceptions (throw new Exception("?!?!?!?");)
-// Check whether 'updatetextboxes' affects outputing variables!
 // Check break/continue still work (currently we have some breakOut and continueOut bools. Doe we need them?)
 // Do we need to use ThreadHelper.SetImage to set the image? Aren't we on the right thread anyway now?
 namespace Logo
