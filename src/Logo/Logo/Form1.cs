@@ -16,7 +16,7 @@ using LogicalParser.Objects;
 //TODO;c
 // Introduce <Step> for single execution of commands
 // Fix <Stop>
-// How do we know when thread has ended?
+// How do we know when thread has ended? And make sure we disable Run and Step buttons when running, otherwise exceptions
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
@@ -32,7 +32,6 @@ namespace Logo
     private Image imageWithoutTurtle;
     private Image imageWithTurtle;
     private bool compiled = false;
-    private bool running = false;
     private bool wrapBorders = false;
     private bool updateTextBoxes = true;
 
@@ -257,7 +256,6 @@ repeat iterations {
 
     private void Stop()
     {
-      running = false;
       executor.Running = false;
     }
 
@@ -321,7 +319,6 @@ repeat iterations {
       }
       catch (Exception ex)
       {
-        running = false;
         AddOutputText("ERROR: " + ex.Message);
         AddOutputText("*** Compile failed ***");
         return false;
@@ -348,8 +345,10 @@ repeat iterations {
       var mainBreak = false;
       var mainContinue = false;
       var backgroundThread = new Thread(() => executor.Execute(commands, objects, new Turtle(), 0, ref mainBreak, ref mainContinue));
-      //TODO: Do we need to set running?
       executor.Running = true;
+
+      this.runButton.Enabled = false;
+      this.stepButton.Enabled = false;
 
       backgroundThread.Start();
     }
@@ -367,11 +366,6 @@ repeat iterations {
         ThreadHelper.SetText(this, turtleBColourTextBox, turtle.ColorB.ToString());
         ThreadHelper.SetText(this, turtleAColourTextBox, turtle.ColorA.ToString());
       }
-    }
-    
-    void runThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-    {
-      running = false;
     }
 
     private void programTextBox_TextChanged(object sender, EventArgs e)
@@ -402,7 +396,7 @@ repeat iterations {
 
         var allLines = File.ReadAllLines(openFileDialog.FileName);
 
-        foreach (var line in FormatLines(allLines))
+        foreach (var line in allLines)
         {
           programTextBox.Text += line + "\r\n";
         }
@@ -413,11 +407,6 @@ repeat iterations {
 
         currentFilename = openFileDialog.FileName;
       }
-    }
-
-    private string[] FormatLines(string[] allLines)
-    {
-      return allLines;
     }
 
     private void newToolStripMenuItem_Click(object sender, EventArgs e)
