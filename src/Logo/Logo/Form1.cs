@@ -370,8 +370,6 @@ repeat iterations {
       }
     }
     
-    readonly object locker = new object();
-
     void runThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       running = false;
