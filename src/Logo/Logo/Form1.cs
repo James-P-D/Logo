@@ -17,7 +17,6 @@ using LogicalParser.Objects;
 // Introduce <Step> for single execution of commands
 // Fix <Stop>
 // How do we know when thread has ended?
-// Fix load (disable step/run buttons on textbox changed)
 // floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
