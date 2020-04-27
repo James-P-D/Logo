@@ -150,31 +150,15 @@ namespace LogicalParser
     {
       commands = new List<Command>();
       objects = new List<LogoObject>();
+
+      // Makes sure we add any constants before we start parsing
+      objects.Add(new NumberConstant("pi", (float)Math.PI));
       Parse(0, out _, stringTokens, commands, objects, true);
-    }
-
-    private void CheckNumberOfParameters(StringToken firstToken, int expectedParameters, int actualParameters)
-    {
-      if (expectedParameters != actualParameters)
-      {
-        ThrowError($"Command {firstToken.Tokens.First()} requires {expectedParameters} parameters not {actualParameters}", firstToken);
-      }
-    }
-
-    private void CheckMinNumberOfParameters(StringToken firstToken, int expectedMinParameters, int actualParameters)
-    {
-      if (actualParameters < expectedMinParameters)
-      {
-        ThrowError($"Command {firstToken.Tokens.First()} requires at least {expectedMinParameters} parameters", firstToken);
-      }
     }
 
     private void Parse(int stringTokenIndex, out int newStringTokenIndex, StringToken[] stringTokens,
       List<Command> commands, List<LogoObject> objects, bool outerLoop)
     {
-      // Makes sure we add any constants before we start parsing
-      objects.Add(new NumberConstant("pi", (float) Math.PI));
-
       while (stringTokenIndex < stringTokens.Length)
       {
         var stringToken = stringTokens[stringTokenIndex];
@@ -625,6 +609,22 @@ namespace LogicalParser
       }
 
       newStringTokenIndex = stringTokenIndex + 1;
+    }
+
+    private void CheckNumberOfParameters(StringToken firstToken, int expectedParameters, int actualParameters)
+    {
+      if (expectedParameters != actualParameters)
+      {
+        ThrowError($"Command {firstToken.Tokens.First()} requires {expectedParameters} parameters not {actualParameters}", firstToken);
+      }
+    }
+
+    private void CheckMinNumberOfParameters(StringToken firstToken, int expectedMinParameters, int actualParameters)
+    {
+      if (actualParameters < expectedMinParameters)
+      {
+        ThrowError($"Command {firstToken.Tokens.First()} requires at least {expectedMinParameters} parameters", firstToken);
+      }
     }
 
     #region Parser Functions
