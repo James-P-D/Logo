@@ -300,8 +300,8 @@ namespace Executor
               }
               else
               {
-                // More eval types need to be added here :(
-                throw new Exception("Unable to parse!!!");
+                // More eval types need to be added here (unless we fix .Value ....)
+                ThrowError($"Unable to output data-type {command}", command);
               }
             }
             else if (command is Repeat)
@@ -423,7 +423,7 @@ namespace Executor
             }
             else
             {
-              throw new Exception($"Don't recognise command '{command}'");
+              ThrowError($"Don't recognise command '{command}'", command);
             }
 
             if (requiresRedraw)
@@ -470,5 +470,13 @@ namespace Executor
       return result;
     }
 
+    #region Errors
+
+    private void ThrowError(string message, Command command)
+    {
+      throw new Exception($"{message} - {command.ToString()}");
+    }
+
+    #endregion
   }
 }
