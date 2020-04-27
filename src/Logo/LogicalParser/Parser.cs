@@ -586,7 +586,9 @@ namespace LogicalParser
           }
           else if (firstToken.Equals(Output))
           {
-            CheckNumberOfParameters(stringToken, 1, parameters);
+            //TODO: Is there a minimum number of parameters needed for OUTPUT ? What about Output 1 + 4; ?
+            //CheckNumberOfParameters(stringToken, 1, parameters);
+
             commands.Add(new Output(ParseEvaluation(CopyArray(stringToken.Tokens, 1), objects, stringToken)));
           }
           else if (firstToken.Equals(Break))
