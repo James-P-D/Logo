@@ -14,17 +14,13 @@ using LogicalParser.Commands;
 using LogicalParser.Objects;
 
 //TODO;c
-// Introduce <Step> for single execution of commands
-// Fix <Stop>
 // How do we know when thread has ended? And make sure we disable Run and Step buttons when running, otherwise exceptions
-// floats? and ints? bytes? casting?!?
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
 // Check if(..) {..} else if {..} !!
 // Move error strings to resources file
 // Check 'Unable to parse' in general. 
-// Check exceptions (throw new Exception("?!?!?!?");)
-// Check break/continue still work (currently we have some breakOut and continueOut bools. Doe we need them?)
+
 namespace Logo
 {
   public partial class Form1 : Form
@@ -34,13 +30,13 @@ namespace Logo
     private bool compiled = false;
     private bool wrapBorders = false;
     private bool updateTextBoxes = true;
-    private bool StepMode = false;
+    private bool stepMode = false;
 
     private List<Command> commands;
     private List<LogoObject> objects;
 
     private bool isDirty = false;
-    private const string INITIAL_DIRECTORY = @".\Samples";
+    private const string InitialDirectory = @".\Samples";
     private string currentFilename;
     private readonly Executor.Executor executor;
 
@@ -220,8 +216,8 @@ repeat iterations {
     {
       if (turtle.IsPenDown)
       {
-        double TOLERANCE = 0.0001;
-        if (Math.Abs(turtle.X - x1) > TOLERANCE || Math.Abs(turtle.Y - y1) > TOLERANCE)
+        double tolerance = 0.0001;
+        if (Math.Abs(turtle.X - x1) > tolerance || Math.Abs(turtle.Y - y1) > tolerance)
         {
           UpdateImage(turtle, x1, y1);
         }
@@ -242,7 +238,7 @@ repeat iterations {
     {
       UpdatePicture(turtle, x1, y1);
       UpdateTextboxes(turtle);
-      if (!this.StepMode)
+      if (!this.stepMode)
       {
         this.executor.ResumeThread();
       }
@@ -269,9 +265,9 @@ repeat iterations {
       this.loadButton.Enabled = true;
       this.stepButton.Enabled = true;
       this.runButton.Enabled = true;
-      if (this.StepMode)
+      if (this.stepMode)
       {
-        this.StepMode = false;
+        this.stepMode = false;
         this.executor.ResumeThread();
       }
     }
@@ -290,7 +286,7 @@ repeat iterations {
     {
       if (!this.executor.Running)
       {
-        this.StepMode = true;
+        this.stepMode = true;
         this.Run();
       }
       else
@@ -301,10 +297,10 @@ repeat iterations {
 
     private void runButton_Click(object sender, EventArgs e)
     {
-      if (this.StepMode)
+      if (this.stepMode)
       {
         this.executor.ResumeThread();
-        this.StepMode = false;
+        this.stepMode = false;
         this.stepButton.Enabled = false;
       }
       else
@@ -426,7 +422,7 @@ repeat iterations {
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
     {
       var openFileDialog = new OpenFileDialog();
-      openFileDialog.InitialDirectory = INITIAL_DIRECTORY;
+      openFileDialog.InitialDirectory = InitialDirectory;
       openFileDialog.Filter = @"logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
       openFileDialog.DefaultExt = "lgl";
       var dialogResult = openFileDialog.ShowDialog();
@@ -529,7 +525,7 @@ repeat iterations {
     private bool SaveAs()
     {
       var saveFileDialog = new SaveFileDialog();
-      saveFileDialog.InitialDirectory = INITIAL_DIRECTORY;
+      saveFileDialog.InitialDirectory = InitialDirectory;
       saveFileDialog.Filter = @"logo files (*.lgl)|*.lgl|All files (*.*)|*.*";
       saveFileDialog.DefaultExt = "lgl";
       var dialogResult = saveFileDialog.ShowDialog();
