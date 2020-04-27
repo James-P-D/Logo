@@ -866,10 +866,6 @@ namespace LogicalParser
           {
             evalStack.Push(new BooleanValueEval(booleanObject));
           }
-          else
-          {
-            throw new Exception("?!?!?");
-          }
         }
         else
         {
