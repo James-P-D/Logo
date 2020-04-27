@@ -55,7 +55,11 @@ namespace Logo
       }
       else
       {
+#if DEBUG
+        if (control.Text.Length > 100000)
+#else
         if (control.Text.Length > 1000)
+#endif
         {
           control.Text = text;
         }
