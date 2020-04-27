@@ -34,6 +34,7 @@ namespace Logo
     private bool compiled = false;
     private bool wrapBorders = false;
     private bool updateTextBoxes = true;
+    private bool StepMode = false;
 
     private List<Command> commands;
     private List<LogoObject> objects;
@@ -241,22 +242,38 @@ repeat iterations {
     {
       UpdatePicture(turtle, x1, y1);
       UpdateTextboxes(turtle);
-      executor.ResumeThread();
+      if (!this.StepMode)
+      {
+        this.executor.ResumeThread();
+      }
+      else
+      {
+        ThreadHelper.SetButtonEnabled(this, this.stepButton, true);
+        ThreadHelper.SetButtonEnabled(this, this.runButton, true);
+      }
     }
 
     void Executor_AddOutputTextEvent(string text)
     {
-      AddOutputText(text);
+      this.AddOutputText(text);
     }
 
     private void stopButton_Click(object sender, EventArgs e)
     {
-      Stop();
+      this.Stop();
     }
 
     private void Stop()
     {
-      executor.Running = false;
+      this.executor.Running = false;
+      this.loadButton.Enabled = true;
+      this.stepButton.Enabled = true;
+      this.runButton.Enabled = true;
+      if (this.StepMode)
+      {
+        this.StepMode = false;
+        this.executor.ResumeThread();
+      }
     }
 
     private void LoadButton_Click(object sender, EventArgs e)
@@ -266,12 +283,34 @@ repeat iterations {
 
     private void StepButton_Click(object sender, EventArgs e)
     {
+      this.Step();
+    }
 
+    private void Step()
+    {
+      if (!this.executor.Running)
+      {
+        this.StepMode = true;
+        this.Run();
+      }
+      else
+      {
+        this.executor.ResumeThread();
+      }
     }
 
     private void runButton_Click(object sender, EventArgs e)
     {
-      this.Run();
+      if (this.StepMode)
+      {
+        this.executor.ResumeThread();
+        this.StepMode = false;
+        this.stepButton.Enabled = false;
+      }
+      else
+      {
+        this.Run();
+      }
     }
 
     private void increaseFontSizeButton_Click(object sender, EventArgs e)
@@ -347,8 +386,9 @@ repeat iterations {
       var backgroundThread = new Thread(() => executor.Execute(commands, objects, new Turtle(), 0, ref mainBreak, ref mainContinue));
       executor.Running = true;
 
-      this.runButton.Enabled = false;
+      this.loadButton.Enabled = false;
       this.stepButton.Enabled = false;
+      this.runButton.Enabled = false;
 
       backgroundThread.Start();
     }

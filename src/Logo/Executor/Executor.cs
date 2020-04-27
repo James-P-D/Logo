@@ -5,6 +5,7 @@ using LogicalParser.Objects;
 using LogicalParser.Commands.Control;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using LogicalParser.Commands.BooleanEvaluation;
 using LogicalParser.Commands.NumberEvaluation;
 
@@ -14,7 +15,7 @@ namespace Executor
   {
     #region Properties
 
-    private EventWaitHandle waitHandle = new ManualResetEvent(initialState: true);
+    private ManualResetEvent waitHandle = new ManualResetEvent(initialState: true);
 
     #endregion
 
@@ -35,12 +36,16 @@ namespace Executor
 
     private void Update(Turtle turtle, int x1, int y1)
     {
-      UpdateEvent?.Invoke(turtle, x1, y1);
+      Task task = Task.Factory.StartNew(() =>
+        {
+          UpdateEvent?.Invoke(turtle, x1, y1);
+        }
+      );
     }
 
     #endregion
 
-    public bool Execute(List<Command> commands, List<LogoObject> objects, Turtle turtle, int indent,
+    public bool Execute(List<Command> commands, List<LogoObject> objects, Turtle turtle, int depth,
       ref bool breakOut, ref bool continueOut)
     {
       breakOut = false;
@@ -48,16 +53,15 @@ namespace Executor
       {
         foreach (var command in commands)
         {
-          bool requiresRedraw = false;
-#if DEBUG
-          AddOutputText($"{GetIndent(indent)}{command}");
-#endif
-
           if (!Running)
           {
             return true;
           }
 
+          bool requiresRedraw = false;
+#if DEBUG
+          AddOutputText($"{GetIndent(depth)}{command}");
+#endif
           if (command is NumberAssign)
           {
             (command as NumberAssign).NumberVar.Value = (command as NumberAssign).NumberEval.Value;
@@ -307,7 +311,7 @@ namespace Executor
               {
                 var repeatBreak = false;
                 var repeatContinue = false;
-                if (!Execute((command as Repeat).Commands, objects, turtle, indent + 2, ref repeatBreak,
+                if (!Execute((command as Repeat).Commands, objects, turtle, depth + 2, ref repeatBreak,
                   ref repeatContinue))
                 {
                   return false;
@@ -332,7 +336,7 @@ namespace Executor
               {
                 var whileBreak = false;
                 var whileContinue = false;
-                if (!Execute((command as While).Commands, objects, turtle, indent + 2, ref whileBreak,
+                if (!Execute((command as While).Commands, objects, turtle, depth + 2, ref whileBreak,
                   ref whileContinue))
                 {
                   return false;
@@ -357,7 +361,7 @@ namespace Executor
               {
                 var ifBreak = false;
                 var ifContinue = false;
-                if (!Execute((command as If).ThenCommands, objects, turtle, indent + 2, ref ifBreak,
+                if (!Execute((command as If).ThenCommands, objects, turtle, depth + 2, ref ifBreak,
                   ref ifContinue))
                 {
                   return false;
@@ -380,7 +384,7 @@ namespace Executor
               {
                 var elseBreak = false;
                 var elseContinue = false;
-                if (!Execute((command as If).ElseCommands, objects, turtle, indent + 2, ref elseBreak,
+                if (!Execute((command as If).ElseCommands, objects, turtle, depth + 2, ref elseBreak,
                   ref elseContinue))
                 {
                   return false;
@@ -425,7 +429,7 @@ namespace Executor
             if (requiresRedraw)
             {
               Update(turtle, x1, y1);
-              this.waitHandle.WaitOne();
+              this.PauseThread();
             }
           }
         }
@@ -437,6 +441,19 @@ namespace Executor
         AddOutputText("ERROR: " + ex.Message);
         return false;
       }
+      finally
+      {
+        if (depth == 0)
+        {
+          this.Running = false;
+        }
+      }
+    }
+
+    private void PauseThread()
+    {
+      this.waitHandle.Reset();
+      this.waitHandle.WaitOne();
     }
 
     public void ResumeThread()

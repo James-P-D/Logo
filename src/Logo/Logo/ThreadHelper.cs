@@ -117,5 +117,33 @@ namespace Logo
     }
 
     #endregion
+
+    #region SetButtonEnabled
+
+    delegate void SetButtonEnabledCallback(Form form, Control control, bool enabled);
+
+    /// <summary>
+    /// Set text property of various controls
+    /// </summary>
+    /// <param name="form">The calling form</param>
+    /// <param name="control"></param>
+    /// <param name="enabled"></param>
+    public static void SetButtonEnabled(Form form, Control control, bool enabled)
+    {
+      // InvokeRequired required compares the thread ID of the 
+      // calling thread to the thread ID of the creating thread. 
+      // If these threads are different, it returns true. 
+      if (control.InvokeRequired)
+      {
+        var setButtonEnabledCallback = new SetButtonEnabledCallback(SetButtonEnabled);
+        form.Invoke(setButtonEnabledCallback, form, control, enabled);
+      }
+      else
+      {
+        control.Enabled = enabled;
+      }
+    }
+
+    #endregion
   }
 }
