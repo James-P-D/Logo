@@ -43,6 +43,19 @@ namespace Executor
       );
     }
 
+    public delegate void OnEndDelegate();
+
+    public event OnEndDelegate OnEndEvent;
+
+    private void OnEnd()
+    {
+      Task task = Task.Factory.StartNew(() =>
+        {
+          OnEndEvent?.Invoke();
+        }
+      );
+    }
+
     #endregion
 
     public bool Execute(List<Command> commands, List<LogoObject> objects, Turtle turtle, int depth,
@@ -446,6 +459,7 @@ namespace Executor
         if (depth == 0)
         {
           this.Running = false;
+          this.OnEnd();
         }
       }
     }
@@ -460,7 +474,7 @@ namespace Executor
     {
       this.waitHandle.Set();
     }
-
+    
     public bool Running { get; set; }
 
     private string GetIndent(int indent)

@@ -49,6 +49,7 @@ namespace Logo
       executor = new Executor.Executor();
       executor.AddOutputTextEvent += Executor_AddOutputTextEvent;
       executor.UpdateEvent += Executor_UpdateEvent;
+      executor.OnEndEvent += Executor_OnEndEvent;
       this.initialiseTextboxFontSizeSettings();
 
       programTextBox.Text = string.Empty;
@@ -199,6 +200,14 @@ namespace Logo
       this.AddOutputText(text);
     }
 
+    void Executor_OnEndEvent()
+    {
+      ThreadHelper.SetButtonEnabled(this, loadButton, true);
+      ThreadHelper.SetButtonEnabled(this, stepButton, true);
+      ThreadHelper.SetButtonEnabled(this, runButton, true);
+      ThreadHelper.SetButtonEnabled(this, stopButton, true);
+    }
+
     private void stopButton_Click(object sender, EventArgs e)
     {
       this.Stop();
@@ -323,11 +332,12 @@ namespace Logo
 
     private void Run()
     {
-      // If the Logo program has been changed, 
+      // If the Logo program has been changed, load it again..
       if (!this.compiled)
       {
         if (!this.LoadProgram())
         {
+          // ..and if loading fails, then don't bother trying to run it
           return;
         }
       }
