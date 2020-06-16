@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using LogicalParser.Commands;
 using LogicalParser.Objects;
 
-//TODO;c
+//TODO
 // How do we know when thread has ended? And make sure we disable Run and Step buttons when running, otherwise exceptions
 // Fix for error line numbers (are we not working correctly with comments?)
 // Check variables (do we need that value in there? Nope! just need to get multiple-inheritance working with interfaces)
