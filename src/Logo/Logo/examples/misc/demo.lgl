@@ -1,0 +1,42 @@
+number TOTAL_CIRCLES = 36;
+number COLOR_CHANGE = 255 / TOTAL_CIRCLES;
+
+number CIRCLE_SIDES = 36;
+number CIRCLE_SIDE_LENGTH = 10;
+number CIRCLE_SIDE_LENGTH_CHANGE = 1;
+number CIRCLE_ANGLE = 360 / CIRCLE_SIDES;
+
+number redish = 0;
+number blueish = 255;
+
+boolean increaseRed = true;
+boolean increaseBlue = false;
+
+setcolora 255;
+
+number circleSideLength = CIRCLE_SIDE_LENGTH;
+
+repeat TOTAL_CIRCLES {
+    setcolorr redish;
+    setcolorb blueish;
+    
+    repeat CIRCLE_SIDES {
+        forward circleSideLength;
+        rightturn CIRCLE_ANGLE;
+    }
+    
+    rightturn 10;
+    circleSideLength = circleSideLength + CIRCLE_SIDE_LENGTH_CHANGE;
+    
+    if (increaseRed) {
+        redish = redish + COLOR_CHANGE;
+    } else {
+        redish = redish - COLOR_CHANGE;
+    }
+
+    if (increaseBlue) {
+        blueish = blueish + COLOR_CHANGE;
+    } else {
+        blueish = blueish - COLOR_CHANGE;
+    }
+}
