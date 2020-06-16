@@ -352,6 +352,7 @@
       this.outputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
       this.outputTextBox.Size = new System.Drawing.Size(334, 213);
       this.outputTextBox.TabIndex = 7;
+      this.outputTextBox.WordWrap = false;
       // 
       // wrapBordersCheckBox
       // 
