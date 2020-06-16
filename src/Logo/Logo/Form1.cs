@@ -269,7 +269,10 @@ repeat iterations {
 
     private void LoadButton_Click(object sender, EventArgs e)
     {
+      bool savedUpdateTextBoxes = this.updateTextBoxes;
+      this.updateTextBoxes = true;
       this.LoadProgram();
+      this.updateTextBoxes = savedUpdateTextBoxes;
     }
 
     private void StepButton_Click(object sender, EventArgs e)
