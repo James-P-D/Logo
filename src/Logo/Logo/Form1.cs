@@ -51,57 +51,7 @@ namespace Logo
       executor.UpdateEvent += Executor_UpdateEvent;
       this.initialiseTextboxFontSizeSettings();
 
-      //programTextBox.Text = string.Empty;
-
-
-
-      programTextBox.Text = @"
-
-number iterations = 80;
-setcolorr 0;
-setcolorg 0;
-setcolorb 0;
-setcolora 0;
-
-repeat iterations {
-  setcolorr 50;
-  setcolora 50;
-  repeat 36 {
-    forward 20;
-    rightturn 10;
-  }
-
-  setcolorr 100;
-  setcolora 100;
-  repeat 36 {
-    forward 30;
-    rightturn 10;
-  }
-
-  setcolorr 150;
-  setcolora 150;
-  repeat 36 {
-    forward 40;
-    rightturn 10;
-  }
-
-  setcolorr 200;
-  setcolora 200;
-  repeat 36 {
-    forward 50;
-    rightturn 10;
-  }
-
-  setcolorr 250;
-  setcolora 250;
-  repeat 36 {
-    forward 60;
-    rightturn 10;
-  }
-
-  rightturn 360 / iterations;
-}";
-
+      programTextBox.Text = string.Empty;
     }
 
     private void Form1_Load(object sender, EventArgs e)
