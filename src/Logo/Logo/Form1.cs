@@ -49,14 +49,9 @@ namespace Logo
       executor = new Executor.Executor();
       executor.AddOutputTextEvent += Executor_AddOutputTextEvent;
       executor.UpdateEvent += Executor_UpdateEvent;
+      this.initialiseTextboxFontSizeSettings();
+
       //programTextBox.Text = string.Empty;
-/*
-      programTextBox.Text = @"
-  repeat 36 {
-    forward 20;
-    rightturn 10;
-  }";
-*/
 
 
 
@@ -308,25 +303,34 @@ repeat iterations {
         this.Run();
       }
     }
-
-    private void increaseFontSizeButton_Click(object sender, EventArgs e)
+    
+    private void initialiseTextboxFontSizeSettings()
     {
-      float fontSize = this.programTextBox.Font.Size;
-      fontSize = Math.Max(5F, Math.Min(fontSize + 1F, 20F));
+      setTextboxFontSizeSettings(this.programTextBox.Font.Size);
+    }
+
+    private void setTextboxFontSizeSettings(float fontSize)
+    {
       this.programTextBox.Font = new Font("Courier New",
+        fontSize, System.Drawing.FontStyle.Regular,
+        System.Drawing.GraphicsUnit.Point,
+        0);
+      this.outputTextBox.Font = new Font("Courier New",
         fontSize, System.Drawing.FontStyle.Regular,
         System.Drawing.GraphicsUnit.Point,
         0);
     }
 
+    private void increaseFontSizeButton_Click(object sender, EventArgs e)
+    {
+      float fontSize = Math.Max(5F, Math.Min(this.programTextBox.Font.Size + 1F, 20F));
+      this.setTextboxFontSizeSettings(fontSize);
+    }
+
     private void decreaseFontSizeButton_Click(object sender, EventArgs e)
     {
-      float fontSize = this.programTextBox.Font.Size;
-      fontSize = Math.Max(5F, Math.Min(fontSize - 1F, 20F));
-      this.programTextBox.Font = new Font("Courier New",
-        fontSize, System.Drawing.FontStyle.Regular,
-        System.Drawing.GraphicsUnit.Point,
-        0);
+      float fontSize = Math.Max(5F, Math.Min(this.programTextBox.Font.Size - 1F, 20F));
+      this.setTextboxFontSizeSettings(fontSize);
     }
 
     private void StringTokeniserAddOutputText(string text)
