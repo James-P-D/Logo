@@ -576,8 +576,11 @@ repeat iterations {
 
     private void AddOutputText(string text)
     {
-      ThreadHelper.AddText(this, outputTextBox, text + "\r\n");
-      ThreadHelper.ScrollToEnd(this, outputTextBox);
+      if (this.updateTextBoxes)
+      {
+        ThreadHelper.AddText(this, outputTextBox, text + "\r\n");
+        ThreadHelper.ScrollToEnd(this, outputTextBox);
+      }
     }
   }
 }
