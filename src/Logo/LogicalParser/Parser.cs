@@ -248,6 +248,7 @@ namespace LogicalParser
         }
         else if (firstToken.Equals(Else))
         {
+//TODO: Need to support else if here!
           var lastParam = stringToken.Tokens.Last();
 
           if (lastParam.Equals(StartBlock))
@@ -269,7 +270,7 @@ namespace LogicalParser
           }
           else
           {
-            ThrowError($"Expected '{StartBlock}' character not '{lastParam}'", stringToken);
+            ThrowError($"Expected '{StartBlock}' or '{If}'", stringToken);
             newStringTokenIndex = stringTokenIndex;
             return;
           }
@@ -823,7 +824,7 @@ namespace LogicalParser
 
     #region Evaluation
 
-    private Eval ParseEvaluation(string[] parameters, List<LogoObject> objects, StringToken stringToken)
+    private Eval ParseEvaluation(string[] parameters, List<LogoObject> objects, StringToken stringToken) 
     {
       // Before we start the evaluation we need to distinguish between binary and unary plus and minus operators
       // ( '5 - 4' verses '-3') We will convert unary minus to '#' and unary plus to '@'
@@ -851,6 +852,7 @@ namespace LogicalParser
 
       foreach (var parameter in parameters)
       {
+        // Comma is just used to separate parameters, so we can ignore
         if (parameter.Equals(StringTokeniser.Comma))
         {
           continue;
@@ -867,6 +869,10 @@ namespace LogicalParser
           else if (logoObject is BooleanObject booleanObject)
           {
             evalStack.Push(new BooleanValueEval(booleanObject));
+          }
+          else
+          {
+            ThrowError($"Unable to parse '{parameter}'", stringToken);
           }
         }
         else
