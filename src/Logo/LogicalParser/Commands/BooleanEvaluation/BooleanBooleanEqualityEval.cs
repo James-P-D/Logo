@@ -1,31 +1,21 @@
-﻿using System;
-using LogicalParser.Commands.NumberEvaluation;
-
-namespace LogicalParser.Commands.BooleanEvaluation
+﻿namespace LogicalParser.Commands.BooleanEvaluation
 {
-  public class BooleanNumberEqualityEval : BooleanEval
+  public class BooleanBooleanEqualityEval : BooleanEval
   {
-    public BooleanNumberEqualityEval(NumberEval numberEval1, NumberEval numberEval2)
+    public BooleanBooleanEqualityEval(BooleanEval booleanEval1, BooleanEval booleanEval2)
     {
-      NumberEval1 = numberEval1;
-      NumberEval2 = numberEval2;
+      BooleanEval1 = booleanEval1;
+      BooleanEval2 = booleanEval2;
     }
 
-    public override bool Value
-    {
-      get
-      {
-        var TOLERANCE = 0.001;
-        return Math.Abs(NumberEval1.Value - NumberEval2.Value) < TOLERANCE;
-      }
-    }
+    public override bool Value => BooleanEval1.Value == BooleanEval2.Value;
 
-    public NumberEval NumberEval1 { get; }
-    public NumberEval NumberEval2 { get; }
+    public BooleanEval BooleanEval1 { get; }
+    public BooleanEval BooleanEval2 { get; }
 
     public override string ToString()
     {
-      return $"({NumberEval1} == {NumberEval2})";
+      return $"({BooleanEval1} == {BooleanEval2})";
     }
   }
 }
